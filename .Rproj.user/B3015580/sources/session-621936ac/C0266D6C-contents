@@ -20,11 +20,11 @@ github-repo: "rstudio/bookdown-demo"
 El análisis de series de tiempo financieras permite comprender el comportamiento dinámico de los mercados, identificar patrones y anticipar posibles tendencias. En este proyecto, se emplean datos históricos de los precios de cierre ajustados de la acción de Apple Inc. (AAPL), extraídos desde la plataforma Yahoo Finance. Apple es una de las compañías tecnológicas más influyentes del mundo y su acción representa un activo altamente líquido y seguido por analistas e inversionistas globales. El estudio se enfoca en explorar la evolución de los precios entre los años 2020 y 2025, aplicando técnicas estadísticas propias del análisis de series de tiempo.
 
 
-# Objetivo general.
+## Objetivo general.
 
 Analizar el comportamiento histórico de la acción de Apple Inc. mediante técnicas de series de tiempo con el fin de identificar patrones, tendencias y comportamientos estacionales relevantes.
 
-# Objetivos específicos.
+## Objetivos específicos.
 
 + Obtener y procesar los datos históricos de precios de la acción AAPL desde Yahoo Finance.
 
@@ -36,7 +36,7 @@ Analizar el comportamiento histórico de la acción de Apple Inc. mediante técn
 
 + Evaluar la presencia de estacionalidad u otros patrones recurrentes.
 
-# Justificación.
+## Justificación.
 
 Apple Inc. representa un caso de estudio ideal para la aplicación de técnicas de análisis de series de tiempo, debido a su alta volatilidad, relevancia económica y disponibilidad de datos históricos confiables. El uso de datos públicos desde Yahoo Finance permite replicabilidad y transparencia en el análisis. A través de este ejercicio, se busca no solo comprender el comportamiento de este activo en particular, sino también aplicar herramientas fundamentales de la estadística temporal como base para estudios más avanzados en predicción financiera, inversión cuantitativa y gestión de riesgo.
 

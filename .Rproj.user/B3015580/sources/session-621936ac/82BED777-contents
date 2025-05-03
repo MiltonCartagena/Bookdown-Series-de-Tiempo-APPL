@@ -1,5 +1,6 @@
 
 bookdown::gitbook:
+ #number_sections: true  # <- ESTO ES CLAVE
   css: style.css
   self_contained: false
   split_by: chapter
