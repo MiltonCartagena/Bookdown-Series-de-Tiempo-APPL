@@ -87,6 +87,43 @@
             "type": "book"
         },
         {
+            "URL": "https://dplyr.tidyverse.org",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                },
+                {
+                    "family": "Francois",
+                    "given": "Romain"
+                },
+                {
+                    "family": "Henry",
+                    "given": "Lionel"
+                },
+                {
+                    "family": "Muller",
+                    "given": "Kirill"
+                },
+                {
+                    "family": "Vaughan",
+                    "given": "Davis"
+                }
+            ],
+            "id": "R-dplyr",
+            "issued": {
+                "date-parts": [
+                    [
+                        2023
+                    ]
+                ]
+            },
+            "note": "R package version 1.1.4",
+            "title": "Dplyr: A grammar of data manipulation",
+            "title-short": "Dplyr",
+            "type": "book"
+        },
+        {
             "URL": "https://pkg.robjhyndman.com/forecast/",
             "author": [
                 {
@@ -224,6 +261,28 @@
             "note": "R package version 0.9.6",
             "title": "Ggrepel: Automatically position non-overlapping text labels with ggplot2",
             "title-short": "Ggrepel",
+            "type": "book"
+        },
+        {
+            "DOI": "10.32614/CRAN.package.gridExtra",
+            "URL": "https://CRAN.R-project.org/package=gridExtra",
+            "author": [
+                {
+                    "family": "Auguie",
+                    "given": "Baptiste"
+                }
+            ],
+            "id": "R-gridExtra",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "note": "R package version 2.3",
+            "title": "gridExtra: Miscellaneous functions for \"grid\" graphics",
+            "title-short": "gridExtra",
             "type": "book"
         },
         {
