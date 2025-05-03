@@ -245,7 +245,7 @@ p2 <- ggplot(df, aes(x = Fecha, y = Estacional)) +
   theme_minimal()
 
 p3 <- ggplot(df, aes(x = Fecha, y = Tendencia)) +
-  geom_line(color = "darkgreen") +
+  geom_line(color = "red") +
   geom_text(
     data = etiquetas,
     aes(label = round(Tendencia, 1)),
