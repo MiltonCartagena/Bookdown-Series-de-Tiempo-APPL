@@ -66,40 +66,85 @@
             "type": "book"
         },
         {
-            "URL": "https://dplyr.tidyverse.org",
+            "URL": "https://github.com/rkillick/changepoint/",
             "author": [
                 {
-                    "family": "Wickham",
-                    "given": "Hadley"
-                },
-                {
-                    "family": "François",
-                    "given": "Romain"
-                },
-                {
-                    "family": "Henry",
-                    "given": "Lionel"
-                },
-                {
-                    "family": "Müller",
-                    "given": "Kirill"
-                },
-                {
-                    "family": "Vaughan",
-                    "given": "Davis"
+                    "family": "Killick",
+                    "given": "Rebecca"
                 }
             ],
-            "id": "R-dplyr",
+            "id": "R-changepoint",
             "issued": {
                 "date-parts": [
                     [
-                        2023
+                        2024
                     ]
                 ]
             },
-            "note": "R package version 1.1.4",
-            "title": "Dplyr: A grammar of data manipulation",
-            "title-short": "Dplyr",
+            "note": "R package version 2.3",
+            "title": "Changepoint: Methods for changepoint detection",
+            "title-short": "Changepoint",
+            "type": "book"
+        },
+        {
+            "URL": "https://pkg.robjhyndman.com/forecast/",
+            "author": [
+                {
+                    "family": "Hyndman",
+                    "given": "Rob"
+                },
+                {
+                    "family": "Athanasopoulos",
+                    "given": "George"
+                },
+                {
+                    "family": "Bergmeir",
+                    "given": "Christoph"
+                },
+                {
+                    "family": "Caceres",
+                    "given": "Gabriel"
+                },
+                {
+                    "family": "Chhay",
+                    "given": "Leanne"
+                },
+                {
+                    "family": "Kuroptev",
+                    "given": "Kirill"
+                },
+                {
+                    "family": "O’Hara-Wild",
+                    "given": "Mitchell"
+                },
+                {
+                    "family": "Petropoulos",
+                    "given": "Fotios"
+                },
+                {
+                    "family": "Razbash",
+                    "given": "Slava"
+                },
+                {
+                    "family": "Wang",
+                    "given": "Earo"
+                },
+                {
+                    "family": "Yasmeen",
+                    "given": "Farah"
+                }
+            ],
+            "id": "R-forecast",
+            "issued": {
+                "date-parts": [
+                    [
+                        2025
+                    ]
+                ]
+            },
+            "note": "R package version 8.24.0",
+            "title": "Forecast: Forecasting functions for time series and linear models",
+            "title-short": "Forecast",
             "type": "book"
         },
         {
@@ -161,25 +206,24 @@
             "type": "book"
         },
         {
-            "DOI": "10.32614/CRAN.package.gridExtra",
-            "URL": "https://CRAN.R-project.org/package=gridExtra",
+            "URL": "https://ggrepel.slowkow.com/",
             "author": [
                 {
-                    "family": "Auguie",
-                    "given": "Baptiste"
+                    "family": "Slowikowski",
+                    "given": "Kamil"
                 }
             ],
-            "id": "R-gridExtra",
+            "id": "R-ggrepel",
             "issued": {
                 "date-parts": [
                     [
-                        2017
+                        2024
                     ]
                 ]
             },
-            "note": "R package version 2.3",
-            "title": "gridExtra: Miscellaneous functions for \"grid\" graphics",
-            "title-short": "gridExtra",
+            "note": "R package version 0.9.6",
+            "title": "Ggrepel: Automatically position non-overlapping text labels with ggplot2",
+            "title-short": "Ggrepel",
             "type": "book"
         },
         {
@@ -226,51 +270,6 @@
             "note": "R package version 2.0.8",
             "title": "PerformanceAnalytics: Econometric tools for performance and risk analysis",
             "title-short": "PerformanceAnalytics",
-            "type": "book"
-        },
-        {
-            "URL": "https://plotly-r.com",
-            "author": [
-                {
-                    "family": "Sievert",
-                    "given": "Carson"
-                },
-                {
-                    "family": "Parmer",
-                    "given": "Chris"
-                },
-                {
-                    "family": "Hocking",
-                    "given": "Toby"
-                },
-                {
-                    "family": "Chamberlain",
-                    "given": "Scott"
-                },
-                {
-                    "family": "Ram",
-                    "given": "Karthik"
-                },
-                {
-                    "family": "Corvellec",
-                    "given": "Marianne"
-                },
-                {
-                    "family": "Despouy",
-                    "given": "Pedro"
-                }
-            ],
-            "id": "R-plotly",
-            "issued": {
-                "date-parts": [
-                    [
-                        2024
-                    ]
-                ]
-            },
-            "note": "R package version 4.10.4",
-            "title": "Plotly: Create interactive web graphics via plotly.js",
-            "title-short": "Plotly",
             "type": "book"
         },
         {
@@ -385,6 +384,32 @@
             "type": "book"
         },
         {
+            "DOI": "10.32614/CRAN.package.tseries",
+            "URL": "https://CRAN.R-project.org/package=tseries",
+            "author": [
+                {
+                    "family": "Trapletti",
+                    "given": "Adrian"
+                },
+                {
+                    "family": "Hornik",
+                    "given": "Kurt"
+                }
+            ],
+            "id": "R-tseries",
+            "issued": {
+                "date-parts": [
+                    [
+                        2024
+                    ]
+                ]
+            },
+            "note": "R package version 0.10-58",
+            "title": "Tseries: Time series analysis and computational finance",
+            "title-short": "Tseries",
+            "type": "book"
+        },
+        {
             "URL": "https://github.com/joshuaulrich/TTR",
             "author": [
                 {
@@ -483,6 +508,62 @@
             "type": "book"
         },
         {
+            "URL": "https://www.jstatsoft.org/article/view/v058i03",
+            "author": [
+                {
+                    "family": "Killick",
+                    "given": "Rebecca"
+                },
+                {
+                    "family": "Eckley",
+                    "given": "Idris A."
+                }
+            ],
+            "container-title": "Journal of Statistical Software",
+            "id": "changepoint2014",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2014
+                    ]
+                ]
+            },
+            "page": "1-19",
+            "title": "changepoint: An R package for changepoint analysis",
+            "title-short": "changepoint",
+            "type": "article-journal",
+            "volume": "58"
+        },
+        {
+            "DOI": "10.18637/jss.v027.i03",
+            "author": [
+                {
+                    "family": "Hyndman",
+                    "given": "Rob J"
+                },
+                {
+                    "family": "Khandakar",
+                    "given": "Yeasmin"
+                }
+            ],
+            "container-title": "Journal of Statistical Software",
+            "id": "forecast2008",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2008
+                    ]
+                ]
+            },
+            "page": "1-22",
+            "title": "Automatic time series forecasting: The forecast package for R",
+            "title-short": "Automatic time series forecasting",
+            "type": "article-journal",
+            "volume": "27"
+        },
+        {
             "ISBN": "978-3-319-24277-4",
             "URL": "https://ggplot2.tidyverse.org",
             "author": [
@@ -562,27 +643,6 @@
             "title": "Knitr: A comprehensive tool for reproducible research in R",
             "title-short": "Knitr",
             "type": "chapter"
-        },
-        {
-            "ISBN": "9781138331457",
-            "URL": "https://plotly-r.com",
-            "author": [
-                {
-                    "family": "Sievert",
-                    "given": "Carson"
-                }
-            ],
-            "id": "plotly2020",
-            "issued": {
-                "date-parts": [
-                    [
-                        2020
-                    ]
-                ]
-            },
-            "publisher": "Chapman; Hall/CRC",
-            "title": "Interactive web-based data visualization with r, plotly, and shiny",
-            "type": "book"
         },
         {
             "ISBN": "9781138359338",

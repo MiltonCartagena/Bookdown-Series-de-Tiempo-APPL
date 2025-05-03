@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capitulo2 Variables en el Tiempo | Bookdown Análisis Series de Tiempo AAPL</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capitulo2 Variables en el Tiempo | Bookdown Análisis Series de Tiempo AAPL" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capitulo2 Variables en el Tiempo | Bookdown Análisis Series de Tiempo AAPL" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  
+
+<meta name="author" content="Sofy Certuche Milton Cartagena" />
+
+
+<meta name="date" content="2025-05-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Análisis Series de Tiempo AAPL</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Análisis de la Serie de Tiempo de AAPL.</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introducción."><i class="fa fa-check"></i><b>1.1</b> Introducción.</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#objetivo-general."><i class="fa fa-check"></i><b>1.2</b> Objetivo general.</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#objetivos-específicos."><i class="fa fa-check"></i><b>1.3</b> Objetivos específicos.</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#justificación."><i class="fa fa-check"></i><b>1.4</b> Justificación.</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#fuente-de-datos."><i class="fa fa-check"></i><b>1.5</b> Fuente de datos.</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="variables-en-el-tiempo.html"><a href="variables-en-el-tiempo.html"><i class="fa fa-check"></i><b>2</b> Variables en el Tiempo</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bookdown Análisis Series de Tiempo AAPL</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="variables-en-el-tiempo" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Capitulo2</span> Variables en el Tiempo<a href="variables-en-el-tiempo.html#variables-en-el-tiempo" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="variables-en-el-tiempo.html#cb1-1" tabindex="-1"></a><span class="co"># Instalar y cargar paquetes</span></span>
+<span id="cb1-2"><a href="variables-en-el-tiempo.html#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;tidyquant&quot;</span>)) <span class="fu">install.packages</span>(<span class="st">&quot;tidyquant&quot;</span>)</span>
+<span id="cb1-3"><a href="variables-en-el-tiempo.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
+<span id="cb1-4"><a href="variables-en-el-tiempo.html#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="variables-en-el-tiempo.html#cb1-5" tabindex="-1"></a><span class="co"># Descargar datos históricos desde Yahoo Finance</span></span>
+<span id="cb1-6"><a href="variables-en-el-tiempo.html#cb1-6" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">&quot;AAPL&quot;</span>, <span class="at">from =</span> <span class="st">&quot;2020-01-01&quot;</span>, <span class="at">to =</span> <span class="st">&quot;2025-04-30&quot;</span>)</span>
+<span id="cb1-7"><a href="variables-en-el-tiempo.html#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="variables-en-el-tiempo.html#cb1-8" tabindex="-1"></a><span class="co"># Vista previa</span></span>
+<span id="cb1-9"><a href="variables-en-el-tiempo.html#cb1-9" tabindex="-1"></a><span class="fu">head</span>(apple_data)</span></code></pre></div>
+<div class="kable-table">
+<table>
+<colgroup>
+<col width="10%" />
+<col width="15%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="14%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">symbol</th>
+<th align="left">date</th>
+<th align="right">open</th>
+<th align="right">high</th>
+<th align="right">low</th>
+<th align="right">close</th>
+<th align="right">volume</th>
+<th align="right">adjusted</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">AAPL</td>
+<td align="left">2020-01-02</td>
+<td align="right">74.0600</td>
+<td align="right">75.1500</td>
+<td align="right">73.7975</td>
+<td align="right">75.0875</td>
+<td align="right">135480400</td>
+<td align="right">72.71609</td>
+</tr>
+<tr class="even">
+<td align="left">AAPL</td>
+<td align="left">2020-01-03</td>
+<td align="right">74.2875</td>
+<td align="right">75.1450</td>
+<td align="right">74.1250</td>
+<td align="right">74.3575</td>
+<td align="right">146322800</td>
+<td align="right">72.00913</td>
+</tr>
+<tr class="odd">
+<td align="left">AAPL</td>
+<td align="left">2020-01-06</td>
+<td align="right">73.4475</td>
+<td align="right">74.9900</td>
+<td align="right">73.1875</td>
+<td align="right">74.9500</td>
+<td align="right">118387200</td>
+<td align="right">72.58291</td>
+</tr>
+<tr class="even">
+<td align="left">AAPL</td>
+<td align="left">2020-01-07</td>
+<td align="right">74.9600</td>
+<td align="right">75.2250</td>
+<td align="right">74.3700</td>
+<td align="right">74.5975</td>
+<td align="right">108872000</td>
+<td align="right">72.24155</td>
+</tr>
+<tr class="odd">
+<td align="left">AAPL</td>
+<td align="left">2020-01-08</td>
+<td align="right">74.2900</td>
+<td align="right">76.1100</td>
+<td align="right">74.2900</td>
+<td align="right">75.7975</td>
+<td align="right">132079200</td>
+<td align="right">73.40366</td>
+</tr>
+<tr class="even">
+<td align="left">AAPL</td>
+<td align="left">2020-01-09</td>
+<td align="right">76.8100</td>
+<td align="right">77.6075</td>
+<td align="right">76.5500</td>
+<td align="right">77.4075</td>
+<td align="right">170108400</td>
+<td align="right">74.96280</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="variables-en-el-tiempo.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="variables-en-el-tiempo.html#cb2-2" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
+<span id="cb2-3"><a href="variables-en-el-tiempo.html#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="variables-en-el-tiempo.html#cb2-4" tabindex="-1"></a><span class="co"># Cargar datos si no están cargados</span></span>
+<span id="cb2-5"><a href="variables-en-el-tiempo.html#cb2-5" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">&quot;AAPL&quot;</span>, <span class="at">from =</span> <span class="st">&quot;2020-01-01&quot;</span>, <span class="at">to =</span> <span class="st">&quot;2025-04-30&quot;</span>)</span>
+<span id="cb2-6"><a href="variables-en-el-tiempo.html#cb2-6" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(apple_data)</span>
+<span id="cb2-7"><a href="variables-en-el-tiempo.html#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="variables-en-el-tiempo.html#cb2-8" tabindex="-1"></a><span class="co"># Seleccionar solo algunos puntos clave para etiquetar (ej: cada 250 días)</span></span>
+<span id="cb2-9"><a href="variables-en-el-tiempo.html#cb2-9" tabindex="-1"></a>etiquetas <span class="ot">&lt;-</span> apple_data[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(apple_data), <span class="at">by =</span> <span class="dv">250</span>), ]</span>
+<span id="cb2-10"><a href="variables-en-el-tiempo.html#cb2-10" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="variables-en-el-tiempo.html#cb2-11" tabindex="-1"></a><span class="co"># Gráfico con línea y etiquetas del mismo color</span></span>
+<span id="cb2-12"><a href="variables-en-el-tiempo.html#cb2-12" tabindex="-1"></a><span class="fu">ggplot</span>(apple_data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> adjusted)) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="variables-en-el-tiempo.html#cb2-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb2-14"><a href="variables-en-el-tiempo.html#cb2-14" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb2-15"><a href="variables-en-el-tiempo.html#cb2-15" tabindex="-1"></a>    <span class="at">data =</span> etiquetas,</span>
+<span id="cb2-16"><a href="variables-en-el-tiempo.html#cb2-16" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">&quot;$&quot;</span>, <span class="fu">round</span>(adjusted, <span class="dv">1</span>))),</span>
+<span id="cb2-17"><a href="variables-en-el-tiempo.html#cb2-17" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;gray20&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb2-18"><a href="variables-en-el-tiempo.html#cb2-18" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-19"><a href="variables-en-el-tiempo.html#cb2-19" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-20"><a href="variables-en-el-tiempo.html#cb2-20" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Precio de cierre ajustado - Apple Inc.&quot;</span>,</span>
+<span id="cb2-21"><a href="variables-en-el-tiempo.html#cb2-21" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>,</span>
+<span id="cb2-22"><a href="variables-en-el-tiempo.html#cb2-22" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Precio (USD)&quot;</span></span>
+<span id="cb2-23"><a href="variables-en-el-tiempo.html#cb2-23" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-24"><a href="variables-en-el-tiempo.html#cb2-24" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="variables-en-el-tiempo.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(TTR)</span>
+<span id="cb3-2"><a href="variables-en-el-tiempo.html#cb3-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-3"><a href="variables-en-el-tiempo.html#cb3-3" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
+<span id="cb3-4"><a href="variables-en-el-tiempo.html#cb3-4" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-5"><a href="variables-en-el-tiempo.html#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="variables-en-el-tiempo.html#cb3-6" tabindex="-1"></a><span class="co"># Obtener y preparar datos</span></span>
+<span id="cb3-7"><a href="variables-en-el-tiempo.html#cb3-7" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">&quot;AAPL&quot;</span>, <span class="at">from =</span> <span class="st">&quot;2020-01-01&quot;</span>, <span class="at">to =</span> <span class="st">&quot;2025-04-30&quot;</span>)</span>
+<span id="cb3-8"><a href="variables-en-el-tiempo.html#cb3-8" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(apple_data)</span>
+<span id="cb3-9"><a href="variables-en-el-tiempo.html#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="variables-en-el-tiempo.html#cb3-10" tabindex="-1"></a><span class="co"># Calcular SMA</span></span>
+<span id="cb3-11"><a href="variables-en-el-tiempo.html#cb3-11" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> apple_data <span class="sc">%&gt;%</span></span>
+<span id="cb3-12"><a href="variables-en-el-tiempo.html#cb3-12" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-13"><a href="variables-en-el-tiempo.html#cb3-13" tabindex="-1"></a>    <span class="at">SMA20 =</span> <span class="fu">SMA</span>(adjusted, <span class="at">n =</span> <span class="dv">20</span>),</span>
+<span id="cb3-14"><a href="variables-en-el-tiempo.html#cb3-14" tabindex="-1"></a>    <span class="at">SMA50 =</span> <span class="fu">SMA</span>(adjusted, <span class="at">n =</span> <span class="dv">50</span>)</span>
+<span id="cb3-15"><a href="variables-en-el-tiempo.html#cb3-15" tabindex="-1"></a>  )</span>
+<span id="cb3-16"><a href="variables-en-el-tiempo.html#cb3-16" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="variables-en-el-tiempo.html#cb3-17" tabindex="-1"></a><span class="co"># Seleccionar puntos cada 100 días para etiquetar</span></span>
+<span id="cb3-18"><a href="variables-en-el-tiempo.html#cb3-18" tabindex="-1"></a>etiquetas <span class="ot">&lt;-</span> apple_data[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(apple_data), <span class="at">by =</span> <span class="dv">100</span>), ]</span>
+<span id="cb3-19"><a href="variables-en-el-tiempo.html#cb3-19" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="variables-en-el-tiempo.html#cb3-20" tabindex="-1"></a><span class="co"># Graficar con etiquetas</span></span>
+<span id="cb3-21"><a href="variables-en-el-tiempo.html#cb3-21" tabindex="-1"></a><span class="fu">ggplot</span>(apple_data, <span class="fu">aes</span>(<span class="at">x =</span> date)) <span class="sc">+</span></span>
+<span id="cb3-22"><a href="variables-en-el-tiempo.html#cb3-22" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> adjusted), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb3-23"><a href="variables-en-el-tiempo.html#cb3-23" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> SMA20), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-24"><a href="variables-en-el-tiempo.html#cb3-24" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> SMA50), <span class="at">color =</span> <span class="st">&quot;green&quot;</span>, <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">&quot;dotdash&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-25"><a href="variables-en-el-tiempo.html#cb3-25" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="variables-en-el-tiempo.html#cb3-26" tabindex="-1"></a>  <span class="co"># Etiquetas para línea principal (precio ajustado)</span></span>
+<span id="cb3-27"><a href="variables-en-el-tiempo.html#cb3-27" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb3-28"><a href="variables-en-el-tiempo.html#cb3-28" tabindex="-1"></a>    <span class="at">data =</span> etiquetas,</span>
+<span id="cb3-29"><a href="variables-en-el-tiempo.html#cb3-29" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> adjusted, <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">&quot;$&quot;</span>, <span class="fu">round</span>(adjusted, <span class="dv">1</span>))),</span>
+<span id="cb3-30"><a href="variables-en-el-tiempo.html#cb3-30" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;gray20&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb3-31"><a href="variables-en-el-tiempo.html#cb3-31" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-32"><a href="variables-en-el-tiempo.html#cb3-32" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="variables-en-el-tiempo.html#cb3-33" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-34"><a href="variables-en-el-tiempo.html#cb3-34" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Precio ajustado con SMA de 20 y 50 días - Apple Inc.&quot;</span>,</span>
+<span id="cb3-35"><a href="variables-en-el-tiempo.html#cb3-35" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>,</span>
+<span id="cb3-36"><a href="variables-en-el-tiempo.html#cb3-36" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Precio (USD)&quot;</span></span>
+<span id="cb3-37"><a href="variables-en-el-tiempo.html#cb3-37" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-38"><a href="variables-en-el-tiempo.html#cb3-38" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="variables-en-el-tiempo.html#cb4-1" tabindex="-1"></a><span class="co"># Rezagos</span></span>
+<span id="cb4-2"><a href="variables-en-el-tiempo.html#cb4-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb4-3"><a href="variables-en-el-tiempo.html#cb4-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-4"><a href="variables-en-el-tiempo.html#cb4-4" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
+<span id="cb4-5"><a href="variables-en-el-tiempo.html#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="variables-en-el-tiempo.html#cb4-6" tabindex="-1"></a><span class="co"># Obtener datos y preparar</span></span>
+<span id="cb4-7"><a href="variables-en-el-tiempo.html#cb4-7" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">&quot;AAPL&quot;</span>, <span class="at">from =</span> <span class="st">&quot;2020-01-01&quot;</span>, <span class="at">to =</span> <span class="st">&quot;2025-04-30&quot;</span>)</span>
+<span id="cb4-8"><a href="variables-en-el-tiempo.html#cb4-8" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(apple_data)</span>
+<span id="cb4-9"><a href="variables-en-el-tiempo.html#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="variables-en-el-tiempo.html#cb4-10" tabindex="-1"></a><span class="co"># Calcular rezagos de 1, 7 y 30 días</span></span>
+<span id="cb4-11"><a href="variables-en-el-tiempo.html#cb4-11" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> apple_data <span class="sc">%&gt;%</span></span>
+<span id="cb4-12"><a href="variables-en-el-tiempo.html#cb4-12" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-13"><a href="variables-en-el-tiempo.html#cb4-13" tabindex="-1"></a>    <span class="at">lag_1 =</span> <span class="fu">lag</span>(adjusted, <span class="dv">1</span>),</span>
+<span id="cb4-14"><a href="variables-en-el-tiempo.html#cb4-14" tabindex="-1"></a>    <span class="at">lag_7 =</span> <span class="fu">lag</span>(adjusted, <span class="dv">7</span>),</span>
+<span id="cb4-15"><a href="variables-en-el-tiempo.html#cb4-15" tabindex="-1"></a>    <span class="at">lag_30 =</span> <span class="fu">lag</span>(adjusted, <span class="dv">30</span>)</span>
+<span id="cb4-16"><a href="variables-en-el-tiempo.html#cb4-16" tabindex="-1"></a>  )</span>
+<span id="cb4-17"><a href="variables-en-el-tiempo.html#cb4-17" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="variables-en-el-tiempo.html#cb4-18" tabindex="-1"></a><span class="co"># Filtrar datos válidos para graficar (sin NA en lag_7)</span></span>
+<span id="cb4-19"><a href="variables-en-el-tiempo.html#cb4-19" tabindex="-1"></a>datos_lag7 <span class="ot">&lt;-</span> apple_data <span class="sc">%&gt;%</span></span>
+<span id="cb4-20"><a href="variables-en-el-tiempo.html#cb4-20" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(lag_7))</span>
+<span id="cb4-21"><a href="variables-en-el-tiempo.html#cb4-21" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="variables-en-el-tiempo.html#cb4-22" tabindex="-1"></a><span class="co"># Seleccionar puntos para etiquetas (cada 100)</span></span>
+<span id="cb4-23"><a href="variables-en-el-tiempo.html#cb4-23" tabindex="-1"></a>etiquetas_lag7 <span class="ot">&lt;-</span> datos_lag7[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(datos_lag7), <span class="at">by =</span> <span class="dv">100</span>), ]</span>
+<span id="cb4-24"><a href="variables-en-el-tiempo.html#cb4-24" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="variables-en-el-tiempo.html#cb4-25" tabindex="-1"></a><span class="co"># Gráfico de rezago de 7 días con etiquetas</span></span>
+<span id="cb4-26"><a href="variables-en-el-tiempo.html#cb4-26" tabindex="-1"></a><span class="fu">ggplot</span>(datos_lag7, <span class="fu">aes</span>(<span class="at">x =</span> lag_7, <span class="at">y =</span> adjusted)) <span class="sc">+</span></span>
+<span id="cb4-27"><a href="variables-en-el-tiempo.html#cb4-27" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb4-28"><a href="variables-en-el-tiempo.html#cb4-28" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb4-29"><a href="variables-en-el-tiempo.html#cb4-29" tabindex="-1"></a>    <span class="at">data =</span> etiquetas_lag7,</span>
+<span id="cb4-30"><a href="variables-en-el-tiempo.html#cb4-30" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">&quot;$&quot;</span>, <span class="fu">round</span>(adjusted, <span class="dv">1</span>))),</span>
+<span id="cb4-31"><a href="variables-en-el-tiempo.html#cb4-31" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;gray20&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb4-32"><a href="variables-en-el-tiempo.html#cb4-32" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-33"><a href="variables-en-el-tiempo.html#cb4-33" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-34"><a href="variables-en-el-tiempo.html#cb4-34" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Precio ajustado vs. Rezago de 7 días (Lag 7) - Apple Inc.&quot;</span>,</span>
+<span id="cb4-35"><a href="variables-en-el-tiempo.html#cb4-35" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Precio hace 7 días&quot;</span>,</span>
+<span id="cb4-36"><a href="variables-en-el-tiempo.html#cb4-36" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Precio actual&quot;</span></span>
+<span id="cb4-37"><a href="variables-en-el-tiempo.html#cb4-37" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-38"><a href="variables-en-el-tiempo.html#cb4-38" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="variables-en-el-tiempo.html#cb5-1" tabindex="-1"></a><span class="co"># descomposicion</span></span>
+<span id="cb5-2"><a href="variables-en-el-tiempo.html#cb5-2" tabindex="-1"></a><span class="co"># Cargar librerías necesarias</span></span>
+<span id="cb5-3"><a href="variables-en-el-tiempo.html#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="variables-en-el-tiempo.html#cb5-4" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
+<span id="cb5-5"><a href="variables-en-el-tiempo.html#cb5-5" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-6"><a href="variables-en-el-tiempo.html#cb5-6" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-7"><a href="variables-en-el-tiempo.html#cb5-7" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb5-8"><a href="variables-en-el-tiempo.html#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="variables-en-el-tiempo.html#cb5-9" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="variables-en-el-tiempo.html#cb5-10" tabindex="-1"></a><span class="co"># Descargar y preparar datos</span></span>
+<span id="cb5-11"><a href="variables-en-el-tiempo.html#cb5-11" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">&quot;AAPL&quot;</span>, <span class="at">from =</span> <span class="st">&quot;2020-01-01&quot;</span>, <span class="at">to =</span> <span class="st">&quot;2025-04-30&quot;</span>)</span>
+<span id="cb5-12"><a href="variables-en-el-tiempo.html#cb5-12" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(apple_data)</span>
+<span id="cb5-13"><a href="variables-en-el-tiempo.html#cb5-13" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="variables-en-el-tiempo.html#cb5-14" tabindex="-1"></a><span class="co"># Agregar mes y promedio mensual</span></span>
+<span id="cb5-15"><a href="variables-en-el-tiempo.html#cb5-15" tabindex="-1"></a>apple_mensual <span class="ot">&lt;-</span> apple_data <span class="sc">%&gt;%</span></span>
+<span id="cb5-16"><a href="variables-en-el-tiempo.html#cb5-16" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">format</span>(date, <span class="st">&quot;%Y-%m&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-17"><a href="variables-en-el-tiempo.html#cb5-17" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb5-18"><a href="variables-en-el-tiempo.html#cb5-18" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">promedio_mensual =</span> <span class="fu">mean</span>(adjusted)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-19"><a href="variables-en-el-tiempo.html#cb5-19" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb5-20"><a href="variables-en-el-tiempo.html#cb5-20" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="variables-en-el-tiempo.html#cb5-21" tabindex="-1"></a><span class="co"># Convertir a serie de tiempo (mensual)</span></span>
+<span id="cb5-22"><a href="variables-en-el-tiempo.html#cb5-22" tabindex="-1"></a>ts_appl <span class="ot">&lt;-</span> <span class="fu">ts</span>(apple_mensual<span class="sc">$</span>promedio_mensual, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2020</span>, <span class="dv">1</span>), <span class="at">frequency =</span> <span class="dv">12</span>)</span>
+<span id="cb5-23"><a href="variables-en-el-tiempo.html#cb5-23" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="variables-en-el-tiempo.html#cb5-24" tabindex="-1"></a><span class="co"># Descomposición clásica</span></span>
+<span id="cb5-25"><a href="variables-en-el-tiempo.html#cb5-25" tabindex="-1"></a>descomposicion <span class="ot">&lt;-</span> <span class="fu">decompose</span>(ts_appl)</span>
+<span id="cb5-26"><a href="variables-en-el-tiempo.html#cb5-26" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="variables-en-el-tiempo.html#cb5-27" tabindex="-1"></a><span class="co"># Extraer componentes</span></span>
+<span id="cb5-28"><a href="variables-en-el-tiempo.html#cb5-28" tabindex="-1"></a>original <span class="ot">&lt;-</span> descomposicion<span class="sc">$</span>x</span>
+<span id="cb5-29"><a href="variables-en-el-tiempo.html#cb5-29" tabindex="-1"></a>seasonal <span class="ot">&lt;-</span> descomposicion<span class="sc">$</span>seasonal</span>
+<span id="cb5-30"><a href="variables-en-el-tiempo.html#cb5-30" tabindex="-1"></a>trend <span class="ot">&lt;-</span> descomposicion<span class="sc">$</span>trend</span>
+<span id="cb5-31"><a href="variables-en-el-tiempo.html#cb5-31" tabindex="-1"></a>random <span class="ot">&lt;-</span> descomposicion<span class="sc">$</span>random</span>
+<span id="cb5-32"><a href="variables-en-el-tiempo.html#cb5-32" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="variables-en-el-tiempo.html#cb5-33" tabindex="-1"></a><span class="co"># Crear fechas mensuales para etiquetar</span></span>
+<span id="cb5-34"><a href="variables-en-el-tiempo.html#cb5-34" tabindex="-1"></a>fechas <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">&quot;2020-01-01&quot;</span>), <span class="at">by =</span> <span class="st">&quot;month&quot;</span>, <span class="at">length.out =</span> <span class="fu">length</span>(original))</span>
+<span id="cb5-35"><a href="variables-en-el-tiempo.html#cb5-35" tabindex="-1"></a></span>
+<span id="cb5-36"><a href="variables-en-el-tiempo.html#cb5-36" tabindex="-1"></a><span class="co"># DataFrames para graficar</span></span>
+<span id="cb5-37"><a href="variables-en-el-tiempo.html#cb5-37" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-38"><a href="variables-en-el-tiempo.html#cb5-38" tabindex="-1"></a>  <span class="at">Fecha =</span> fechas,</span>
+<span id="cb5-39"><a href="variables-en-el-tiempo.html#cb5-39" tabindex="-1"></a>  <span class="at">Original =</span> <span class="fu">as.numeric</span>(original),</span>
+<span id="cb5-40"><a href="variables-en-el-tiempo.html#cb5-40" tabindex="-1"></a>  <span class="at">Estacional =</span> <span class="fu">as.numeric</span>(seasonal),</span>
+<span id="cb5-41"><a href="variables-en-el-tiempo.html#cb5-41" tabindex="-1"></a>  <span class="at">Tendencia =</span> <span class="fu">as.numeric</span>(trend),</span>
+<span id="cb5-42"><a href="variables-en-el-tiempo.html#cb5-42" tabindex="-1"></a>  <span class="at">Residual =</span> <span class="fu">as.numeric</span>(random)</span>
+<span id="cb5-43"><a href="variables-en-el-tiempo.html#cb5-43" tabindex="-1"></a>)</span>
+<span id="cb5-44"><a href="variables-en-el-tiempo.html#cb5-44" tabindex="-1"></a></span>
+<span id="cb5-45"><a href="variables-en-el-tiempo.html#cb5-45" tabindex="-1"></a><span class="co"># Etiquetas de tendencia (cada 12 meses)</span></span>
+<span id="cb5-46"><a href="variables-en-el-tiempo.html#cb5-46" tabindex="-1"></a>etiquetas <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb5-47"><a href="variables-en-el-tiempo.html#cb5-47" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Tendencia)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-48"><a href="variables-en-el-tiempo.html#cb5-48" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">n</span>(), <span class="at">by =</span> <span class="dv">12</span>))</span>
+<span id="cb5-49"><a href="variables-en-el-tiempo.html#cb5-49" tabindex="-1"></a></span>
+<span id="cb5-50"><a href="variables-en-el-tiempo.html#cb5-50" tabindex="-1"></a><span class="co"># Graficar los componentes</span></span>
+<span id="cb5-51"><a href="variables-en-el-tiempo.html#cb5-51" tabindex="-1"></a><span class="co">#library(gridExtra)</span></span>
+<span id="cb5-52"><a href="variables-en-el-tiempo.html#cb5-52" tabindex="-1"></a></span>
+<span id="cb5-53"><a href="variables-en-el-tiempo.html#cb5-53" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Fecha, <span class="at">y =</span> Original)) <span class="sc">+</span></span>
+<span id="cb5-54"><a href="variables-en-el-tiempo.html#cb5-54" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb5-55"><a href="variables-en-el-tiempo.html#cb5-55" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Serie original&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">x =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-56"><a href="variables-en-el-tiempo.html#cb5-56" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb5-57"><a href="variables-en-el-tiempo.html#cb5-57" tabindex="-1"></a></span>
+<span id="cb5-58"><a href="variables-en-el-tiempo.html#cb5-58" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Fecha, <span class="at">y =</span> Estacional)) <span class="sc">+</span></span>
+<span id="cb5-59"><a href="variables-en-el-tiempo.html#cb5-59" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-60"><a href="variables-en-el-tiempo.html#cb5-60" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Componente estacional&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">x =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-61"><a href="variables-en-el-tiempo.html#cb5-61" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb5-62"><a href="variables-en-el-tiempo.html#cb5-62" tabindex="-1"></a></span>
+<span id="cb5-63"><a href="variables-en-el-tiempo.html#cb5-63" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Fecha, <span class="at">y =</span> Tendencia)) <span class="sc">+</span></span>
+<span id="cb5-64"><a href="variables-en-el-tiempo.html#cb5-64" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-65"><a href="variables-en-el-tiempo.html#cb5-65" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb5-66"><a href="variables-en-el-tiempo.html#cb5-66" tabindex="-1"></a>    <span class="at">data =</span> etiquetas,</span>
+<span id="cb5-67"><a href="variables-en-el-tiempo.html#cb5-67" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(Tendencia, <span class="dv">1</span>)),</span>
+<span id="cb5-68"><a href="variables-en-el-tiempo.html#cb5-68" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;gray20&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb5-69"><a href="variables-en-el-tiempo.html#cb5-69" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-70"><a href="variables-en-el-tiempo.html#cb5-70" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Tendencia estimada&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">x =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-71"><a href="variables-en-el-tiempo.html#cb5-71" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb5-72"><a href="variables-en-el-tiempo.html#cb5-72" tabindex="-1"></a></span>
+<span id="cb5-73"><a href="variables-en-el-tiempo.html#cb5-73" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Fecha, <span class="at">y =</span> Residual)) <span class="sc">+</span></span>
+<span id="cb5-74"><a href="variables-en-el-tiempo.html#cb5-74" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">color =</span> <span class="st">&quot;gray20&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-75"><a href="variables-en-el-tiempo.html#cb5-75" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Componente residual&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">x =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-76"><a href="variables-en-el-tiempo.html#cb5-76" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb5-77"><a href="variables-en-el-tiempo.html#cb5-77" tabindex="-1"></a></span>
+<span id="cb5-78"><a href="variables-en-el-tiempo.html#cb5-78" tabindex="-1"></a><span class="co"># Mostrar juntos</span></span>
+<span id="cb5-79"><a href="variables-en-el-tiempo.html#cb5-79" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1, p2, p3, p4, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["book.pdf", "book.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "code_folding": "show"
+});
+});
+</script>
+
+</body>
+
+</html>

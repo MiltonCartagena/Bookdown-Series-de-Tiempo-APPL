@@ -1,6 +1,27 @@
-h1:introducción. Introducción.
+h1:introducción-y-descripción-de-los-datos-de-aapl. Introducción y Descripción de los Datos de AAPL.
+h2:introducción. Introducción.
 h2:objetivo-general. Objetivo general.
 h2:objetivos-específicos. Objetivos específicos.
 h2:justificación. Justificación.
-h1:fuente-de-datos. Fuente de datos.
+h2:fuente-de-datos. Fuente de datos.
+h1:análisis-exploratorio-y-comportamiento-temporal-de-aapl. Análisis Exploratorio y Comportamiento Temporal de AAPL.
+h2:descarga-y-visualización-inicial. Descarga y visualización inicial.
+h2:evolución-del-precio-ajustado. Evolución del precio ajustado.
+h2:análisis-con-promedios-móviles. Análisis con promedios móviles.
+h2:análisis-de-rezagos. Análisis de rezagos.
+h2:descomposición-estacional. Descomposición estacional.
+h1:preprocesamiento-y-modelado-temporal-de-la-serie-aapl. Preprocesamiento y Modelado Temporal de la Serie AAPL.
+h2:introducción.-1 Introducción.
+h2:objetivo. Objetivo.
+h2:preparación-de-los-datos Preparación de los Datos
+h2:gráfico-inicial. Gráfico inicial.
+h2:estacionariedad-y-diferenciación. Estacionariedad y diferenciación.
+h2:descomposición-de-la-serie Descomposición de la serie
+h2:modelo-arima-y-validación. Modelo ARIMA y validación.
+h2:validación-de-residuos. Validación de residuos.
+h2:conclusión. Conclusión.
+h2:predicción. Predicción.
+h2:punto-de-cambio. Punto de cambio.
+h2:conclusión.-1 Conclusión.
+h2:bibliografía. Bibliografía.
 

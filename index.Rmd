@@ -1,6 +1,6 @@
 --- 
 title: "Bookdown Análisis Series de Tiempo AAPL"
-author: "Sofy Certuche Milton Cartagena"
+author: "Sofy Certuche, Milton Cartagena"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -15,7 +15,17 @@ link-citations: true
 github-repo: "rstudio/bookdown-demo"
 ---
 
-# Introducción.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+# Introducción y Descripción de los Datos de AAPL.
+
+## Introducción.
 
 El análisis de series de tiempo financieras permite comprender el comportamiento dinámico de los mercados, identificar patrones y anticipar posibles tendencias. En este proyecto, se emplean datos históricos de los precios de cierre ajustados de la acción de Apple Inc. (AAPL), extraídos desde la plataforma Yahoo Finance. Apple es una de las compañías tecnológicas más influyentes del mundo y su acción representa un activo altamente líquido y seguido por analistas e inversionistas globales. El estudio se enfoca en explorar la evolución de los precios entre los años 2020 y 2025, aplicando técnicas estadísticas propias del análisis de series de tiempo.
 
@@ -40,7 +50,7 @@ Analizar el comportamiento histórico de la acción de Apple Inc. mediante técn
 
 Apple Inc. representa un caso de estudio ideal para la aplicación de técnicas de análisis de series de tiempo, debido a su alta volatilidad, relevancia económica y disponibilidad de datos históricos confiables. El uso de datos públicos desde Yahoo Finance permite replicabilidad y transparencia en el análisis. A través de este ejercicio, se busca no solo comprender el comportamiento de este activo en particular, sino también aplicar herramientas fundamentales de la estadística temporal como base para estudios más avanzados en predicción financiera, inversión cuantitativa y gestión de riesgo.
 
-# Fuente de datos.
+## Fuente de datos.
 
 + Yahoo Finance: https://finance.yahoo.com/quote/AAPL
 
@@ -48,12 +58,16 @@ Apple Inc. representa un caso de estudio ideal para la aplicación de técnicas 
 
 + Variable principal: Precio de cierre ajustado (Adjusted Close)
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
+# Análisis Exploratorio y Comportamiento Temporal de AAPL.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+
 ```
+
+## Descarga y visualización inicial.
+
+Los datos se obtienen utilizando el paquete `tidyquant`, que permite extraer cotizaciones bursátiles directamente desde Yahoo Finance.
 
 ```{r}
 # Instalar y cargar paquetes
@@ -65,10 +79,15 @@ apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30")
 
 # Vista previa
 head(apple_data)
-
 ```
 
+## Evolución del precio ajustado.
+
+A continuación, se muestra el comportamiento del precio de cierre ajustado de AAPL, incluyendo etiquetas para resaltar puntos de referencia en la serie.
+
+
 ```{r}
+# Librerias
 library(ggplot2)
 library(tidyquant)
 
@@ -97,8 +116,12 @@ ggplot(apple_data, aes(x = date, y = adjusted)) +
 
 ```
 
+## Análisis con promedios móviles.
+
+Se calculan promedios móviles simples de 20 y 50 días para detectar tendencias a corto y mediano plazo.
 
 ```{r}
+# Librerias
 library(TTR)
 library(ggplot2)
 library(tidyquant)
@@ -122,7 +145,7 @@ etiquetas <- apple_data[seq(1, nrow(apple_data), by = 100), ]
 ggplot(apple_data, aes(x = date)) +
   geom_line(aes(y = adjusted), color = "blue", size = 0.4) +
   geom_line(aes(y = SMA20), color = "red", size = 0.5, linetype = "dashed") +
-  geom_line(aes(y = SMA50), color = "green", size = 0.5, linetype = "dotdash") +
+  geom_line(aes(y = SMA50), color = "#004949", size = 0.5, linetype = "dotdash") +
 
   # Etiquetas para línea principal (precio ajustado)
   geom_text(
@@ -140,8 +163,13 @@ ggplot(apple_data, aes(x = date)) +
 
 ```
 
+## Análisis de rezagos.
+
+Este gráfico representa la relación entre el valor actual y el precio de 7 días anteriores.
+
+
 ```{r}
-# Rezagos
+# Librerias
 library(dplyr)
 library(ggplot2)
 library(tidyquant)
@@ -167,7 +195,7 @@ etiquetas_lag7 <- datos_lag7[seq(1, nrow(datos_lag7), by = 100), ]
 
 # Gráfico de rezago de 7 días con etiquetas
 ggplot(datos_lag7, aes(x = lag_7, y = adjusted)) +
-  geom_point(alpha = 0.5, color = "darkblue") +
+  geom_point(alpha = 0.5, color = "#9A68A4") +
   geom_text(
     data = etiquetas_lag7,
     aes(label = paste0("$", round(adjusted, 1))),
@@ -182,9 +210,13 @@ ggplot(datos_lag7, aes(x = lag_7, y = adjusted)) +
 
 ```
 
+## Descomposición estacional.
+
+Se descompone la serie mensual para observar los componentes de tendencia, estacionalidad y ruido.
+
 ```{r}
-# descomposicion
-# Cargar librerías necesarias
+# Librerías
+
 library(tidyquant)
 library(dplyr)
 library(ggplot2)
@@ -232,7 +264,8 @@ etiquetas <- df %>%
   slice(seq(1, n(), by = 12))
 
 # Graficar los componentes
-library(gridExtra)
+
+ library(gridExtra)
 
 p1 <- ggplot(df, aes(x = Fecha, y = Original)) +
   geom_line() +
@@ -240,12 +273,12 @@ p1 <- ggplot(df, aes(x = Fecha, y = Original)) +
   theme_minimal()
 
 p2 <- ggplot(df, aes(x = Fecha, y = Estacional)) +
-  geom_line(color = "blue") +
+  geom_line(color = "#0078A2") +
   labs(title = "Componente estacional", y = "", x = "") +
   theme_minimal()
 
 p3 <- ggplot(df, aes(x = Fecha, y = Tendencia)) +
-  geom_line(color = "red") +
+  geom_line(color = "#D8152F") +
   geom_text(
     data = etiquetas,
     aes(label = round(Tendencia, 1)),
@@ -264,3 +297,128 @@ gridExtra::grid.arrange(p1, p2, p3, p4, ncol = 1)
 
 ```
 
+# Preprocesamiento y Modelado Temporal de la Serie AAPL.
+
+## Introducción.
+
+El presente análisis explora la serie temporal del precio de cierre ajustado de las acciones de Apple Inc. (AAPL), obtenida de Yahoo Finance entre 2020 y abril de 2025. Se aplicarán técnicas de preprocesamiento, visualización, descomposición y modelado de series temporales con el fin de identificar patrones relevantes como tendencia, estacionalidad, rezagos y posibles puntos de cambio estructural.
+
+## Objetivo.
+
+Analizar la estructura temporal del precio de las acciones de Apple Inc. mediante técnicas de descomposición, prueba de estacionariedad, diferenciación e identificación de modelo ARIMA. El análisis incluirá visualizaciones con etiquetas para resaltar comportamientos clave.
+
+## Preparación de los Datos
+
+```{r}
+# Librerias
+
+library(tidyquant)
+apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30")
+apple_data <- na.omit(apple_data)
+```
+
+## Gráfico inicial.
+
+```{r}
+#Librerias
+
+library(ggplot2)
+plot1 <- ggplot(apple_data, aes(x = date, y = adjusted)) +
+  geom_line(color = "#2C3E50") +
+  geom_text(data = apple_data[seq(1, nrow(apple_data), by = 250), ],
+            aes(label = paste0("$", round(adjusted, 1))),
+            color = "gray30", size = 3, vjust = -1) +
+  labs(title = "Precio de cierre ajustado - Apple Inc.", x = "Fecha", y = "Precio (USD)") +
+  theme_minimal()
+plot1
+```
+
+## Estacionariedad y diferenciación.
+
+```{r}
+# Librerias
+
+library(tseries)
+serie_ts <- ts(apple_data$adjusted, frequency = 365, start = c(2020, 1))
+adf.test(serie_ts)
+```
+
+Interpretación Según el valor-p de la prueba ADF, si p > 0.05, la serie no es estacionaria. Por tanto, se requiere una diferenciación:
+
+```{r}
+diff_serie <- diff(serie_ts)
+adf.test(diff_serie)
+```
+
+Resultado esperado: p < 0.05, indicando que la serie diferenciada es estacionaria.
+
+## Descomposición de la serie
+
+
+```{r}
+ts_monthly <- ts(tapply(apple_data$adjusted, format(apple_data$date, "%Y-%m"), mean), frequency = 12, start = c(2020,1))
+descomp <- decompose(ts_monthly)
+plot(descomp)
+```
+
+Justificación: La descomposición permite observar la tendencia, estacionalidad y componente aleatorio, facilitando el entendimiento de la serie antes de modelar.
+
+## Modelo ARIMA y validación.
+
+```{r}
+library(forecast)
+modelo <- auto.arima(diff_serie)
+summary(modelo)
+```
+
+## Validación de residuos.
+
+```{r}
+residuos <- residuals(modelo)
+t.test(residuos)
+Box.test(residuos, lag = 12, type = "Ljung-Box")
+shapiro.test(residuos)
+```
+
+## Conclusión.
+
++ Si p > 0.05 en t-test: la media de residuos es cero.
+
++ Si p > 0.05 en Box-test: residuos no están autocorrelacionados.
+
++ Si p > 0.05 en Shapiro-Wilk: residuos con distribución normal (deseable pero no obligatorio).
+
+## Predicción.
+
+```{r}
+forecast_values <- forecast(modelo, h = 6)
+plot(forecast_values)
+```
+
+## Punto de cambio.
+
+```{r}
+library(changepoint)
+cambio <- cpt.mean(diff_serie)
+plot(cambio)
+```
+
+**Interpretación:** Se identifica visualmente un punto de quiebre estructural relevante.
+
+## Conclusión.
+
+Se realizó un análisis exhaustivo de la serie temporal del precio de las acciones de Apple Inc. Se identificó que la serie no es estacionaria en su forma original, por lo que se aplicó una diferenciación. Se llevó a cabo una descomposición para observar la estructura interna y un modelo ARIMA fue ajustado automáticamente. Se validaron los supuestos del modelo y se generó una predicción a corto plazo. Adicionalmente, se detectó un punto de cambio estructural en la serie diferenciada. Este ejercicio cumple con los criterios técnicos y comunicativos exigidos para la Unidad 3.
+
+## Bibliografía.
+
+- Yahoo Finance. (2025). *Apple Inc. (AAPL) Stock Price & Historical Data*. Recuperado de [https://finance.yahoo.com/quote/AAPL](https://finance.yahoo.com/quote/AAPL)
+
+- Dancho, M. & Vaughan, D. (2021). *tidyquant: Tidy Quantitative Financial Analysis*. R package version 1.0.4. Recuperado de [https://business-science.github.io/tidyquant/](https://business-science.github.io/tidyquant/)
+
+- Hyndman, R.J. & Athanasopoulos, G. (2018). *Forecasting: Principles and Practice* (2da ed.). OTexts. Disponible en [https://otexts.com/fpp2/](https://otexts.com/fpp2/)
+
+- Cowpertwait, P. & Metcalfe, A. (2009). *Introductory Time Series with R*. Springer. DOI: [10.1007/978-0-387-88698-5](https://doi.org/10.1007/978-0-387-88698-5)
+
+- Shumway, R. H., & Stoffer, D. S. (2017). *Time Series Analysis and Its Applications: With R Examples*. Springer.
+
+- R Core Team (2023). *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing. [https://www.R-project.org/](https://www.R-project.org/)

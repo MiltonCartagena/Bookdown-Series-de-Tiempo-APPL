@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capitulo3 Preprocesamiento y Visualización – AAPL (Apple Inc.) | Bookdown Análisis Series de Tiempo AAPL</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capitulo3 Preprocesamiento y Visualización – AAPL (Apple Inc.) | Bookdown Análisis Series de Tiempo AAPL" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capitulo3 Preprocesamiento y Visualización – AAPL (Apple Inc.) | Bookdown Análisis Series de Tiempo AAPL" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  
+
+<meta name="author" content="Sofy Certuche Milton Cartagena" />
+
+
+<meta name="date" content="2025-05-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="variables-en-el-tiempo..html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Análisis Series de Tiempo AAPL</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Análisis de la Serie de Tiempo de AAPL.</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introducción."><i class="fa fa-check"></i><b>1.1</b> Introducción.</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#objetivo-general."><i class="fa fa-check"></i><b>1.2</b> Objetivo general.</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#objetivos-específicos."><i class="fa fa-check"></i><b>1.3</b> Objetivos específicos.</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#justificación."><i class="fa fa-check"></i><b>1.4</b> Justificación.</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#fuente-de-datos."><i class="fa fa-check"></i><b>1.5</b> Fuente de datos.</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="variables-en-el-tiempo..html"><a href="variables-en-el-tiempo..html"><i class="fa fa-check"></i><b>2</b> Variables en el Tiempo.</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="variables-en-el-tiempo..html"><a href="variables-en-el-tiempo..html#descarga-y-visualización-inicial."><i class="fa fa-check"></i><b>2.1</b> Descarga y visualización inicial.</a></li>
+<li class="chapter" data-level="2.2" data-path="variables-en-el-tiempo..html"><a href="variables-en-el-tiempo..html#evolución-del-precio-ajustado."><i class="fa fa-check"></i><b>2.2</b> Evolución del precio ajustado.</a></li>
+<li class="chapter" data-level="2.3" data-path="variables-en-el-tiempo..html"><a href="variables-en-el-tiempo..html#análisis-con-promedios-móviles."><i class="fa fa-check"></i><b>2.3</b> Análisis con promedios móviles.</a></li>
+<li class="chapter" data-level="2.4" data-path="variables-en-el-tiempo..html"><a href="variables-en-el-tiempo..html#análisis-de-rezagos."><i class="fa fa-check"></i><b>2.4</b> Análisis de rezagos.</a></li>
+<li class="chapter" data-level="2.5" data-path="variables-en-el-tiempo..html"><a href="variables-en-el-tiempo..html#descomposición-estacional."><i class="fa fa-check"></i><b>2.5</b> Descomposición estacional.</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="preprocesamiento-y-visualización-aapl-apple-inc..html"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html"><i class="fa fa-check"></i><b>3</b> Preprocesamiento y Visualización – AAPL (Apple Inc.)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="preprocesamiento-y-visualización-aapl-apple-inc..html"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#introducción.-1"><i class="fa fa-check"></i><b>3.1</b> Introducción.</a></li>
+<li class="chapter" data-level="3.2" data-path="preprocesamiento-y-visualización-aapl-apple-inc..html"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#objetivo."><i class="fa fa-check"></i><b>3.2</b> Objetivo.</a></li>
+<li class="chapter" data-level="3.3" data-path="preprocesamiento-y-visualización-aapl-apple-inc..html"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#descomposición-de-la-serie."><i class="fa fa-check"></i><b>3.3</b> Descomposición de la serie.</a></li>
+<li class="chapter" data-level="3.4" data-path="preprocesamiento-y-visualización-aapl-apple-inc..html"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#diferenciación."><i class="fa fa-check"></i><b>3.4</b> Diferenciación.</a></li>
+<li class="chapter" data-level="3.5" data-path="preprocesamiento-y-visualización-aapl-apple-inc..html"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#identificación-de-cambio-estructural."><i class="fa fa-check"></i><b>3.5</b> Identificación de cambio estructural.</a></li>
+<li class="chapter" data-level="3.6" data-path="preprocesamiento-y-visualización-aapl-apple-inc..html"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#conclusión."><i class="fa fa-check"></i><b>3.6</b> Conclusión.</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bookdown Análisis Series de Tiempo AAPL</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="preprocesamiento-y-visualización-aapl-apple-inc." class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Capitulo3</span> Preprocesamiento y Visualización – AAPL (Apple Inc.)<a href="preprocesamiento-y-visualización-aapl-apple-inc..html#preprocesamiento-y-visualización-aapl-apple-inc." class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introducción.-1" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Introducción.<a href="preprocesamiento-y-visualización-aapl-apple-inc..html#introducción.-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En esta sección se busca describir, mediante técnicas gráficas y estadísticas, el comportamiento subyacente de la serie temporal del precio ajustado de las acciones de Apple Inc. Para ello, se aplican funciones de preprocesamiento que permiten evaluar tendencias, rezagos, estacionalidad y estacionariedad.</p>
+</div>
+<div id="objetivo." class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Objetivo.<a href="preprocesamiento-y-visualización-aapl-apple-inc..html#objetivo." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Manipular y transformar la base de datos de AAPL utilizando herramientas estadísticas de series temporales para identificar patrones como tendencia, estacionalidad y residuos, con el fin de comprender el comportamiento histórico de la acción y su posible proyección futura.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-1" tabindex="-1"></a><span class="co">#Librerias</span></span>
+<span id="cb6-2"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-2" tabindex="-1"></a><span class="fu">library</span>(TTR)</span>
+<span id="cb6-3"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb6-4"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-5" tabindex="-1"></a><span class="co"># Cálculo de medias móviles</span></span>
+<span id="cb6-6"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-6" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> apple_data <span class="sc">%&gt;%</span></span>
+<span id="cb6-7"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-7" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-8"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-8" tabindex="-1"></a>    <span class="at">SMA20 =</span> <span class="fu">SMA</span>(adjusted, <span class="at">n =</span> <span class="dv">20</span>),</span>
+<span id="cb6-9"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-9" tabindex="-1"></a>    <span class="at">SMA50 =</span> <span class="fu">SMA</span>(adjusted, <span class="at">n =</span> <span class="dv">50</span>)</span>
+<span id="cb6-10"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-10" tabindex="-1"></a>  )</span>
+<span id="cb6-11"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-12" tabindex="-1"></a><span class="co"># Visualización</span></span>
+<span id="cb6-13"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-13" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-14"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-14" tabindex="-1"></a><span class="fu">ggplot</span>(apple_data, <span class="fu">aes</span>(<span class="at">x =</span> date)) <span class="sc">+</span></span>
+<span id="cb6-15"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-15" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> adjusted), <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb6-16"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-16" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> SMA20), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-17"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-17" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> SMA50), <span class="at">color =</span> <span class="st">&quot;green&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dotdash&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-18"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-18" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Precio AAPL con SMA de 20 y 50 días&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;USD&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-19"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb6-19" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="descomposición-de-la-serie." class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Descomposición de la serie.<a href="preprocesamiento-y-visualización-aapl-apple-inc..html#descomposición-de-la-serie." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb7-1" tabindex="-1"></a><span class="co"># Cálculo de rezagos</span></span>
+<span id="cb7-2"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb7-2" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> apple_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb7-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-4"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb7-4" tabindex="-1"></a>    <span class="at">lag_1 =</span> <span class="fu">lag</span>(adjusted, <span class="dv">1</span>),</span>
+<span id="cb7-5"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb7-5" tabindex="-1"></a>    <span class="at">lag_7 =</span> <span class="fu">lag</span>(adjusted, <span class="dv">7</span>),</span>
+<span id="cb7-6"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb7-6" tabindex="-1"></a>    <span class="at">lag_30 =</span> <span class="fu">lag</span>(adjusted, <span class="dv">30</span>)</span>
+<span id="cb7-7"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb7-7" tabindex="-1"></a>  )</span>
+<span id="cb7-8"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb7-8" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb7-9" tabindex="-1"></a><span class="co"># Gráfico comparando precio actual vs. rezago 7 días</span></span>
+<span id="cb7-10"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb7-10" tabindex="-1"></a><span class="fu">ggplot</span>(apple_data, <span class="fu">aes</span>(<span class="at">x =</span> lag_7, <span class="at">y =</span> adjusted)) <span class="sc">+</span></span>
+<span id="cb7-11"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb7-11" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-12"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb7-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Precio actual vs. rezago 7 días&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Precio 7 días atrás&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio actual&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-13"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb7-13" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb8-1" tabindex="-1"></a><span class="do">## Prueba de estacionariedad (ADF).</span></span></code></pre></div>
+<p>El valor-p es mayor a 0.05, por tanto no se rechaza la hipótesis nula: la serie no es estacionaria.</p>
+</div>
+<div id="diferenciación." class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Diferenciación.<a href="preprocesamiento-y-visualización-aapl-apple-inc..html#diferenciación." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb9-1" tabindex="-1"></a><span class="co"># Serie de tiempo</span></span>
+<span id="cb9-2"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb9-2" tabindex="-1"></a>apple_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(apple_data<span class="sc">$</span>adjusted, <span class="at">frequency =</span> <span class="dv">365</span>, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2020</span>, <span class="dv">1</span>))</span>
+<span id="cb9-3"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb9-4" tabindex="-1"></a><span class="co"># Prueba Dickey-Fuller</span></span>
+<span id="cb9-5"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb9-5" tabindex="-1"></a><span class="fu">library</span>(tseries)</span>
+<span id="cb9-6"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb9-6" tabindex="-1"></a><span class="fu">adf.test</span>(apple_ts)</span></code></pre></div>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  apple_ts
+## Dickey-Fuller = -3.0277, Lag order = 11, p-value = 0.1433
+## alternative hypothesis: stationary</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb11-1" tabindex="-1"></a><span class="co"># Diferenciación</span></span>
+<span id="cb11-2"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb11-2" tabindex="-1"></a>diff_apple_ts <span class="ot">&lt;-</span> <span class="fu">diff</span>(apple_ts)</span>
+<span id="cb11-3"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb11-3" tabindex="-1"></a><span class="fu">adf.test</span>(diff_apple_ts)</span></code></pre></div>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  diff_apple_ts
+## Dickey-Fuller = -11.094, Lag order = 11, p-value = 0.01
+## alternative hypothesis: stationary</code></pre>
+<p>Luego de una primera diferenciación, el valor-p es menor a 0.05, lo que indica que la serie ahora es estacionaria. La transformación fue exitosa.</p>
+</div>
+<div id="identificación-de-cambio-estructural." class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Identificación de cambio estructural.<a href="preprocesamiento-y-visualización-aapl-apple-inc..html#identificación-de-cambio-estructural." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb13-1" tabindex="-1"></a><span class="co"># Agregación mensual</span></span>
+<span id="cb13-2"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb13-2" tabindex="-1"></a>apple_monthly <span class="ot">&lt;-</span> apple_data <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb13-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">format</span>(date, <span class="st">&quot;%Y-%m&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb13-4" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb13-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_adjusted =</span> <span class="fu">mean</span>(adjusted))</span>
+<span id="cb13-6"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb13-6" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb13-7" tabindex="-1"></a>apple_ts_monthly <span class="ot">&lt;-</span> <span class="fu">ts</span>(apple_monthly<span class="sc">$</span>mean_adjusted, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2020</span>,<span class="dv">1</span>), <span class="at">frequency =</span> <span class="dv">12</span>)</span>
+<span id="cb13-8"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb13-8" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb13-9" tabindex="-1"></a><span class="co"># Descomposición</span></span>
+<span id="cb13-10"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb13-10" tabindex="-1"></a>decomp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(apple_ts_monthly)</span>
+<span id="cb13-11"><a href="preprocesamiento-y-visualización-aapl-apple-inc..html#cb13-11" tabindex="-1"></a><span class="fu">plot</span>(decomp)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Se detecta un punto de cambio relevante alrededor de la observación 219, coincidente con el año 2020.</p>
+<p>residuos)</p>
+<p>Los residuos no siguen una distribución normal (p &lt; 0.05), pero muestran independencia. El modelo puede considerarse válido con reservas.</p>
+</div>
+<div id="conclusión." class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Conclusión.<a href="preprocesamiento-y-visualización-aapl-apple-inc..html#conclusión." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La serie del IMAE-Valle no era inicialmente estacionaria, pero pudo transformarse mediante diferenciación. Se identificó un cambio estructural importante en 2020. La serie fue descompuesta exitosamente y se modeló con ARIMA, permitiendo predicciones razonables. Estos pasos son clave para un análisis riguroso y reproducible de series de tiempo.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="variables-en-el-tiempo..html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["book.pdf", "book.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "code_folding": "show"
+});
+});
+</script>
+
+</body>
+
+</html>
