@@ -1,0 +1,266 @@
+--- 
+title: "Bookdown Análisis Series de Tiempo AAPL"
+author: "Sofy Certuche Milton Cartagena"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  set in the _output.yml file.
+  The HTML output format for this example is bookdown::gitbook,
+link-citations: true
+github-repo: "rstudio/bookdown-demo"
+---
+
+# Introducción.
+
+El análisis de series de tiempo financieras permite comprender el comportamiento dinámico de los mercados, identificar patrones y anticipar posibles tendencias. En este proyecto, se emplean datos históricos de los precios de cierre ajustados de la acción de Apple Inc. (AAPL), extraídos desde la plataforma Yahoo Finance. Apple es una de las compañías tecnológicas más influyentes del mundo y su acción representa un activo altamente líquido y seguido por analistas e inversionistas globales. El estudio se enfoca en explorar la evolución de los precios entre los años 2020 y 2025, aplicando técnicas estadísticas propias del análisis de series de tiempo.
+
+
+# Objetivo general.
+
+Analizar el comportamiento histórico de la acción de Apple Inc. mediante técnicas de series de tiempo con el fin de identificar patrones, tendencias y comportamientos estacionales relevantes.
+
+# Objetivos específicos.
+
++ Obtener y procesar los datos históricos de precios de la acción AAPL desde Yahoo Finance.
+
++ Visualizar y explorar los datos utilizando gráficos de series de tiempo.
+
++ Aplicar técnicas de suavizamiento como el promedio móvil simple (SMA).
+
++ Incorporar rezagos (lags) para analizar la dependencia temporal.
+
++ Evaluar la presencia de estacionalidad u otros patrones recurrentes.
+
+# Justificación.
+
+Apple Inc. representa un caso de estudio ideal para la aplicación de técnicas de análisis de series de tiempo, debido a su alta volatilidad, relevancia económica y disponibilidad de datos históricos confiables. El uso de datos públicos desde Yahoo Finance permite replicabilidad y transparencia en el análisis. A través de este ejercicio, se busca no solo comprender el comportamiento de este activo en particular, sino también aplicar herramientas fundamentales de la estadística temporal como base para estudios más avanzados en predicción financiera, inversión cuantitativa y gestión de riesgo.
+
+# Fuente de datos.
+
++ Yahoo Finance: https://finance.yahoo.com/quote/AAPL
+
++ Periodo de análisis: 2020-01-01 a 2025-04-30
+
++ Variable principal: Precio de cierre ajustado (Adjusted Close)
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+```{r}
+# Instalar y cargar paquetes
+if (!require("tidyquant")) install.packages("tidyquant")
+library(tidyquant)
+
+# Descargar datos históricos desde Yahoo Finance
+apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30")
+
+# Vista previa
+head(apple_data)
+
+```
+
+```{r}
+library(ggplot2)
+library(tidyquant)
+
+# Cargar datos si no están cargados
+apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30")
+apple_data <- na.omit(apple_data)
+
+# Seleccionar solo algunos puntos clave para etiquetar (ej: cada 250 días)
+etiquetas <- apple_data[seq(1, nrow(apple_data), by = 250), ]
+
+# Gráfico con línea y etiquetas del mismo color
+ggplot(apple_data, aes(x = date, y = adjusted)) +
+  geom_line(color = "blue", size = 0.3) +
+  geom_text(
+    data = etiquetas,
+    aes(label = paste0("$", round(adjusted, 1))),
+    color = "gray20", size = 3, vjust = -1
+  ) +
+  labs(
+    title = "Precio de cierre ajustado - Apple Inc.",
+    x = "Fecha",
+    y = "Precio (USD)"
+  ) +
+  theme_minimal(base_size = 12)
+
+
+```
+
+
+```{r}
+library(TTR)
+library(ggplot2)
+library(tidyquant)
+library(dplyr)
+
+# Obtener y preparar datos
+apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30")
+apple_data <- na.omit(apple_data)
+
+# Calcular SMA
+apple_data <- apple_data %>%
+  mutate(
+    SMA20 = SMA(adjusted, n = 20),
+    SMA50 = SMA(adjusted, n = 50)
+  )
+
+# Seleccionar puntos cada 100 días para etiquetar
+etiquetas <- apple_data[seq(1, nrow(apple_data), by = 100), ]
+
+# Graficar con etiquetas
+ggplot(apple_data, aes(x = date)) +
+  geom_line(aes(y = adjusted), color = "blue", size = 0.4) +
+  geom_line(aes(y = SMA20), color = "red", size = 0.5, linetype = "dashed") +
+  geom_line(aes(y = SMA50), color = "green", size = 0.5, linetype = "dotdash") +
+
+  # Etiquetas para línea principal (precio ajustado)
+  geom_text(
+    data = etiquetas,
+    aes(x = date, y = adjusted, label = paste0("$", round(adjusted, 1))),
+    color = "gray20", size = 3, vjust = -1
+  ) +
+
+  labs(
+    title = "Precio ajustado con SMA de 20 y 50 días - Apple Inc.",
+    x = "Fecha",
+    y = "Precio (USD)"
+  ) +
+  theme_minimal()
+
+```
+
+```{r}
+# Rezagos
+library(dplyr)
+library(ggplot2)
+library(tidyquant)
+
+# Obtener datos y preparar
+apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30")
+apple_data <- na.omit(apple_data)
+
+# Calcular rezagos de 1, 7 y 30 días
+apple_data <- apple_data %>%
+  mutate(
+    lag_1 = lag(adjusted, 1),
+    lag_7 = lag(adjusted, 7),
+    lag_30 = lag(adjusted, 30)
+  )
+
+# Filtrar datos válidos para graficar (sin NA en lag_7)
+datos_lag7 <- apple_data %>%
+  filter(!is.na(lag_7))
+
+# Seleccionar puntos para etiquetas (cada 100)
+etiquetas_lag7 <- datos_lag7[seq(1, nrow(datos_lag7), by = 100), ]
+
+# Gráfico de rezago de 7 días con etiquetas
+ggplot(datos_lag7, aes(x = lag_7, y = adjusted)) +
+  geom_point(alpha = 0.5, color = "darkblue") +
+  geom_text(
+    data = etiquetas_lag7,
+    aes(label = paste0("$", round(adjusted, 1))),
+    color = "gray20", size = 3, vjust = -1
+  ) +
+  labs(
+    title = "Precio ajustado vs. Rezago de 7 días (Lag 7) - Apple Inc.",
+    x = "Precio hace 7 días",
+    y = "Precio actual"
+  ) +
+  theme_minimal()
+
+```
+
+```{r}
+# descomposicion
+# Cargar librerías necesarias
+library(tidyquant)
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+
+
+# Descargar y preparar datos
+apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30")
+apple_data <- na.omit(apple_data)
+
+# Agregar mes y promedio mensual
+apple_mensual <- apple_data %>%
+  mutate(month = format(date, "%Y-%m")) %>%
+  group_by(month) %>%
+  summarise(promedio_mensual = mean(adjusted)) %>%
+  ungroup()
+
+# Convertir a serie de tiempo (mensual)
+ts_appl <- ts(apple_mensual$promedio_mensual, start = c(2020, 1), frequency = 12)
+
+# Descomposición clásica
+descomposicion <- decompose(ts_appl)
+
+# Extraer componentes
+original <- descomposicion$x
+seasonal <- descomposicion$seasonal
+trend <- descomposicion$trend
+random <- descomposicion$random
+
+# Crear fechas mensuales para etiquetar
+fechas <- seq(as.Date("2020-01-01"), by = "month", length.out = length(original))
+
+# DataFrames para graficar
+df <- data.frame(
+  Fecha = fechas,
+  Original = as.numeric(original),
+  Estacional = as.numeric(seasonal),
+  Tendencia = as.numeric(trend),
+  Residual = as.numeric(random)
+)
+
+# Etiquetas de tendencia (cada 12 meses)
+etiquetas <- df %>%
+  filter(!is.na(Tendencia)) %>%
+  slice(seq(1, n(), by = 12))
+
+# Graficar los componentes
+library(gridExtra)
+
+p1 <- ggplot(df, aes(x = Fecha, y = Original)) +
+  geom_line() +
+  labs(title = "Serie original", y = "", x = "") +
+  theme_minimal()
+
+p2 <- ggplot(df, aes(x = Fecha, y = Estacional)) +
+  geom_line(color = "blue") +
+  labs(title = "Componente estacional", y = "", x = "") +
+  theme_minimal()
+
+p3 <- ggplot(df, aes(x = Fecha, y = Tendencia)) +
+  geom_line(color = "darkgreen") +
+  geom_text(
+    data = etiquetas,
+    aes(label = round(Tendencia, 1)),
+    color = "gray20", size = 3, vjust = -1
+  ) +
+  labs(title = "Tendencia estimada", y = "", x = "") +
+  theme_minimal()
+
+p4 <- ggplot(df, aes(x = Fecha, y = Residual)) +
+  geom_col(color = "gray20") +
+  labs(title = "Componente residual", y = "", x = "") +
+  theme_minimal()
+
+# Mostrar juntos
+gridExtra::grid.arrange(p1, p2, p3, p4, ncol = 1)
+
+```
+

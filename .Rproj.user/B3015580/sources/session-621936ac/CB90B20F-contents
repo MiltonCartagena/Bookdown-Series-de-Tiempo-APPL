@@ -1,0 +1,55 @@
+
+# Instalar y cargar paquetes
+if (!require("tidyquant")) install.packages("tidyquant")
+library(tidyquant)
+
+# Descargar datos históricos desde Yahoo Finance
+apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30")
+
+# Vista previa
+head(apple_data)
+
+
+################################################################################
+library(TTR)
+library(ggplot2)
+library(tidyquant)
+library(dplyr)
+
+# Obtener y preparar datos
+apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30")
+apple_data <- na.omit(apple_data)
+
+# Calcular SMA
+apple_data <- apple_data %>%
+  mutate(
+    SMA20 = SMA(adjusted, n = 20),
+    SMA50 = SMA(adjusted, n = 50)
+  )
+
+# Seleccionar puntos cada 100 días para etiquetar
+etiquetas <- apple_data[seq(1, nrow(apple_data), by = 100), ]
+
+# Graficar con etiquetas
+ggplot(apple_data, aes(x = date)) +
+  geom_line(aes(y = adjusted), color = "blue", size = 0.4) +
+  geom_line(aes(y = SMA20), color = "red", size = 0.5, linetype = "dashed") +
+  geom_line(aes(y = SMA50), color = "green", size = 0.5, linetype = "dotdash") +
+  
+  # Etiquetas para línea principal (precio ajustado)
+  geom_text(
+    data = etiquetas,
+    aes(x = date, y = adjusted, label = paste0("$", round(adjusted, 1))),
+    color = "gray20", size = 3, vjust = -1
+  ) +
+  
+  labs(
+    title = "Precio ajustado con SMA de 20 y 50 días - Apple Inc.",
+    x = "Fecha",
+    y = "Precio (USD)"
+  ) +
+  theme_minimal()
+
+
+
+
