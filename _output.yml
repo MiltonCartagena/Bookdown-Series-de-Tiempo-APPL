@@ -1,12 +1,14 @@
 
 bookdown::gitbook:
   css: style.css
-  self_contained: false  # ← ESTA LÍNEA ES CLAVE
+  self_contained: false
+  split_by: chapter
   config:
     toc:
       before: |
         <li><a href="./">Análisis Series de Tiempo AAPL</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+    edit: https://github.com/USERNAME/REPO/edit/main/%s
     download: ["pdf", "epub"]
+

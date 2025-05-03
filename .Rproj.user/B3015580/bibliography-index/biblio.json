@@ -66,6 +66,123 @@
             "type": "book"
         },
         {
+            "URL": "https://dplyr.tidyverse.org",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                },
+                {
+                    "family": "François",
+                    "given": "Romain"
+                },
+                {
+                    "family": "Henry",
+                    "given": "Lionel"
+                },
+                {
+                    "family": "Müller",
+                    "given": "Kirill"
+                },
+                {
+                    "family": "Vaughan",
+                    "given": "Davis"
+                }
+            ],
+            "id": "R-dplyr",
+            "issued": {
+                "date-parts": [
+                    [
+                        2023
+                    ]
+                ]
+            },
+            "note": "R package version 1.1.4",
+            "title": "Dplyr: A grammar of data manipulation",
+            "title-short": "Dplyr",
+            "type": "book"
+        },
+        {
+            "URL": "https://ggplot2.tidyverse.org",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                },
+                {
+                    "family": "Chang",
+                    "given": "Winston"
+                },
+                {
+                    "family": "Henry",
+                    "given": "Lionel"
+                },
+                {
+                    "family": "Pedersen",
+                    "given": "Thomas Lin"
+                },
+                {
+                    "family": "Takahashi",
+                    "given": "Kohske"
+                },
+                {
+                    "family": "Wilke",
+                    "given": "Claus"
+                },
+                {
+                    "family": "Woo",
+                    "given": "Kara"
+                },
+                {
+                    "family": "Yutani",
+                    "given": "Hiroaki"
+                },
+                {
+                    "family": "Dunnington",
+                    "given": "Dewey"
+                },
+                {
+                    "family": "Brand",
+                    "given": "Teun",
+                    "non-dropping-particle": "van den"
+                }
+            ],
+            "id": "R-ggplot2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2025
+                    ]
+                ]
+            },
+            "note": "R package version 3.5.2",
+            "title": "ggplot2: Create elegant data visualisations using the grammar of graphics",
+            "title-short": "ggplot2",
+            "type": "book"
+        },
+        {
+            "DOI": "10.32614/CRAN.package.gridExtra",
+            "URL": "https://CRAN.R-project.org/package=gridExtra",
+            "author": [
+                {
+                    "family": "Auguie",
+                    "given": "Baptiste"
+                }
+            ],
+            "id": "R-gridExtra",
+            "issued": {
+                "date-parts": [
+                    [
+                        2017
+                    ]
+                ]
+            },
+            "note": "R package version 2.3",
+            "title": "gridExtra: Miscellaneous functions for \"grid\" graphics",
+            "title-short": "gridExtra",
+            "type": "book"
+        },
+        {
             "URL": "https://yihui.org/knitr/",
             "author": [
                 {
@@ -84,6 +201,101 @@
             "note": "R package version 1.50",
             "title": "Knitr: A general-purpose package for dynamic report generation in r",
             "title-short": "Knitr",
+            "type": "book"
+        },
+        {
+            "URL": "https://github.com/braverock/PerformanceAnalytics",
+            "author": [
+                {
+                    "family": "Peterson",
+                    "given": "Brian G."
+                },
+                {
+                    "family": "Carl",
+                    "given": "Peter"
+                }
+            ],
+            "id": "R-PerformanceAnalytics",
+            "issued": {
+                "date-parts": [
+                    [
+                        2024
+                    ]
+                ]
+            },
+            "note": "R package version 2.0.8",
+            "title": "PerformanceAnalytics: Econometric tools for performance and risk analysis",
+            "title-short": "PerformanceAnalytics",
+            "type": "book"
+        },
+        {
+            "URL": "https://plotly-r.com",
+            "author": [
+                {
+                    "family": "Sievert",
+                    "given": "Carson"
+                },
+                {
+                    "family": "Parmer",
+                    "given": "Chris"
+                },
+                {
+                    "family": "Hocking",
+                    "given": "Toby"
+                },
+                {
+                    "family": "Chamberlain",
+                    "given": "Scott"
+                },
+                {
+                    "family": "Ram",
+                    "given": "Karthik"
+                },
+                {
+                    "family": "Corvellec",
+                    "given": "Marianne"
+                },
+                {
+                    "family": "Despouy",
+                    "given": "Pedro"
+                }
+            ],
+            "id": "R-plotly",
+            "issued": {
+                "date-parts": [
+                    [
+                        2024
+                    ]
+                ]
+            },
+            "note": "R package version 4.10.4",
+            "title": "Plotly: Create interactive web graphics via plotly.js",
+            "title-short": "Plotly",
+            "type": "book"
+        },
+        {
+            "URL": "https://www.quantmod.com/",
+            "author": [
+                {
+                    "family": "Ryan",
+                    "given": "Jeffrey A."
+                },
+                {
+                    "family": "Ulrich",
+                    "given": "Joshua M."
+                }
+            ],
+            "id": "R-quantmod",
+            "issued": {
+                "date-parts": [
+                    [
+                        2025
+                    ]
+                ]
+            },
+            "note": "R package version 0.4.27",
+            "title": "Quantmod: Quantitative financial modelling framework",
+            "title-short": "Quantmod",
             "type": "book"
         },
         {
@@ -148,6 +360,106 @@
             "type": "book"
         },
         {
+            "URL": "https://business-science.github.io/tidyquant/",
+            "author": [
+                {
+                    "family": "Dancho",
+                    "given": "Matt"
+                },
+                {
+                    "family": "Vaughan",
+                    "given": "Davis"
+                }
+            ],
+            "id": "R-tidyquant",
+            "issued": {
+                "date-parts": [
+                    [
+                        2025
+                    ]
+                ]
+            },
+            "note": "R package version 1.0.11",
+            "title": "Tidyquant: Tidy quantitative financial analysis",
+            "title-short": "Tidyquant",
+            "type": "book"
+        },
+        {
+            "URL": "https://github.com/joshuaulrich/TTR",
+            "author": [
+                {
+                    "family": "Ulrich",
+                    "given": "Joshua"
+                }
+            ],
+            "id": "R-TTR",
+            "issued": {
+                "date-parts": [
+                    [
+                        2023
+                    ]
+                ]
+            },
+            "note": "R package version 0.24.4",
+            "title": "TTR: Technical trading rules",
+            "title-short": "TTR",
+            "type": "book"
+        },
+        {
+            "URL": "https://joshuaulrich.github.io/xts/",
+            "author": [
+                {
+                    "family": "Ryan",
+                    "given": "Jeffrey A."
+                },
+                {
+                    "family": "Ulrich",
+                    "given": "Joshua M."
+                }
+            ],
+            "id": "R-xts",
+            "issued": {
+                "date-parts": [
+                    [
+                        2024
+                    ]
+                ]
+            },
+            "note": "R package version 0.14.1",
+            "title": "Xts: eXtensible time series",
+            "title-short": "Xts",
+            "type": "book"
+        },
+        {
+            "URL": "https://zoo.R-Forge.R-project.org/",
+            "author": [
+                {
+                    "family": "Zeileis",
+                    "given": "Achim"
+                },
+                {
+                    "family": "Grothendieck",
+                    "given": "Gabor"
+                },
+                {
+                    "family": "Ryan",
+                    "given": "Jeffrey A."
+                }
+            ],
+            "id": "R-zoo",
+            "issued": {
+                "date-parts": [
+                    [
+                        2025
+                    ]
+                ]
+            },
+            "note": "R package version 1.8-14",
+            "title": "Zoo: S3 infrastructure for regular and irregular time series (z’s ordered observations)",
+            "title-short": "Zoo",
+            "type": "book"
+        },
+        {
             "ISBN": "978-1138700109",
             "URL": "https://bookdown.org/yihui/bookdown",
             "author": [
@@ -168,6 +480,28 @@
             "publisher-place": "Boca Raton, Florida",
             "title": "Bookdown: Authoring books and technical documents with R markdown",
             "title-short": "Bookdown",
+            "type": "book"
+        },
+        {
+            "ISBN": "978-3-319-24277-4",
+            "URL": "https://ggplot2.tidyverse.org",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "Hadley"
+                }
+            ],
+            "id": "ggplot22016",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016
+                    ]
+                ]
+            },
+            "publisher": "Springer-Verlag New York",
+            "title": "ggplot2: Elegant graphics for data analysis",
+            "title-short": "ggplot2",
             "type": "book"
         },
         {
@@ -230,6 +564,27 @@
             "type": "chapter"
         },
         {
+            "ISBN": "9781138331457",
+            "URL": "https://plotly-r.com",
+            "author": [
+                {
+                    "family": "Sievert",
+                    "given": "Carson"
+                }
+            ],
+            "id": "plotly2020",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020
+                    ]
+                ]
+            },
+            "publisher": "Chapman; Hall/CRC",
+            "title": "Interactive web-based data visualization with r, plotly, and shiny",
+            "type": "book"
+        },
+        {
             "ISBN": "9781138359338",
             "URL": "https://bookdown.org/yihui/rmarkdown",
             "author": [
@@ -289,6 +644,34 @@
             "publisher-place": "Boca Raton, Florida",
             "title": "R markdown cookbook",
             "type": "book"
+        },
+        {
+            "DOI": "10.18637/jss.v014.i06",
+            "author": [
+                {
+                    "family": "Zeileis",
+                    "given": "Achim"
+                },
+                {
+                    "family": "Grothendieck",
+                    "given": "Gabor"
+                }
+            ],
+            "container-title": "Journal of Statistical Software",
+            "id": "zoo2005",
+            "issue": "6",
+            "issued": {
+                "date-parts": [
+                    [
+                        2005
+                    ]
+                ]
+            },
+            "page": "1-27",
+            "title": "Zoo: S3 infrastructure for regular and irregular time series",
+            "title-short": "Zoo",
+            "type": "article-journal",
+            "volume": "14"
         }
     ],
     "project_biblios": [
