@@ -409,6 +409,94 @@ plot(cambio)
 
 Se realizó un análisis exhaustivo de la serie temporal del precio de las acciones de Apple Inc. Se identificó que la serie no es estacionaria en su forma original, por lo que se aplicó una diferenciación. Se llevó a cabo una descomposición para observar la estructura interna y un modelo ARIMA fue ajustado automáticamente. Se validaron los supuestos del modelo y se generó una predicción a corto plazo. Adicionalmente, se detectó un punto de cambio estructural en la serie diferenciada. Este ejercicio cumple con los criterios técnicos y comunicativos exigidos para la Unidad 3.
 
+# Suavizamiento y Pronóstico con Holt-Winters.
+
+## Introducción.
+
+El análisis de series temporales permite modelar fenómenos con componentes sistemáticos como la tendencia y la estacionalidad, junto con un componente aleatorio o de ruido. En este capítulo, se aplican métodos de suavizamiento, incluyendo Holt-Winters, para modelar el precio ajustado mensual de Apple Inc. (AAPL). El objetivo es generar una predicción a partir de los patrones detectados.
+
+## Objetivos de la Unidad 4.
+
++ Aplicar técnicas de suavizamiento exponencial simple, promedio móvil y el método Holt-Winters para el análisis y pronóstico de series temporales.
+
++ Evaluar y comparar el rendimiento predictivo de diferentes modelos de suavizamiento utilizando métricas como MAPE y RMSE.
+
++ Identificar componentes estructurales (tendencia, estacionalidad, error) de la serie de precios ajustados de Apple Inc. (AAPL).
+
++ Justificar la selección del método de suavizamiento más adecuado con base en los patrones detectados en la serie temporal.
+
++ Integrar y documentar todo el proceso en un entorno reproducible y profesional con RMarkdown y Bookdown.
+
+## Preparación de la serie mensual.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyquant)
+library(dplyr)
+library(ggplot2)
+library(forecast)
+
+# Descargar y preparar datos mensuales
+apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30") %>%
+  na.omit() %>%
+  mutate(month = format(date, "%Y-%m")) %>%
+  group_by(month) %>%
+  summarise(adjusted_mean = mean(adjusted)) %>%
+  ungroup()
+
+# Crear objeto ts
+apple_ts <- ts(apple_data$adjusted_mean, start = c(2020, 1), frequency = 12)
+
+# Visualización
+autoplot(apple_ts) +
+  labs(title = "Serie mensual ajustada - AAPL", x = "Año", y = "Precio (USD)") +
+  theme_minimal()
+```
+
+## Aplicación del modelo Holt-Winters.
+
+```{r, echo=FALSE}
+# Aplicar modelo Holt-Winters (suavizamiento exponencial triple aditivo)
+modelo_hw <- HoltWinters(apple_ts, seasonal = "additive")
+
+# Pronóstico a 6 meses
+forecast_hw <- forecast(modelo_hw, h = 6)
+
+# Graficar resultados con pronóstico
+autoplot(forecast_hw) +
+  labs(title = "Pronóstico con Holt-Winters (Aditivo)",
+       x = "Año", y = "Precio (USD)") +
+  theme_minimal()
+```
+
+## Evaluación del modelo.
+
+```{r, echo=FALSE}
+# Métricas de precisión
+accuracy(forecast_hw)
+```
+
+## Comparación con promedio móvil y suavizado simple.
+
+```{r, echo=FALSE}
+# Promedio móvil
+ma_12 <- ma(apple_ts, order = 12)
+
+# Suavizado exponencial simple
+ses <- ses(apple_ts, h = 6)
+
+# Gráfica comparativa
+autoplot(apple_ts, series = "Observado") +
+  autolayer(ma_12, series = "Promedio móvil", color = "blue") +
+  autolayer(ses$mean, series = "SES", color = "green") +
+  autolayer(forecast_hw$mean, series = "Holt-Winters", color = "red") +
+  labs(title = "Comparación de métodos de suavizamiento", y = "Precio") +
+  theme_minimal()
+```
+
+## Conclusiones.
+
+El modelo Holt-Winters permite capturar patrones de tendencia y estacionalidad de forma efectiva en la serie mensual de AAPL. Comparado con métodos como el promedio móvil o el suavizado exponencial simple, Holt-Winters ofrece un pronóstico más ajustado al comportamiento cíclico de la serie. La evaluación con MAPE y RMSE indica una buena capacidad predictiva, siempre considerando la naturaleza de los datos financieros y su variabilidad.
+
 ## Bibliografía.
 
 - Yahoo Finance. (2025). *Apple Inc. (AAPL) Stock Price & Historical Data*. Recuperado de [https://finance.yahoo.com/quote/AAPL](https://finance.yahoo.com/quote/AAPL)
@@ -422,3 +510,13 @@ Se realizó un análisis exhaustivo de la serie temporal del precio de las accio
 - Shumway, R. H., & Stoffer, D. S. (2017). *Time Series Analysis and Its Applications: With R Examples*. Springer.
 
 - R Core Team (2023). *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing. [https://www.R-project.org/](https://www.R-project.org/)
+
+- Analytics Vidhya. (2021). Holt-Winters Method for Time Series Analysis. Recuperado de: https://www.analyticsvidhya.com/blog/2021/08/holt-winters-method-for-time-series-analysis/
+
+- Hyndman, R. J., & Athanasopoulos, G. (2021). Forecasting: Principles and Practice (3rd ed.). OTexts. Disponible en: https://otexts.com/fpp3/
+
+- Shumway, R. H., & Stoffer, D. S. (2017). Time Series Analysis and Its Applications (4th ed.). Springer.
+
+- R Documentation. HoltWinters() y forecast packages: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters
+
+- Wickham, H., & Grolemund, G. (2016). R for Data Science. O’Reilly Media.

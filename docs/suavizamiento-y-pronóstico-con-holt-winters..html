@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Bookdown Análisis Series de Tiempo AAPL</title>
+  <title>Capitulo4 Suavizamiento y Pronóstico con Holt-Winters. | Bookdown Análisis Series de Tiempo AAPL</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 set in the _output.yml file.
 The HTML output format for this example is bookdown::gitbook,</p>" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Bookdown Análisis Series de Tiempo AAPL" />
+  <meta property="og:title" content="Capitulo4 Suavizamiento y Pronóstico con Holt-Winters. | Bookdown Análisis Series de Tiempo AAPL" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
@@ -19,7 +19,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Bookdown Análisis Series de Tiempo AAPL" />
+  <meta name="twitter:title" content="Capitulo4 Suavizamiento y Pronóstico con Holt-Winters. | Bookdown Análisis Series de Tiempo AAPL" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 set in the _output.yml file.
@@ -36,8 +36,8 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"/>
 
-<link rel="next" href="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -208,42 +208,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Bookdown Análisis Series de Tiempo AAPL</h1>
-<p class="author"><em>Sofy Certuche, Milton Cartagena</em></p>
-<p class="date"><em>2025-05-12</em></p>
+<div id="suavizamiento-y-pronóstico-con-holt-winters." class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Capitulo4</span> Suavizamiento y Pronóstico con Holt-Winters.<a href="suavizamiento-y-pronóstico-con-holt-winters..html#suavizamiento-y-pronóstico-con-holt-winters." class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introducción.-2" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Introducción.<a href="suavizamiento-y-pronóstico-con-holt-winters..html#introducción.-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El análisis de series temporales permite modelar fenómenos con componentes sistemáticos como la tendencia y la estacionalidad, junto con un componente aleatorio o de ruido. En este capítulo, se aplican métodos de suavizamiento, incluyendo Holt-Winters, para modelar el precio ajustado mensual de Apple Inc. (AAPL). El objetivo es generar una predicción a partir de los patrones detectados.</p>
 </div>
-<div id="introducción-y-descripción-de-los-datos-de-aapl." class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Capitulo1</span> Introducción y Descripción de los Datos de AAPL.<a href="index.html#introducción-y-descripción-de-los-datos-de-aapl." class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="introducción." class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Introducción.<a href="index.html#introducción." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>El análisis de series de tiempo financieras permite comprender el comportamiento dinámico de los mercados, identificar patrones y anticipar posibles tendencias. En este proyecto, se emplean datos históricos de los precios de cierre ajustados de la acción de Apple Inc. (AAPL), extraídos desde la plataforma Yahoo Finance. Apple es una de las compañías tecnológicas más influyentes del mundo y su acción representa un activo altamente líquido y seguido por analistas e inversionistas globales. El estudio se enfoca en explorar la evolución de los precios entre los años 2020 y 2025, aplicando técnicas estadísticas propias del análisis de series de tiempo.</p>
-</div>
-<div id="objetivo-general." class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Objetivo general.<a href="index.html#objetivo-general." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Analizar el comportamiento histórico de la acción de Apple Inc. mediante técnicas de series de tiempo con el fin de identificar patrones, tendencias y comportamientos estacionales relevantes.</p>
-</div>
-<div id="objetivos-específicos." class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Objetivos específicos.<a href="index.html#objetivos-específicos." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="objetivos-de-la-unidad-4." class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Objetivos de la Unidad 4.<a href="suavizamiento-y-pronóstico-con-holt-winters..html#objetivos-de-la-unidad-4." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><p>Obtener y procesar los datos históricos de precios de la acción AAPL desde Yahoo Finance.</p></li>
-<li><p>Visualizar y explorar los datos utilizando gráficos de series de tiempo.</p></li>
-<li><p>Aplicar técnicas de suavizamiento como el promedio móvil simple (SMA).</p></li>
-<li><p>Incorporar rezagos (lags) para analizar la dependencia temporal.</p></li>
-<li><p>Evaluar la presencia de estacionalidad u otros patrones recurrentes.</p></li>
+<li><p>Aplicar técnicas de suavizamiento exponencial simple, promedio móvil y el método Holt-Winters para el análisis y pronóstico de series temporales.</p></li>
+<li><p>Evaluar y comparar el rendimiento predictivo de diferentes modelos de suavizamiento utilizando métricas como MAPE y RMSE.</p></li>
+<li><p>Identificar componentes estructurales (tendencia, estacionalidad, error) de la serie de precios ajustados de Apple Inc. (AAPL).</p></li>
+<li><p>Justificar la selección del método de suavizamiento más adecuado con base en los patrones detectados en la serie temporal.</p></li>
+<li><p>Integrar y documentar todo el proceso en un entorno reproducible y profesional con RMarkdown y Bookdown.</p></li>
 </ul>
 </div>
-<div id="justificación." class="section level2 hasAnchor" number="1.4">
-<h2><span class="header-section-number">1.4</span> Justificación.<a href="index.html#justificación." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Apple Inc. representa un caso de estudio ideal para la aplicación de técnicas de análisis de series de tiempo, debido a su alta volatilidad, relevancia económica y disponibilidad de datos históricos confiables. El uso de datos públicos desde Yahoo Finance permite replicabilidad y transparencia en el análisis. A través de este ejercicio, se busca no solo comprender el comportamiento de este activo en particular, sino también aplicar herramientas fundamentales de la estadística temporal como base para estudios más avanzados en predicción financiera, inversión cuantitativa y gestión de riesgo.</p>
+<div id="preparación-de-la-serie-mensual." class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Preparación de la serie mensual.<a href="suavizamiento-y-pronóstico-con-holt-winters..html#preparación-de-la-serie-mensual." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="book_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 </div>
-<div id="fuente-de-datos." class="section level2 hasAnchor" number="1.5">
-<h2><span class="header-section-number">1.5</span> Fuente de datos.<a href="index.html#fuente-de-datos." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="aplicación-del-modelo-holt-winters." class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Aplicación del modelo Holt-Winters.<a href="suavizamiento-y-pronóstico-con-holt-winters..html#aplicación-del-modelo-holt-winters." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="book_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="evaluación-del-modelo." class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Evaluación del modelo.<a href="suavizamiento-y-pronóstico-con-holt-winters..html#evaluación-del-modelo." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<pre><code>##                     ME     RMSE      MAE        MPE     MAPE      MASE
+## Training set -1.600205 11.98077 8.919953 -0.9404718 5.211653 0.2644498
+##                    ACF1
+## Training set 0.03483054</code></pre>
+</div>
+<div id="comparación-con-promedio-móvil-y-suavizado-simple." class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Comparación con promedio móvil y suavizado simple.<a href="suavizamiento-y-pronóstico-con-holt-winters..html#comparación-con-promedio-móvil-y-suavizado-simple." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="book_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+</div>
+<div id="conclusiones." class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Conclusiones.<a href="suavizamiento-y-pronóstico-con-holt-winters..html#conclusiones." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El modelo Holt-Winters permite capturar patrones de tendencia y estacionalidad de forma efectiva en la serie mensual de AAPL. Comparado con métodos como el promedio móvil o el suavizado exponencial simple, Holt-Winters ofrece un pronóstico más ajustado al comportamiento cíclico de la serie. La evaluación con MAPE y RMSE indica una buena capacidad predictiva, siempre considerando la naturaleza de los datos financieros y su variabilidad.</p>
+</div>
+<div id="bibliografía." class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> Bibliografía.<a href="suavizamiento-y-pronóstico-con-holt-winters..html#bibliografía." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><p>Yahoo Finance: <a href="https://finance.yahoo.com/quote/AAPL" class="uri">https://finance.yahoo.com/quote/AAPL</a></p></li>
-<li><p>Periodo de análisis: 2020-01-01 a 2025-04-30</p></li>
-<li><p>Variable principal: Precio de cierre ajustado (Adjusted Close)</p></li>
+<li><p>Yahoo Finance. (2025). <em>Apple Inc. (AAPL) Stock Price &amp; Historical Data</em>. Recuperado de <a href="https://finance.yahoo.com/quote/AAPL">https://finance.yahoo.com/quote/AAPL</a></p></li>
+<li><p>Dancho, M. &amp; Vaughan, D. (2021). <em>tidyquant: Tidy Quantitative Financial Analysis</em>. R package version 1.0.4. Recuperado de <a href="https://business-science.github.io/tidyquant/">https://business-science.github.io/tidyquant/</a></p></li>
+<li><p>Hyndman, R.J. &amp; Athanasopoulos, G. (2018). <em>Forecasting: Principles and Practice</em> (2da ed.). OTexts. Disponible en <a href="https://otexts.com/fpp2/">https://otexts.com/fpp2/</a></p></li>
+<li><p>Cowpertwait, P. &amp; Metcalfe, A. (2009). <em>Introductory Time Series with R</em>. Springer. DOI: <a href="https://doi.org/10.1007/978-0-387-88698-5">10.1007/978-0-387-88698-5</a></p></li>
+<li><p>Shumway, R. H., &amp; Stoffer, D. S. (2017). <em>Time Series Analysis and Its Applications: With R Examples</em>. Springer.</p></li>
+<li><p>R Core Team (2023). <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a></p></li>
+<li><p>Analytics Vidhya. (2021). Holt-Winters Method for Time Series Analysis. Recuperado de: <a href="https://www.analyticsvidhya.com/blog/2021/08/holt-winters-method-for-time-series-analysis/" class="uri">https://www.analyticsvidhya.com/blog/2021/08/holt-winters-method-for-time-series-analysis/</a></p></li>
+<li><p>Hyndman, R. J., &amp; Athanasopoulos, G. (2021). Forecasting: Principles and Practice (3rd ed.). OTexts. Disponible en: <a href="https://otexts.com/fpp3/" class="uri">https://otexts.com/fpp3/</a></p></li>
+<li><p>Shumway, R. H., &amp; Stoffer, D. S. (2017). Time Series Analysis and Its Applications (4th ed.). Springer.</p></li>
+<li><p>R Documentation. HoltWinters() y forecast packages: <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters" class="uri">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters</a></p></li>
+<li><p>Wickham, H., &amp; Grolemund, G. (2016). R for Data Science. O’Reilly Media.</p></li>
 </ul>
+
 </div>
 </div>
             </section>
@@ -251,8 +270,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
+<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -29,7 +29,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
 <meta name="author" content="Sofy Certuche, Milton Cartagena" />
 
 
-<meta name="date" content="2025-05-03" />
+<meta name="date" content="2025-05-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -37,7 +37,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
   
   
 <link rel="prev" href="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html"/>
-
+<link rel="next" href="suavizamiento-y-pronóstico-con-holt-winters..html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -176,7 +176,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.10" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#predicción."><i class="fa fa-check"></i><b>3.10</b> Predicción.</a></li>
 <li class="chapter" data-level="3.11" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#punto-de-cambio."><i class="fa fa-check"></i><b>3.11</b> Punto de cambio.</a></li>
 <li class="chapter" data-level="3.12" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#conclusión.-1"><i class="fa fa-check"></i><b>3.12</b> Conclusión.</a></li>
-<li class="chapter" data-level="3.13" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#bibliografía."><i class="fa fa-check"></i><b>3.13</b> Bibliografía.</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html"><i class="fa fa-check"></i><b>4</b> Suavizamiento y Pronóstico con Holt-Winters.</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#introducción.-2"><i class="fa fa-check"></i><b>4.1</b> Introducción.</a></li>
+<li class="chapter" data-level="4.2" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#objetivos-de-la-unidad-4."><i class="fa fa-check"></i><b>4.2</b> Objetivos de la Unidad 4.</a></li>
+<li class="chapter" data-level="4.3" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#preparación-de-la-serie-mensual."><i class="fa fa-check"></i><b>4.3</b> Preparación de la serie mensual.</a></li>
+<li class="chapter" data-level="4.4" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#aplicación-del-modelo-holt-winters."><i class="fa fa-check"></i><b>4.4</b> Aplicación del modelo Holt-Winters.</a></li>
+<li class="chapter" data-level="4.5" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#evaluación-del-modelo."><i class="fa fa-check"></i><b>4.5</b> Evaluación del modelo.</a></li>
+<li class="chapter" data-level="4.6" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#comparación-con-promedio-móvil-y-suavizado-simple."><i class="fa fa-check"></i><b>4.6</b> Comparación con promedio móvil y suavizado simple.</a></li>
+<li class="chapter" data-level="4.7" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#conclusiones."><i class="fa fa-check"></i><b>4.7</b> Conclusiones.</a></li>
+<li class="chapter" data-level="4.8" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#bibliografía."><i class="fa fa-check"></i><b>4.8</b> Bibliografía.</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -276,7 +286,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Training set error measures:
 ##                     ME     RMSE      MAE MPE MAPE      MASE        ACF1
-## Training set 0.1035856 2.969198 2.104537 100  100 0.6971252 -0.01002596</code></pre>
+## Training set 0.1035856 2.969198 2.104538 100  100 0.6971253 -0.01002613</code></pre>
 </div>
 <div id="validación-de-residuos." class="section level2 hasAnchor" number="3.8">
 <h2><span class="header-section-number">3.8</span> Validación de residuos.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#validación-de-residuos." class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -289,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## t = 1.2759, df = 1336, p-value = 0.2022
 ## alternative hypothesis: true mean is not equal to 0
 ## 95 percent confidence interval:
-##  -0.05567682  0.26284799
+##  -0.05567681  0.26284800
 ## sample estimates:
 ## mean of x 
 ## 0.1035856</code></pre>
@@ -332,26 +342,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.12</span> Conclusión.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#conclusión.-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se realizó un análisis exhaustivo de la serie temporal del precio de las acciones de Apple Inc. Se identificó que la serie no es estacionaria en su forma original, por lo que se aplicó una diferenciación. Se llevó a cabo una descomposición para observar la estructura interna y un modelo ARIMA fue ajustado automáticamente. Se validaron los supuestos del modelo y se generó una predicción a corto plazo. Adicionalmente, se detectó un punto de cambio estructural en la serie diferenciada. Este ejercicio cumple con los criterios técnicos y comunicativos exigidos para la Unidad 3.</p>
 </div>
-<div id="bibliografía." class="section level2 hasAnchor" number="3.13">
-<h2><span class="header-section-number">3.13</span> Bibliografía.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#bibliografía." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><p>Yahoo Finance. (2025). <em>Apple Inc. (AAPL) Stock Price &amp; Historical Data</em>. Recuperado de <a href="https://finance.yahoo.com/quote/AAPL">https://finance.yahoo.com/quote/AAPL</a></p></li>
-<li><p>Dancho, M. &amp; Vaughan, D. (2021). <em>tidyquant: Tidy Quantitative Financial Analysis</em>. R package version 1.0.4. Recuperado de <a href="https://business-science.github.io/tidyquant/">https://business-science.github.io/tidyquant/</a></p></li>
-<li><p>Hyndman, R.J. &amp; Athanasopoulos, G. (2018). <em>Forecasting: Principles and Practice</em> (2da ed.). OTexts. Disponible en <a href="https://otexts.com/fpp2/">https://otexts.com/fpp2/</a></p></li>
-<li><p>Cowpertwait, P. &amp; Metcalfe, A. (2009). <em>Introductory Time Series with R</em>. Springer. DOI: <a href="https://doi.org/10.1007/978-0-387-88698-5">10.1007/978-0-387-88698-5</a></p></li>
-<li><p>Shumway, R. H., &amp; Stoffer, D. S. (2017). <em>Time Series Analysis and Its Applications: With R Examples</em>. Springer.</p></li>
-<li><p>R Core Team (2023). <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a></p></li>
-</ul>
-
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="suavizamiento-y-pronóstico-con-holt-winters..html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

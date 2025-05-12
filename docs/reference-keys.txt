@@ -23,4 +23,12 @@ conclusión.
 predicción.
 punto-de-cambio.
 conclusión.-1
+suavizamiento-y-pronóstico-con-holt-winters.
+introducción.-2
+objetivos-de-la-unidad-4.
+preparación-de-la-serie-mensual.
+aplicación-del-modelo-holt-winters.
+evaluación-del-modelo.
+comparación-con-promedio-móvil-y-suavizado-simple.
+conclusiones.
 bibliografía.
