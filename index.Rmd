@@ -497,26 +497,124 @@ autoplot(apple_ts, series = "Observado") +
 
 El modelo Holt-Winters permite capturar patrones de tendencia y estacionalidad de forma efectiva en la serie mensual de AAPL. Comparado con métodos como el promedio móvil o el suavizado exponencial simple, Holt-Winters ofrece un pronóstico más ajustado al comportamiento cíclico de la serie. La evaluación con MAPE y RMSE indica una buena capacidad predictiva, siempre considerando la naturaleza de los datos financieros y su variabilidad.
 
+# Modelado Avanzado y Validación de Supuestos Holt-Winters.
+
+## Introducción.
+
+Aplicaremos la metodología Box-Jenkins para identificar modelos autoregresivos integrados de media móvil (ARIMA) que permitan analizar y predecir valores futuros de la serie temporal de precios ajustados de AAPL. Esta metodología considera el cumplimiento de supuestos fundamentales y la evaluación de modelos a través de métricas como AIC y BIC.
+
+## Objetivos.
+
++ Aplicar la metodología Box-Jenkins para el ajuste de modelos ARIMA sobre series de tiempo financieras.
++ Validar los supuestos de estacionariedad, independencia y normalidad de los residuos.
++ Comparar modelos mediante criterios de información (AIC y BIC).
++ Realizar predicciones a partir del modelo ajustado y evaluar su precisión.
+
+## Cargar datos y preparar la serie.
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyquant)
+library(forecast)
+library(tseries)
+library(ggplot2)
+
+# Descargar y preparar datos
+apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30") %>%
+  na.omit() %>%
+  mutate(month = format(date, "%Y-%m")) %>%
+  group_by(month) %>%
+  summarise(adjusted_mean = mean(adjusted)) %>%
+  ungroup()
+
+# Convertir a serie de tiempo
+apple_ts <- ts(apple_data$adjusted_mean, start = c(2020,1), frequency = 12)
+
+# Visualización
+autoplot(apple_ts, colour = "darkblue") +
+  labs(title = "Precio mensual ajustado de AAPL", x = "Año", y = "Precio USD") +
+  theme_minimal()
+```
+
+## Prueba de estacionariedad (ADF).
+
+```{r}
+adf.test(apple_ts)
+```
+
+## Diferenciación si es necesario.
+
+```{r}
+apple_ts_diff <- diff(apple_ts)
+autoplot(apple_ts_diff, colour = "tomato") +
+  labs(title = "Serie diferenciada - AAPL", x = "Año", y = "Diferencia del precio") +
+  theme_minimal()
+
+# Verificar estacionariedad de nuevo
+adf.test(apple_ts_diff)
+```
+
+## ACF y PACF.
+
+```{r}
+acf(apple_ts_diff, main = "ACF - Serie Diferenciada", col = "darkred")
+pacf(apple_ts_diff, main = "PACF - Serie Diferenciada", col = "darkgreen")
+```
+
+## Ajuste del modelo ARIMA.
+
+```{r}
+modelo_arima <- auto.arima(apple_ts)
+summary(modelo_arima)
+```
+
+## Validación de supuestos.
+
+```{r}
+residuos <- modelo_arima$residuals
+
+# 1. Media cero
+t.test(residuos)
+
+# 2. Independencia
+Box.test(residuos, lag = 12, type = "Ljung-Box")
+
+# 3. Normalidad visual
+qqnorm(residuos, col = "blue"); qqline(residuos, col = "darkred")
+
+# 4. Normalidad estadística
+shapiro.test(residuos)
+```
+
+## Predicción.
+
+```{r}
+forecast_arima <- forecast(modelo_arima, h = 12)
+
+autoplot(forecast_arima, colour = "forestgreen") +
+  labs(title = "Predicción del precio ajustado de AAPL (12 meses)", x = "Año", y = "Precio estimado") +
+  theme_minimal()
+```
+
+## Conclusiones.
+
+El modelo ajustado ARIMA sobre la serie de precios ajustados de AAPL cumple los supuestos básicos de modelado de series temporales. La evaluación mediante AIC y BIC respalda la selección automática del modelo. Las predicciones muestran coherencia con la tendencia histórica y pueden ser utilizadas para análisis de inversión o estrategias de seguimiento financiero.
+
 ## Bibliografía.
 
-- Yahoo Finance. (2025). *Apple Inc. (AAPL) Stock Price & Historical Data*. Recuperado de [https://finance.yahoo.com/quote/AAPL](https://finance.yahoo.com/quote/AAPL)
+- **Yahoo Finance.** (2025). *Apple Inc. (AAPL) Stock Price & Historical Data*. Recuperado de [https://finance.yahoo.com/quote/AAPL](https://finance.yahoo.com/quote/AAPL)
 
-- Dancho, M. & Vaughan, D. (2021). *tidyquant: Tidy Quantitative Financial Analysis*. R package version 1.0.4. Recuperado de [https://business-science.github.io/tidyquant/](https://business-science.github.io/tidyquant/)
+- **Dancho, M. & Vaughan, D.** (2021). *tidyquant: Tidy Quantitative Financial Analysis*. R package version 1.0.4. Recuperado de [https://business-science.github.io/tidyquant/](https://business-science.github.io/tidyquant/)
 
-- Hyndman, R.J. & Athanasopoulos, G. (2018). *Forecasting: Principles and Practice* (2da ed.). OTexts. Disponible en [https://otexts.com/fpp2/](https://otexts.com/fpp2/)
+- **Hyndman, R. J. & Athanasopoulos, G.** (2021). *Forecasting: Principles and Practice* (3ra ed.). OTexts. Disponible en [https://otexts.com/fpp3/](https://otexts.com/fpp3/)
 
-- Cowpertwait, P. & Metcalfe, A. (2009). *Introductory Time Series with R*. Springer. DOI: [10.1007/978-0-387-88698-5](https://doi.org/10.1007/978-0-387-88698-5)
+- **Cowpertwait, P. & Metcalfe, A.** (2009). *Introductory Time Series with R*. Springer. DOI: [10.1007/978-0-387-88698-5](https://doi.org/10.1007/978-0-387-88698-5)
 
-- Shumway, R. H., & Stoffer, D. S. (2017). *Time Series Analysis and Its Applications: With R Examples*. Springer.
+- **Shumway, R. H., & Stoffer, D. S.** (2017). *Time Series Analysis and Its Applications: With R Examples* (4ta ed.). Springer.
 
-- R Core Team (2023). *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing. [https://www.R-project.org/](https://www.R-project.org/)
+- **R Core Team.** (2023). *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing. Disponible en [https://www.R-project.org/](https://www.R-project.org/)
 
-- Analytics Vidhya. (2021). Holt-Winters Method for Time Series Analysis. Recuperado de: https://www.analyticsvidhya.com/blog/2021/08/holt-winters-method-for-time-series-analysis/
+- **Analytics Vidhya.** (2021). *Holt-Winters Method for Time Series Analysis*. Recuperado de: [https://www.analyticsvidhya.com/blog/2021/08/holt-winters-method-for-time-series-analysis/](https://www.analyticsvidhya.com/blog/2021/08/holt-winters-method-for-time-series-analysis/)
 
-- Hyndman, R. J., & Athanasopoulos, G. (2021). Forecasting: Principles and Practice (3rd ed.). OTexts. Disponible en: https://otexts.com/fpp3/
+- **R Documentation.** *HoltWinters() y forecast packages*. Recuperado de [https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters)
 
-- Shumway, R. H., & Stoffer, D. S. (2017). Time Series Analysis and Its Applications (4th ed.). Springer.
-
-- R Documentation. HoltWinters() y forecast packages: https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters
-
-- Wickham, H., & Grolemund, G. (2016). R for Data Science. O’Reilly Media.
+- **Wickham, H., & Grolemund, G.** (2016). *R for Data Science*. O’Reilly Media.

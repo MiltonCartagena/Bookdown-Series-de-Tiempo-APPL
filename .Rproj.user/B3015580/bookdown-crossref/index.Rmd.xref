@@ -31,5 +31,16 @@ h2:aplicación-del-modelo-holt-winters. Aplicación del modelo Holt-Winters.
 h2:evaluación-del-modelo. Evaluación del modelo.
 h2:comparación-con-promedio-móvil-y-suavizado-simple. Comparación con promedio móvil y suavizado simple.
 h2:conclusiones. Conclusiones.
+h1:modelado-avanzado-y-validación-de-supuestos-holt-winters. Modelado Avanzado y Validación de Supuestos Holt-Winters.
+h2:introducción.-3 Introducción.
+h2:objetivos. Objetivos.
+h2:cargar-datos-y-preparar-la-serie. Cargar datos y preparar la serie.
+h2:prueba-de-estacionariedad-adf. Prueba de estacionariedad (ADF).
+h2:diferenciación-si-es-necesario. Diferenciación si es necesario.
+h2:acf-y-pacf. ACF y PACF.
+h2:ajuste-del-modelo-arima. Ajuste del modelo ARIMA.
+h2:validación-de-supuestos. Validación de supuestos.
+h2:predicción.-1 Predicción.
+h2:conclusiones.-1 Conclusiones.
 h2:bibliografía. Bibliografía.
 

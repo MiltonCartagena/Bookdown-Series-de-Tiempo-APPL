@@ -29,7 +29,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
 <meta name="author" content="Sofy Certuche, Milton Cartagena" />
 
 
-<meta name="date" content="2025-05-12" />
+<meta name="date" content="2025-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -186,7 +186,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#evaluación-del-modelo."><i class="fa fa-check"></i><b>4.5</b> Evaluación del modelo.</a></li>
 <li class="chapter" data-level="4.6" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#comparación-con-promedio-móvil-y-suavizado-simple."><i class="fa fa-check"></i><b>4.6</b> Comparación con promedio móvil y suavizado simple.</a></li>
 <li class="chapter" data-level="4.7" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#conclusiones."><i class="fa fa-check"></i><b>4.7</b> Conclusiones.</a></li>
-<li class="chapter" data-level="4.8" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#bibliografía."><i class="fa fa-check"></i><b>4.8</b> Bibliografía.</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><i class="fa fa-check"></i><b>5</b> Modelado Avanzado y Validación de Supuestos Holt-Winters.</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#introducción.-3"><i class="fa fa-check"></i><b>5.1</b> Introducción.</a></li>
+<li class="chapter" data-level="5.2" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#objetivos."><i class="fa fa-check"></i><b>5.2</b> Objetivos.</a></li>
+<li class="chapter" data-level="5.3" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#cargar-datos-y-preparar-la-serie."><i class="fa fa-check"></i><b>5.3</b> Cargar datos y preparar la serie.</a></li>
+<li class="chapter" data-level="5.4" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#prueba-de-estacionariedad-adf."><i class="fa fa-check"></i><b>5.4</b> Prueba de estacionariedad (ADF).</a></li>
+<li class="chapter" data-level="5.5" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#diferenciación-si-es-necesario."><i class="fa fa-check"></i><b>5.5</b> Diferenciación si es necesario.</a></li>
+<li class="chapter" data-level="5.6" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#acf-y-pacf."><i class="fa fa-check"></i><b>5.6</b> ACF y PACF.</a></li>
+<li class="chapter" data-level="5.7" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#ajuste-del-modelo-arima."><i class="fa fa-check"></i><b>5.7</b> Ajuste del modelo ARIMA.</a></li>
+<li class="chapter" data-level="5.8" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#validación-de-supuestos."><i class="fa fa-check"></i><b>5.8</b> Validación de supuestos.</a></li>
+<li class="chapter" data-level="5.9" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#predicción.-1"><i class="fa fa-check"></i><b>5.9</b> Predicción.</a></li>
+<li class="chapter" data-level="5.10" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#conclusiones.-1"><i class="fa fa-check"></i><b>5.10</b> Conclusiones.</a></li>
+<li class="chapter" data-level="5.11" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#bibliografía."><i class="fa fa-check"></i><b>5.11</b> Bibliografía.</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -281,12 +294,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Series: diff_serie 
 ## ARIMA(0,0,0) with zero mean 
 ## 
-## sigma^2 = 8.816:  log likelihood = -3352.17
-## AIC=6706.33   AICc=6706.34   BIC=6711.53
+## sigma^2 = 8.793:  log likelihood = -3350.42
+## AIC=6702.83   AICc=6702.83   BIC=6708.03
 ## 
 ## Training set error measures:
-##                     ME     RMSE      MAE MPE MAPE      MASE        ACF1
-## Training set 0.1035856 2.969199 2.104537 100  100 0.6971252 -0.01002625</code></pre>
+##                     ME    RMSE      MAE MPE MAPE      MASE        ACF1
+## Training set 0.1034499 2.96531 2.101781 100  100 0.6971252 -0.01002614</code></pre>
 </div>
 <div id="validación-de-residuos." class="section level2 hasAnchor" number="3.8">
 <h2><span class="header-section-number">3.8</span> Validación de residuos.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#validación-de-residuos." class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -299,10 +312,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## t = 1.2759, df = 1336, p-value = 0.2022
 ## alternative hypothesis: true mean is not equal to 0
 ## 95 percent confidence interval:
-##  -0.05567682  0.26284800
+##  -0.0556039  0.2625038
 ## sample estimates:
 ## mean of x 
-## 0.1035856</code></pre>
+## 0.1034499</code></pre>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb17-1" tabindex="-1"></a><span class="fu">Box.test</span>(residuos, <span class="at">lag =</span> <span class="dv">12</span>, <span class="at">type =</span> <span class="st">&quot;Ljung-Box&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Box-Ljung test
