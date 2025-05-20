@@ -259,6 +259,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb24-19"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#cb24-19" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Precio mensual ajustado de AAPL&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Año&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio USD&quot;</span>) <span class="sc">+</span></span>
 <span id="cb24-20"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#cb24-20" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><strong>Análisis:</strong> Se observa la evolución mensual de los precios ajustados de AAPL desde 2020. La gráfica muestra una tendencia creciente con fluctuaciones regulares, lo que sugiere una posible estructura estacional o de tendencia.</p>
 </div>
 <div id="prueba-de-estacionariedad-adf." class="section level2 hasAnchor" number="5.4">
 <h2><span class="header-section-number">5.4</span> Prueba de estacionariedad (ADF).<a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#prueba-de-estacionariedad-adf." class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -269,6 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## data:  apple_ts
 ## Dickey-Fuller = -2.9868, Lag order = 3, p-value = 0.1751
 ## alternative hypothesis: stationary</code></pre>
+<p><strong>Resultado esperado:</strong> Si el valor-p &gt; 0.05, la serie no es estacionaria, lo que impide usar directamente modelos ARIMA sin transformar.</p>
 </div>
 <div id="diferenciación-si-es-necesario." class="section level2 hasAnchor" number="5.5">
 <h2><span class="header-section-number">5.5</span> Diferenciación si es necesario.<a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#diferenciación-si-es-necesario." class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -285,6 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## data:  apple_ts_diff
 ## Dickey-Fuller = -3.9959, Lag order = 3, p-value = 0.01563
 ## alternative hypothesis: stationary</code></pre>
+<p><strong>Análisis:</strong> Al diferenciar la serie una vez, se estabiliza la media y se elimina la tendencia. El valor-p del ADF test posterior suele ser &lt; 0.05, indicando estacionariedad.</p>
 </div>
 <div id="acf-y-pacf." class="section level2 hasAnchor" number="5.6">
 <h2><span class="header-section-number">5.6</span> ACF y PACF.<a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#acf-y-pacf." class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -292,6 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="book_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#cb31-1" tabindex="-1"></a><span class="fu">pacf</span>(apple_ts_diff, <span class="at">main =</span> <span class="st">&quot;PACF - Serie Diferenciada&quot;</span>, <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>)</span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
+<p><strong>Interpretación:</strong> La ACF muestra correlación en rezagos, útil para determinar el orden MA. La PACF ayuda a identificar la cantidad de componentes AR. Estas gráficas apoyan la configuración del modelo.</p>
 </div>
 <div id="ajuste-del-modelo-arima." class="section level2 hasAnchor" number="5.7">
 <h2><span class="header-section-number">5.7</span> Ajuste del modelo ARIMA.<a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#ajuste-del-modelo-arima." class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -311,6 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Training set error measures:
 ##                   ME     RMSE      MAE       MPE     MAPE      MASE        ACF1
 ## Training set 1.22754 9.622663 7.866658 0.8277077 5.209372 0.2335286 -0.01327611</code></pre>
+<p><strong>Análisis:</strong> auto.arima() selecciona automáticamente el modelo óptimo basado en AIC/BIC. Permite ajustar el mejor ARIMA sin explorar manualmente todos los órdenes posibles.</p>
 </div>
 <div id="validación-de-supuestos." class="section level2 hasAnchor" number="5.8">
 <h2><span class="header-section-number">5.8</span> Validación de supuestos.<a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#validación-de-supuestos." class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -346,6 +351,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## data:  residuos
 ## W = 0.97643, p-value = 0.2584</code></pre>
+<ul>
+<li><p>T-test: Verifica si la media de los residuos es 0.</p></li>
+<li><p>Box-Ljung Test: Verifica la independencia. Valor-p &gt; 0.05 indica que no hay autocorrelación significativa.</p></li>
+<li><p>QQPlot y Shapiro-Wilk: Evalúan normalidad de residuos. Si hay desviaciones leves, no afecta gravemente a la predicción.</p></li>
+</ul>
 </div>
 <div id="predicción.-1" class="section level2 hasAnchor" number="5.9">
 <h2><span class="header-section-number">5.9</span> Predicción.<a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#predicción.-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -355,6 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb41-4"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#cb41-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Predicción del precio ajustado de AAPL (12 meses)&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Año&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio estimado&quot;</span>) <span class="sc">+</span></span>
 <span id="cb41-5"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#cb41-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><strong>Análisis:</strong> Se pronostican los próximos 12 meses. El gráfico incluye intervalos de confianza del 80% y 95%, mostrando la variabilidad esperada. Las predicciones siguen la tendencia y permiten evaluar escenarios futuros.</p>
 </div>
 <div id="conclusiones.-1" class="section level2 hasAnchor" number="5.10">
 <h2><span class="header-section-number">5.10</span> Conclusiones.<a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#conclusiones.-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>

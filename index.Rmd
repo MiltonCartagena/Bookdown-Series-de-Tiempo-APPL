@@ -535,11 +535,15 @@ autoplot(apple_ts, colour = "darkblue") +
   theme_minimal()
 ```
 
+**Análisis:** Se observa la evolución mensual de los precios ajustados de AAPL desde 2020. La gráfica muestra una tendencia creciente con fluctuaciones regulares, lo que sugiere una posible estructura estacional o de tendencia.
+
 ## Prueba de estacionariedad (ADF).
 
 ```{r}
 adf.test(apple_ts)
 ```
+
+**Resultado esperado:** Si el valor-p > 0.05, la serie no es estacionaria, lo que impide usar directamente modelos ARIMA sin transformar.
 
 ## Diferenciación si es necesario.
 
@@ -553,6 +557,8 @@ autoplot(apple_ts_diff, colour = "tomato") +
 adf.test(apple_ts_diff)
 ```
 
+**Análisis:** Al diferenciar la serie una vez, se estabiliza la media y se elimina la tendencia. El valor-p del ADF test posterior suele ser < 0.05, indicando estacionariedad.
+
 ## ACF y PACF.
 
 ```{r}
@@ -560,12 +566,16 @@ acf(apple_ts_diff, main = "ACF - Serie Diferenciada", col = "darkred")
 pacf(apple_ts_diff, main = "PACF - Serie Diferenciada", col = "darkgreen")
 ```
 
+**Interpretación:** La ACF muestra correlación en rezagos, útil para determinar el orden MA. La PACF ayuda a identificar la cantidad de componentes AR. Estas gráficas apoyan la configuración del modelo.
+
 ## Ajuste del modelo ARIMA.
 
 ```{r}
 modelo_arima <- auto.arima(apple_ts)
 summary(modelo_arima)
 ```
+
+**Análisis:** auto.arima() selecciona automáticamente el modelo óptimo basado en AIC/BIC. Permite ajustar el mejor ARIMA sin explorar manualmente todos los órdenes posibles.
 
 ## Validación de supuestos.
 
@@ -585,6 +595,12 @@ qqnorm(residuos, col = "blue"); qqline(residuos, col = "darkred")
 shapiro.test(residuos)
 ```
 
++ T-test: Verifica si la media de los residuos es 0.
+
++ Box-Ljung Test: Verifica la independencia. Valor-p > 0.05 indica que no hay autocorrelación significativa.
+
++ QQPlot y Shapiro-Wilk: Evalúan normalidad de residuos. Si hay desviaciones leves, no afecta gravemente a la predicción. 
+
 ## Predicción.
 
 ```{r}
@@ -594,6 +610,8 @@ autoplot(forecast_arima, colour = "forestgreen") +
   labs(title = "Predicción del precio ajustado de AAPL (12 meses)", x = "Año", y = "Precio estimado") +
   theme_minimal()
 ```
+
+**Análisis:** Se pronostican los próximos 12 meses. El gráfico incluye intervalos de confianza del 80% y 95%, mostrando la variabilidad esperada. Las predicciones siguen la tendencia y permiten evaluar escenarios futuros.
 
 ## Conclusiones.
 
