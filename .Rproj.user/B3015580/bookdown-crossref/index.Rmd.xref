@@ -42,5 +42,16 @@ h2:ajuste-del-modelo-arima. Ajuste del modelo ARIMA.
 h2:validación-de-supuestos. Validación de supuestos.
 h2:predicción.-1 Predicción.
 h2:conclusiones.-1 Conclusiones.
+h1:regresión-en-series-de-tiempo-con-prophet. Regresión en Series de Tiempo con Prophet.
+h2:introducción.-4 Introducción.
+h2:objetivo.-1 Objetivo.
+h2:justificación-del-uso-de-prophet. Justificación del uso de Prophet.
+h2:script-preparación-de-los-datos. Script: Preparación de los datos.
+h2:datos. Datos.
+h2:entrenamiento-del-modelo-prophet. Entrenamiento del modelo Prophet.
+h2:componentes-del-modelo-tendencia-estacionalidad. Componentes del modelo (tendencia, estacionalidad).
+h2:explicación Explicación:
+h2:comparación-con-modelos-anteriores-arima-vs-prophet. Comparación con modelos anteriores (ARIMA vs Prophet).
+h2:conclusiones.-2 Conclusiones.
 h2:bibliografía. Bibliografía.
 

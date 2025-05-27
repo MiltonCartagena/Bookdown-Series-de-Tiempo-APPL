@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capitulo6 Regresión en Series de Tiempo con Prophet. | Bookdown Análisis Series de Tiempo AAPL</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capitulo6 Regresión en Series de Tiempo con Prophet. | Bookdown Análisis Series de Tiempo AAPL" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capitulo6 Regresión en Series de Tiempo con Prophet. | Bookdown Análisis Series de Tiempo AAPL" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  
+
+<meta name="author" content="Sofy Certuche, Milton Cartagena" />
+
+
+<meta name="date" content="2025-05-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Análisis Series de Tiempo AAPL</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción y Descripción de los Datos de AAPL.</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introducción."><i class="fa fa-check"></i><b>1.1</b> Introducción.</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#objetivo-general."><i class="fa fa-check"></i><b>1.2</b> Objetivo general.</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#objetivos-específicos."><i class="fa fa-check"></i><b>1.3</b> Objetivos específicos.</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#justificación."><i class="fa fa-check"></i><b>1.4</b> Justificación.</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#fuente-de-datos."><i class="fa fa-check"></i><b>1.5</b> Fuente de datos.</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html"><a href="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html"><i class="fa fa-check"></i><b>2</b> Análisis Exploratorio y Comportamiento Temporal de AAPL.</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html"><a href="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html#descarga-y-visualización-inicial."><i class="fa fa-check"></i><b>2.1</b> Descarga y visualización inicial.</a></li>
+<li class="chapter" data-level="2.2" data-path="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html"><a href="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html#evolución-del-precio-ajustado."><i class="fa fa-check"></i><b>2.2</b> Evolución del precio ajustado.</a></li>
+<li class="chapter" data-level="2.3" data-path="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html"><a href="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html#análisis-con-promedios-móviles."><i class="fa fa-check"></i><b>2.3</b> Análisis con promedios móviles.</a></li>
+<li class="chapter" data-level="2.4" data-path="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html"><a href="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html#análisis-de-rezagos."><i class="fa fa-check"></i><b>2.4</b> Análisis de rezagos.</a></li>
+<li class="chapter" data-level="2.5" data-path="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html"><a href="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html#descomposición-estacional."><i class="fa fa-check"></i><b>2.5</b> Descomposición estacional.</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><i class="fa fa-check"></i><b>3</b> Preprocesamiento y Modelado Temporal de la Serie AAPL.</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#introducción.-1"><i class="fa fa-check"></i><b>3.1</b> Introducción.</a></li>
+<li class="chapter" data-level="3.2" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#objetivo."><i class="fa fa-check"></i><b>3.2</b> Objetivo.</a></li>
+<li class="chapter" data-level="3.3" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#preparación-de-los-datos"><i class="fa fa-check"></i><b>3.3</b> Preparación de los Datos</a></li>
+<li class="chapter" data-level="3.4" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#gráfico-inicial."><i class="fa fa-check"></i><b>3.4</b> Gráfico inicial.</a></li>
+<li class="chapter" data-level="3.5" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#estacionariedad-y-diferenciación."><i class="fa fa-check"></i><b>3.5</b> Estacionariedad y diferenciación.</a></li>
+<li class="chapter" data-level="3.6" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#descomposición-de-la-serie"><i class="fa fa-check"></i><b>3.6</b> Descomposición de la serie</a></li>
+<li class="chapter" data-level="3.7" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#modelo-arima-y-validación."><i class="fa fa-check"></i><b>3.7</b> Modelo ARIMA y validación.</a></li>
+<li class="chapter" data-level="3.8" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#validación-de-residuos."><i class="fa fa-check"></i><b>3.8</b> Validación de residuos.</a></li>
+<li class="chapter" data-level="3.9" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#conclusión."><i class="fa fa-check"></i><b>3.9</b> Conclusión.</a></li>
+<li class="chapter" data-level="3.10" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#predicción."><i class="fa fa-check"></i><b>3.10</b> Predicción.</a></li>
+<li class="chapter" data-level="3.11" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#punto-de-cambio."><i class="fa fa-check"></i><b>3.11</b> Punto de cambio.</a></li>
+<li class="chapter" data-level="3.12" data-path="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#conclusión.-1"><i class="fa fa-check"></i><b>3.12</b> Conclusión.</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html"><i class="fa fa-check"></i><b>4</b> Suavizamiento y Pronóstico con Holt-Winters.</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#introducción.-2"><i class="fa fa-check"></i><b>4.1</b> Introducción.</a></li>
+<li class="chapter" data-level="4.2" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#objetivos-de-la-unidad-4."><i class="fa fa-check"></i><b>4.2</b> Objetivos de la Unidad 4.</a></li>
+<li class="chapter" data-level="4.3" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#preparación-de-la-serie-mensual."><i class="fa fa-check"></i><b>4.3</b> Preparación de la serie mensual.</a></li>
+<li class="chapter" data-level="4.4" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#aplicación-del-modelo-holt-winters."><i class="fa fa-check"></i><b>4.4</b> Aplicación del modelo Holt-Winters.</a></li>
+<li class="chapter" data-level="4.5" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#evaluación-del-modelo."><i class="fa fa-check"></i><b>4.5</b> Evaluación del modelo.</a></li>
+<li class="chapter" data-level="4.6" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#comparación-con-promedio-móvil-y-suavizado-simple."><i class="fa fa-check"></i><b>4.6</b> Comparación con promedio móvil y suavizado simple.</a></li>
+<li class="chapter" data-level="4.7" data-path="suavizamiento-y-pronóstico-con-holt-winters..html"><a href="suavizamiento-y-pronóstico-con-holt-winters..html#conclusiones."><i class="fa fa-check"></i><b>4.7</b> Conclusiones.</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><i class="fa fa-check"></i><b>5</b> Modelado Avanzado y Validación de Supuestos Holt-Winters.</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#introducción.-3"><i class="fa fa-check"></i><b>5.1</b> Introducción.</a></li>
+<li class="chapter" data-level="5.2" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#objetivos."><i class="fa fa-check"></i><b>5.2</b> Objetivos.</a></li>
+<li class="chapter" data-level="5.3" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#cargar-datos-y-preparar-la-serie."><i class="fa fa-check"></i><b>5.3</b> Cargar datos y preparar la serie.</a></li>
+<li class="chapter" data-level="5.4" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#prueba-de-estacionariedad-adf."><i class="fa fa-check"></i><b>5.4</b> Prueba de estacionariedad (ADF).</a></li>
+<li class="chapter" data-level="5.5" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#diferenciación-si-es-necesario."><i class="fa fa-check"></i><b>5.5</b> Diferenciación si es necesario.</a></li>
+<li class="chapter" data-level="5.6" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#acf-y-pacf."><i class="fa fa-check"></i><b>5.6</b> ACF y PACF.</a></li>
+<li class="chapter" data-level="5.7" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#ajuste-del-modelo-arima."><i class="fa fa-check"></i><b>5.7</b> Ajuste del modelo ARIMA.</a></li>
+<li class="chapter" data-level="5.8" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#validación-de-supuestos."><i class="fa fa-check"></i><b>5.8</b> Validación de supuestos.</a></li>
+<li class="chapter" data-level="5.9" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#predicción.-1"><i class="fa fa-check"></i><b>5.9</b> Predicción.</a></li>
+<li class="chapter" data-level="5.10" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#conclusiones.-1"><i class="fa fa-check"></i><b>5.10</b> Conclusiones.</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html"><i class="fa fa-check"></i><b>6</b> Regresión en Series de Tiempo con Prophet.</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#introducción.-4"><i class="fa fa-check"></i><b>6.1</b> Introducción.</a></li>
+<li class="chapter" data-level="6.2" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#objetivo.-1"><i class="fa fa-check"></i><b>6.2</b> Objetivo.</a></li>
+<li class="chapter" data-level="6.3" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#justificación-del-uso-de-prophet."><i class="fa fa-check"></i><b>6.3</b> Justificación del uso de Prophet.</a></li>
+<li class="chapter" data-level="6.4" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#script-preparación-de-los-datos."><i class="fa fa-check"></i><b>6.4</b> Script: Preparación de los datos.</a></li>
+<li class="chapter" data-level="6.5" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#datos."><i class="fa fa-check"></i><b>6.5</b> Datos.</a></li>
+<li class="chapter" data-level="6.6" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#entrenamiento-del-modelo-prophet."><i class="fa fa-check"></i><b>6.6</b> Entrenamiento del modelo Prophet.</a></li>
+<li class="chapter" data-level="6.7" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#componentes-del-modelo-tendencia-estacionalidad."><i class="fa fa-check"></i><b>6.7</b> Componentes del modelo (tendencia, estacionalidad).</a></li>
+<li class="chapter" data-level="6.8" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#explicación"><i class="fa fa-check"></i><b>6.8</b> Explicación:</a></li>
+<li class="chapter" data-level="6.9" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#comparación-con-modelos-anteriores-arima-vs-prophet."><i class="fa fa-check"></i><b>6.9</b> Comparación con modelos anteriores (ARIMA vs Prophet).</a></li>
+<li class="chapter" data-level="6.10" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#conclusiones.-2"><i class="fa fa-check"></i><b>6.10</b> Conclusiones.</a></li>
+<li class="chapter" data-level="6.11" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#bibliografía."><i class="fa fa-check"></i><b>6.11</b> Bibliografía.</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bookdown Análisis Series de Tiempo AAPL</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regresión-en-series-de-tiempo-con-prophet." class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Capitulo6</span> Regresión en Series de Tiempo con Prophet.<a href="regresión-en-series-de-tiempo-con-prophet..html#regresión-en-series-de-tiempo-con-prophet." class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introducción.-4" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Introducción.<a href="regresión-en-series-de-tiempo-con-prophet..html#introducción.-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En esta unidad se explora el uso de modelos de regresión aplicados a series de tiempo, integrando técnicas estadísticas convencionales con algoritmos de aprendizaje estadístico. Particularmente, se utilizará el algoritmo Facebook Prophet, ampliamente reconocido por su capacidad de modelar tendencias, estacionalidades y efectos de eventos en datos temporales. Se aplicará sobre la serie histórica de precios ajustados de Apple Inc. (AAPL), con el fin de realizar predicciones fundamentadas en su comportamiento histórico.</p>
+</div>
+<div id="objetivo.-1" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Objetivo.<a href="regresión-en-series-de-tiempo-con-prophet..html#objetivo.-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Aplicar el algoritmo Prophet como modelo de regresión sobre una serie temporal financiera (AAPL), justificando su utilidad frente a modelos lineales o ARIMA, y evaluando su capacidad predictiva sobre los datos históricos.</p>
+</div>
+<div id="justificación-del-uso-de-prophet." class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Justificación del uso de Prophet.<a href="regresión-en-series-de-tiempo-con-prophet..html#justificación-del-uso-de-prophet." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Prophet es un algoritmo de código abierto desarrollado por Facebook para el análisis y predicción de series temporales con fuertes componentes de tendencia y estacionalidad. Su facilidad de uso, robustez ante valores atípicos y capacidad para modelar cambios de tendencia lo convierten en una herramienta ideal para series financieras como la de AAPL. A diferencia de modelos ARIMA, Prophet permite descomponer automáticamente los componentes y ajustar predicciones incluso con fechas irregulares.</p>
+</div>
+<div id="script-preparación-de-los-datos." class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Script: Preparación de los datos.<a href="regresión-en-series-de-tiempo-con-prophet..html#script-preparación-de-los-datos." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-1" tabindex="-1"></a><span class="co"># Instalar y cargar paquetes</span></span>
+<span id="cb42-2"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;tidyquant&quot;</span>)) <span class="fu">install.packages</span>(<span class="st">&quot;tidyquant&quot;</span>)</span>
+<span id="cb42-3"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-3" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
+<span id="cb42-4"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-4" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-5" tabindex="-1"></a><span class="co"># Descargar datos históricos desde Yahoo Finance</span></span>
+<span id="cb42-6"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-6" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">&quot;AAPL&quot;</span>, <span class="at">from =</span> <span class="st">&quot;2020-01-01&quot;</span>, <span class="at">to =</span> <span class="st">&quot;2025-04-30&quot;</span>)</span>
+<span id="cb42-7"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-7" tabindex="-1"></a></span>
+<span id="cb42-8"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-8" tabindex="-1"></a><span class="co"># Vista previa</span></span>
+<span id="cb42-9"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-9" tabindex="-1"></a><span class="fu">head</span>(apple_data)</span></code></pre></div>
+<div class="kable-table">
+<table>
+<colgroup>
+<col width="10%" />
+<col width="15%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="14%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">symbol</th>
+<th align="left">date</th>
+<th align="right">open</th>
+<th align="right">high</th>
+<th align="right">low</th>
+<th align="right">close</th>
+<th align="right">volume</th>
+<th align="right">adjusted</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">AAPL</td>
+<td align="left">2020-01-02</td>
+<td align="right">74.0600</td>
+<td align="right">75.1500</td>
+<td align="right">73.7975</td>
+<td align="right">75.0875</td>
+<td align="right">135480400</td>
+<td align="right">72.62084</td>
+</tr>
+<tr class="even">
+<td align="left">AAPL</td>
+<td align="left">2020-01-03</td>
+<td align="right">74.2875</td>
+<td align="right">75.1450</td>
+<td align="right">74.1250</td>
+<td align="right">74.3575</td>
+<td align="right">146322800</td>
+<td align="right">71.91482</td>
+</tr>
+<tr class="odd">
+<td align="left">AAPL</td>
+<td align="left">2020-01-06</td>
+<td align="right">73.4475</td>
+<td align="right">74.9900</td>
+<td align="right">73.1875</td>
+<td align="right">74.9500</td>
+<td align="right">118387200</td>
+<td align="right">72.48785</td>
+</tr>
+<tr class="even">
+<td align="left">AAPL</td>
+<td align="left">2020-01-07</td>
+<td align="right">74.9600</td>
+<td align="right">75.2250</td>
+<td align="right">74.3700</td>
+<td align="right">74.5975</td>
+<td align="right">108872000</td>
+<td align="right">72.14694</td>
+</tr>
+<tr class="odd">
+<td align="left">AAPL</td>
+<td align="left">2020-01-08</td>
+<td align="right">74.2900</td>
+<td align="right">76.1100</td>
+<td align="right">74.2900</td>
+<td align="right">75.7975</td>
+<td align="right">132079200</td>
+<td align="right">73.30751</td>
+</tr>
+<tr class="even">
+<td align="left">AAPL</td>
+<td align="left">2020-01-09</td>
+<td align="right">76.8100</td>
+<td align="right">77.6075</td>
+<td align="right">76.5500</td>
+<td align="right">77.4075</td>
+<td align="right">170108400</td>
+<td align="right">74.86462</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-1" tabindex="-1"></a><span class="co"># Instalar si no está Prophet</span></span>
+<span id="cb43-2"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-2" tabindex="-1"></a><span class="co">#if (!require(&quot;prophet&quot;)) install.packages(&quot;prophet&quot;)</span></span>
+<span id="cb43-3"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-3" tabindex="-1"></a><span class="fu">library</span>(prophet)</span>
+<span id="cb43-4"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-4" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
+<span id="cb43-5"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-5" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb43-6"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-6" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-7" tabindex="-1"></a><span class="co"># Descargar datos de AAPL</span></span>
+<span id="cb43-8"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-8" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">&quot;AAPL&quot;</span>, <span class="at">from =</span> <span class="st">&quot;2020-01-01&quot;</span>, <span class="at">to =</span> <span class="st">&quot;2025-04-30&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-9"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-9" tabindex="-1"></a>  <span class="fu">select</span>(date, adjusted) <span class="sc">%&gt;%</span></span>
+<span id="cb43-10"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-10" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">ds =</span> date, <span class="at">y =</span> adjusted)</span>
+<span id="cb43-11"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-11" tabindex="-1"></a></span>
+<span id="cb43-12"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-12" tabindex="-1"></a><span class="co"># Ver estructura</span></span>
+<span id="cb43-13"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-13" tabindex="-1"></a><span class="fu">head</span>(apple_data)</span></code></pre></div>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th align="left">ds</th>
+<th align="right">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2020-01-02</td>
+<td align="right">72.62082</td>
+</tr>
+<tr class="even">
+<td align="left">2020-01-03</td>
+<td align="right">71.91483</td>
+</tr>
+<tr class="odd">
+<td align="left">2020-01-06</td>
+<td align="right">72.48786</td>
+</tr>
+<tr class="even">
+<td align="left">2020-01-07</td>
+<td align="right">72.14694</td>
+</tr>
+<tr class="odd">
+<td align="left">2020-01-08</td>
+<td align="right">73.30753</td>
+</tr>
+<tr class="even">
+<td align="left">2020-01-09</td>
+<td align="right">74.86462</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="datos." class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Datos.<a href="regresión-en-series-de-tiempo-con-prophet..html#datos." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Se descargan los datos históricos de precios ajustados de Apple Inc. y se renombran las columnas según el formato requerido por Prophet: ds para fechas y y para el valor numérico.</p>
+</div>
+<div id="entrenamiento-del-modelo-prophet." class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Entrenamiento del modelo Prophet.<a href="regresión-en-series-de-tiempo-con-prophet..html#entrenamiento-del-modelo-prophet." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Una vez preparados los datos con estructura compatible (ds, y), se entrena el modelo Prophet. Este proceso se realiza con la función prophet(), que ajusta automáticamente componentes de tendencia, estacionalidad y residuos a la serie temporal.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-1" tabindex="-1"></a><span class="co"># Crear y entrenar el modelo</span></span>
+<span id="cb44-2"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-2" tabindex="-1"></a>modelo_prophet <span class="ot">&lt;-</span> <span class="fu">prophet</span>(apple_data)</span>
+<span id="cb44-3"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-3" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-4" tabindex="-1"></a><span class="co"># Crear marco de fechas a futuro (12 meses)</span></span>
+<span id="cb44-5"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-5" tabindex="-1"></a>futuro <span class="ot">&lt;-</span> <span class="fu">make_future_dataframe</span>(modelo_prophet, <span class="at">periods =</span> <span class="dv">365</span>)</span>
+<span id="cb44-6"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-6" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-7" tabindex="-1"></a><span class="co"># Generar predicción</span></span>
+<span id="cb44-8"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-8" tabindex="-1"></a>prediccion <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_prophet, futuro)</span>
+<span id="cb44-9"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-9" tabindex="-1"></a></span>
+<span id="cb44-10"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-10" tabindex="-1"></a><span class="co"># Visualizar resultado</span></span>
+<span id="cb44-11"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-11" tabindex="-1"></a><span class="fu">plot</span>(modelo_prophet, prediccion) <span class="sc">+</span></span>
+<span id="cb44-12"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-12" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Predicción del precio de AAPL con Prophet&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-13"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-13" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><strong>Explicación:</strong></p>
+<p>El modelo se entrena con los datos históricos y genera predicciones para un año adicional. La gráfica resultante muestra la serie observada, el valor ajustado y el pronóstico con bandas de incertidumbre.</p>
+<p>Descripción técnica:
+prophet(apple_data) ajusta el modelo con base en los precios diarios de AAPL, detectando automáticamente cambios de tendencia, días con mayor varianza y estacionalidades relevantes.</p>
+<p>make_future_dataframe() genera un calendario extendido de 365 días futuros, lo que permite simular el comportamiento de los precios para todo el año siguiente.</p>
+<p>predict() aplica el modelo ajustado y genera predicciones para cada fecha del nuevo marco temporal, devolviendo un dataframe con:</p>
+<p>yhat: valor predicho</p>
+<p>yhat_lower y yhat_upper: bandas de confianza (80% por defecto)</p>
+<p><strong>Análisis visual:</strong></p>
+<ul>
+<li>El gráfico muestra</li>
+</ul>
+<p><strong>La línea azul principal:</strong> valores predichos (yhat) de la acción AAPL.</p>
+<ul>
+<li>Sombra gris claro: intervalos de confianza para cada fecha futura.</li>
+</ul>
+<p>En el rango histórico (2020–2025), se observa un ajuste suave sobre la tendencia subyacente.</p>
+<p>En el rango futuro (2025–2026), el modelo proyecta una continuación de la tendencia positiva, aunque con mayor incertidumbre (bandas más anchas).</p>
+<p><strong>Interpretación:</strong>
+Prophet estima que, de mantenerse las condiciones actuales, el precio ajustado de AAPL seguiría una trayectoria creciente moderada durante el año siguiente.</p>
+<p>El uso de bandas de confianza es clave para la toma de decisiones gerenciales, ya que permite planear bajo distintos escenarios (optimista, base, pesimista).</p>
+</div>
+<div id="componentes-del-modelo-tendencia-estacionalidad." class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> Componentes del modelo (tendencia, estacionalidad).<a href="regresión-en-series-de-tiempo-con-prophet..html#componentes-del-modelo-tendencia-estacionalidad." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Una vez entrenado el modelo y generadas las predicciones, es fundamental descomponer el comportamiento de la serie para entender los factores que influyen en las variaciones de la variable objetivo (precio ajustado de AAPL). Para esto, se emplea la función prophet_plot_components().</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb45-1" tabindex="-1"></a><span class="fu">prophet_plot_components</span>(modelo_prophet, prediccion)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+</div>
+<div id="explicación" class="section level2 hasAnchor" number="6.8">
+<h2><span class="header-section-number">6.8</span> Explicación:<a href="regresión-en-series-de-tiempo-con-prophet..html#explicación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Esta visualización permite examinar la descomposición automática del modelo:</p>
+<ul>
+<li><p>Tendencia estimada</p></li>
+<li><p>Estacionalidad semanal</p></li>
+<li><p>Estacionalidad anual (si aplica)
+Ideal para interpretar comportamientos estructurales de la serie.</p></li>
+<li><p>¿Qué muestra esta visualización?
+Esta función genera una serie de gráficos separados que ilustran:</p></li>
+<li><p>Tendencia (Trend)</p></li>
+<li><p>Muestra la evolución subyacente del precio de la acción a lo largo del tiempo.</p></li>
+<li><p>En este caso, se observa una tendencia positiva con algunos tramos de aceleración y desaceleración, típicos de un activo con comportamiento de largo plazo al alza.</p></li>
+<li><p>Estacionalidad anual (Yearly seasonality)</p></li>
+<li><p>Identifica patrones que se repiten en el mismo mes del año.</p></li>
+<li><p>Por ejemplo, si hay alzas sistemáticas en ciertos meses (e.g., octubre por eventos de tecnología o cierres fiscales), el modelo las representa suavemente.</p></li>
+<li><p>Estacionalidad semanal (Weekly seasonality)</p></li>
+<li><p>Refleja el comportamiento recurrente dentro de una semana. Aunque para activos bursátiles este patrón puede estar sesgado por la falta de datos los fines de semana, Prophet lo modela si encuentra suficiente evidencia.</p></li>
+</ul>
+<p>A menudo, los lunes o viernes pueden mostrar volatilidad distinta por decisiones de portafolio o eventos financieros.</p>
+<ul>
+<li><p>Interpretación general:</p></li>
+<li><p>El análisis de componentes es clave para validar si el modelo está capturando adecuadamente estructuras repetitivas en la serie.</p></li>
+<li><p>Permite diagnosticar si existe estacionalidad fuerte o si el comportamiento depende principalmente de la tendencia (como parece ser el caso de AAPL).</p></li>
+<li><p>También sirve para comunicar de manera transparente a los tomadores de decisión qué elementos están impulsando las predicciones del modelo.</p></li>
+</ul>
+</div>
+<div id="comparación-con-modelos-anteriores-arima-vs-prophet." class="section level2 hasAnchor" number="6.9">
+<h2><span class="header-section-number">6.9</span> Comparación con modelos anteriores (ARIMA vs Prophet).<a href="regresión-en-series-de-tiempo-con-prophet..html#comparación-con-modelos-anteriores-arima-vs-prophet." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En unidades previas se aplicaron modelos ARIMA a la serie de precios de AAPL. Si bien estos modelos demostraron buena capacidad de ajuste, requieren supuestos fuertes como la estacionariedad y no siempre capturan fácilmente efectos de estacionalidad múltiple o rupturas de tendencia.</p>
+<ul>
+<li><p>Prophet, en contraste:</p></li>
+<li><p>No exige preprocesamiento complejo (como diferenciación manual).</p></li>
+<li><p>Detecta automáticamente estacionalidad y tendencias no lineales.</p></li>
+<li><p>Permite extender fácilmente horizontes de predicción.</p></li>
+</ul>
+<p>Por tanto, Prophet se presenta como una excelente alternativa en contextos donde se necesita agilidad, flexibilidad y robustez ante cambios estructurales.</p>
+</div>
+<div id="conclusiones.-2" class="section level2 hasAnchor" number="6.10">
+<h2><span class="header-section-number">6.10</span> Conclusiones.<a href="regresión-en-series-de-tiempo-con-prophet..html#conclusiones.-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>El algoritmo Prophet se ajustó exitosamente a la serie de precios históricos de Apple Inc. desde 2020 hasta abril de 2025, entregando proyecciones con bandas de confianza para el año siguiente.</p></li>
+<li><p>La descomposición automática del modelo facilitó el análisis de la tendencia subyacente y patrones de estacionalidad semanal, sin necesidad de diferenciación previa ni supuestos de estacionariedad.</p></li>
+<li><p>Prophet demostró ser una alternativa más intuitiva y visual frente a modelos ARIMA, especialmente en contextos exploratorios o productivos.</p></li>
+<li><p>La aplicación de Prophet permite abordar el problema como una regresión de series de tiempo, con control explícito sobre fechas, eventos y feriados futuros.</p></li>
+</ul>
+</div>
+<div id="bibliografía." class="section level2 hasAnchor" number="6.11">
+<h2><span class="header-section-number">6.11</span> Bibliografía.<a href="regresión-en-series-de-tiempo-con-prophet..html#bibliografía." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p><strong>Yahoo Finance.</strong> (2025). <em>Apple Inc. (AAPL) Stock Price &amp; Historical Data</em>. Recuperado de <a href="https://finance.yahoo.com/quote/AAPL">https://finance.yahoo.com/quote/AAPL</a></p></li>
+<li><p><strong>Dancho, M. &amp; Vaughan, D.</strong> (2021). <em>tidyquant: Tidy Quantitative Financial Analysis</em>. R package version 1.0.4. Recuperado de <a href="https://business-science.github.io/tidyquant/">https://business-science.github.io/tidyquant/</a></p></li>
+<li><p><strong>Hyndman, R. J. &amp; Athanasopoulos, G.</strong> (2021). <em>Forecasting: Principles and Practice</em> (3ra ed.). OTexts. Disponible en <a href="https://otexts.com/fpp3/">https://otexts.com/fpp3/</a></p></li>
+<li><p><strong>Cowpertwait, P. &amp; Metcalfe, A.</strong> (2009). <em>Introductory Time Series with R</em>. Springer. DOI: <a href="https://doi.org/10.1007/978-0-387-88698-5">10.1007/978-0-387-88698-5</a></p></li>
+<li><p><strong>Shumway, R. H., &amp; Stoffer, D. S.</strong> (2017). <em>Time Series Analysis and Its Applications: With R Examples</em> (4ta ed.). Springer.</p></li>
+<li><p><strong>R Core Team.</strong> (2023). <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. Disponible en <a href="https://www.R-project.org/">https://www.R-project.org/</a></p></li>
+<li><p><strong>Analytics Vidhya.</strong> (2021). <em>Holt-Winters Method for Time Series Analysis</em>. Recuperado de: <a href="https://www.analyticsvidhya.com/blog/2021/08/holt-winters-method-for-time-series-analysis/">https://www.analyticsvidhya.com/blog/2021/08/holt-winters-method-for-time-series-analysis/</a></p></li>
+<li><p><strong>R Documentation.</strong> <em>HoltWinters() y forecast packages</em>. Recuperado de <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters</a></p></li>
+<li><p><strong>Wickham, H., &amp; Grolemund, G.</strong> (2016). <em>R for Data Science</em>. O’Reilly Media.</p></li>
+<li><p>aylor, S. J. &amp; Letham, B. (2018). Forecasting at scale. The American Statistician, 72(1), 37–45. DOI: <a href="https://doi.org/10.1080/00031305.2017.1380080" class="uri">https://doi.org/10.1080/00031305.2017.1380080</a></p></li>
+<li><p>Facebook Prophet Official Documentation: <a href="https://facebook.github.io/prophet/" class="uri">https://facebook.github.io/prophet/</a></p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["book.pdf", "book.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "code_folding": "show"
+});
+});
+</script>
+
+</body>
+
+</html>

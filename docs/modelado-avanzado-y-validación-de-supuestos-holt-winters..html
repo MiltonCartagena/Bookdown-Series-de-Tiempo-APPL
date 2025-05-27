@@ -29,7 +29,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
 <meta name="author" content="Sofy Certuche, Milton Cartagena" />
 
 
-<meta name="date" content="2025-05-19" />
+<meta name="date" content="2025-05-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -37,7 +37,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
   
   
 <link rel="prev" href="suavizamiento-y-pronóstico-con-holt-winters..html"/>
-
+<link rel="next" href="regresión-en-series-de-tiempo-con-prophet..html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -199,7 +199,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.8" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#validación-de-supuestos."><i class="fa fa-check"></i><b>5.8</b> Validación de supuestos.</a></li>
 <li class="chapter" data-level="5.9" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#predicción.-1"><i class="fa fa-check"></i><b>5.9</b> Predicción.</a></li>
 <li class="chapter" data-level="5.10" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#conclusiones.-1"><i class="fa fa-check"></i><b>5.10</b> Conclusiones.</a></li>
-<li class="chapter" data-level="5.11" data-path="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#bibliografía."><i class="fa fa-check"></i><b>5.11</b> Bibliografía.</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html"><i class="fa fa-check"></i><b>6</b> Regresión en Series de Tiempo con Prophet.</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#introducción.-4"><i class="fa fa-check"></i><b>6.1</b> Introducción.</a></li>
+<li class="chapter" data-level="6.2" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#objetivo.-1"><i class="fa fa-check"></i><b>6.2</b> Objetivo.</a></li>
+<li class="chapter" data-level="6.3" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#justificación-del-uso-de-prophet."><i class="fa fa-check"></i><b>6.3</b> Justificación del uso de Prophet.</a></li>
+<li class="chapter" data-level="6.4" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#script-preparación-de-los-datos."><i class="fa fa-check"></i><b>6.4</b> Script: Preparación de los datos.</a></li>
+<li class="chapter" data-level="6.5" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#datos."><i class="fa fa-check"></i><b>6.5</b> Datos.</a></li>
+<li class="chapter" data-level="6.6" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#entrenamiento-del-modelo-prophet."><i class="fa fa-check"></i><b>6.6</b> Entrenamiento del modelo Prophet.</a></li>
+<li class="chapter" data-level="6.7" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#componentes-del-modelo-tendencia-estacionalidad."><i class="fa fa-check"></i><b>6.7</b> Componentes del modelo (tendencia, estacionalidad).</a></li>
+<li class="chapter" data-level="6.8" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#explicación"><i class="fa fa-check"></i><b>6.8</b> Explicación:</a></li>
+<li class="chapter" data-level="6.9" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#comparación-con-modelos-anteriores-arima-vs-prophet."><i class="fa fa-check"></i><b>6.9</b> Comparación con modelos anteriores (ARIMA vs Prophet).</a></li>
+<li class="chapter" data-level="6.10" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#conclusiones.-2"><i class="fa fa-check"></i><b>6.10</b> Conclusiones.</a></li>
+<li class="chapter" data-level="6.11" data-path="regresión-en-series-de-tiempo-con-prophet..html"><a href="regresión-en-series-de-tiempo-con-prophet..html#bibliografía."><i class="fa fa-check"></i><b>6.11</b> Bibliografía.</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado con bookdown</a></li>
@@ -313,8 +326,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## AIC=472.11   AICc=472.52   BIC=478.54
 ## 
 ## Training set error measures:
-##                   ME     RMSE      MAE       MPE     MAPE      MASE        ACF1
-## Training set 1.22754 9.622663 7.866658 0.8277077 5.209372 0.2335286 -0.01327611</code></pre>
+##                    ME     RMSE      MAE       MPE     MAPE      MASE       ACF1
+## Training set 1.227539 9.622662 7.866658 0.8277077 5.209372 0.2335286 -0.0132761</code></pre>
 <p><strong>Análisis:</strong> auto.arima() selecciona automáticamente el modelo óptimo basado en AIC/BIC. Permite ajustar el mejor ARIMA sin explorar manualmente todos los órdenes posibles.</p>
 </div>
 <div id="validación-de-supuestos." class="section level2 hasAnchor" number="5.8">
@@ -333,7 +346,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  -1.175338  3.630417
 ## sample estimates:
 ## mean of x 
-##   1.22754</code></pre>
+##  1.227539</code></pre>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#cb36-1" tabindex="-1"></a><span class="co"># 2. Independencia</span></span>
 <span id="cb36-2"><a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#cb36-2" tabindex="-1"></a><span class="fu">Box.test</span>(residuos, <span class="at">lag =</span> <span class="dv">12</span>, <span class="at">type =</span> <span class="st">&quot;Ljung-Box&quot;</span>)</span></code></pre></div>
 <pre><code>## 
@@ -371,29 +384,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.10</span> Conclusiones.<a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#conclusiones.-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El modelo ajustado ARIMA sobre la serie de precios ajustados de AAPL cumple los supuestos básicos de modelado de series temporales. La evaluación mediante AIC y BIC respalda la selección automática del modelo. Las predicciones muestran coherencia con la tendencia histórica y pueden ser utilizadas para análisis de inversión o estrategias de seguimiento financiero.</p>
 </div>
-<div id="bibliografía." class="section level2 hasAnchor" number="5.11">
-<h2><span class="header-section-number">5.11</span> Bibliografía.<a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html#bibliografía." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><p><strong>Yahoo Finance.</strong> (2025). <em>Apple Inc. (AAPL) Stock Price &amp; Historical Data</em>. Recuperado de <a href="https://finance.yahoo.com/quote/AAPL">https://finance.yahoo.com/quote/AAPL</a></p></li>
-<li><p><strong>Dancho, M. &amp; Vaughan, D.</strong> (2021). <em>tidyquant: Tidy Quantitative Financial Analysis</em>. R package version 1.0.4. Recuperado de <a href="https://business-science.github.io/tidyquant/">https://business-science.github.io/tidyquant/</a></p></li>
-<li><p><strong>Hyndman, R. J. &amp; Athanasopoulos, G.</strong> (2021). <em>Forecasting: Principles and Practice</em> (3ra ed.). OTexts. Disponible en <a href="https://otexts.com/fpp3/">https://otexts.com/fpp3/</a></p></li>
-<li><p><strong>Cowpertwait, P. &amp; Metcalfe, A.</strong> (2009). <em>Introductory Time Series with R</em>. Springer. DOI: <a href="https://doi.org/10.1007/978-0-387-88698-5">10.1007/978-0-387-88698-5</a></p></li>
-<li><p><strong>Shumway, R. H., &amp; Stoffer, D. S.</strong> (2017). <em>Time Series Analysis and Its Applications: With R Examples</em> (4ta ed.). Springer.</p></li>
-<li><p><strong>R Core Team.</strong> (2023). <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. Disponible en <a href="https://www.R-project.org/">https://www.R-project.org/</a></p></li>
-<li><p><strong>Analytics Vidhya.</strong> (2021). <em>Holt-Winters Method for Time Series Analysis</em>. Recuperado de: <a href="https://www.analyticsvidhya.com/blog/2021/08/holt-winters-method-for-time-series-analysis/">https://www.analyticsvidhya.com/blog/2021/08/holt-winters-method-for-time-series-analysis/</a></p></li>
-<li><p><strong>R Documentation.</strong> <em>HoltWinters() y forecast packages</em>. Recuperado de <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters</a></p></li>
-<li><p><strong>Wickham, H., &amp; Grolemund, G.</strong> (2016). <em>R for Data Science</em>. O’Reilly Media.</p></li>
-</ul>
-
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="suavizamiento-y-pronóstico-con-holt-winters..html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="suavizamiento-y-pronóstico-con-holt-winters..html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regresión-en-series-de-tiempo-con-prophet..html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

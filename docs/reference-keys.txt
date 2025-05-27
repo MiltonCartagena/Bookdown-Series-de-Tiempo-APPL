@@ -42,4 +42,15 @@ ajuste-del-modelo-arima.
 validación-de-supuestos.
 predicción.-1
 conclusiones.-1
+regresión-en-series-de-tiempo-con-prophet.
+introducción.-4
+objetivo.-1
+justificación-del-uso-de-prophet.
+script-preparación-de-los-datos.
+datos.
+entrenamiento-del-modelo-prophet.
+componentes-del-modelo-tendencia-estacionalidad.
+explicación
+comparación-con-modelos-anteriores-arima-vs-prophet.
+conclusiones.-2
 bibliografía.

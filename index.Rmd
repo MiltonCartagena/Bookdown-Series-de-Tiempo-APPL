@@ -617,6 +617,180 @@ autoplot(forecast_arima, colour = "forestgreen") +
 
 El modelo ajustado ARIMA sobre la serie de precios ajustados de AAPL cumple los supuestos básicos de modelado de series temporales. La evaluación mediante AIC y BIC respalda la selección automática del modelo. Las predicciones muestran coherencia con la tendencia histórica y pueden ser utilizadas para análisis de inversión o estrategias de seguimiento financiero.
 
+# Regresión en Series de Tiempo con Prophet.
+
+## Introducción.
+
+En esta unidad se explora el uso de modelos de regresión aplicados a series de tiempo, integrando técnicas estadísticas convencionales con algoritmos de aprendizaje estadístico. Particularmente, se utilizará el algoritmo Facebook Prophet, ampliamente reconocido por su capacidad de modelar tendencias, estacionalidades y efectos de eventos en datos temporales. Se aplicará sobre la serie histórica de precios ajustados de Apple Inc. (AAPL), con el fin de realizar predicciones fundamentadas en su comportamiento histórico.
+
+## Objetivo.
+
+Aplicar el algoritmo Prophet como modelo de regresión sobre una serie temporal financiera (AAPL), justificando su utilidad frente a modelos lineales o ARIMA, y evaluando su capacidad predictiva sobre los datos históricos.
+
+## Justificación del uso de Prophet.
+
+Prophet es un algoritmo de código abierto desarrollado por Facebook para el análisis y predicción de series temporales con fuertes componentes de tendencia y estacionalidad. Su facilidad de uso, robustez ante valores atípicos y capacidad para modelar cambios de tendencia lo convierten en una herramienta ideal para series financieras como la de AAPL. A diferencia de modelos ARIMA, Prophet permite descomponer automáticamente los componentes y ajustar predicciones incluso con fechas irregulares.
+
+## Script: Preparación de los datos.
+
+```{r}
+# Instalar y cargar paquetes
+if (!require("tidyquant")) install.packages("tidyquant")
+library(tidyquant)
+
+# Descargar datos históricos desde Yahoo Finance
+apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30")
+
+# Vista previa
+head(apple_data)
+```
+
+
+```{r}
+# Instalar si no está Prophet
+#if (!require("prophet")) install.packages("prophet")
+library(prophet)
+library(tidyquant)
+library(dplyr)
+
+# Descargar datos de AAPL
+apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30") %>%
+  select(date, adjusted) %>%
+  rename(ds = date, y = adjusted)
+
+# Ver estructura
+head(apple_data)
+
+```
+
+## Datos.
+
+Se descargan los datos históricos de precios ajustados de Apple Inc. y se renombran las columnas según el formato requerido por Prophet: ds para fechas y y para el valor numérico.
+
+## Entrenamiento del modelo Prophet.
+
+Una vez preparados los datos con estructura compatible (ds, y), se entrena el modelo Prophet. Este proceso se realiza con la función prophet(), que ajusta automáticamente componentes de tendencia, estacionalidad y residuos a la serie temporal.
+
+```{r}
+# Crear y entrenar el modelo
+modelo_prophet <- prophet(apple_data)
+
+# Crear marco de fechas a futuro (12 meses)
+futuro <- make_future_dataframe(modelo_prophet, periods = 365)
+
+# Generar predicción
+prediccion <- predict(modelo_prophet, futuro)
+
+# Visualizar resultado
+plot(modelo_prophet, prediccion) +
+  ggtitle("Predicción del precio de AAPL con Prophet") +
+  theme_minimal()
+```
+
+**Explicación:**
+
+El modelo se entrena con los datos históricos y genera predicciones para un año adicional. La gráfica resultante muestra la serie observada, el valor ajustado y el pronóstico con bandas de incertidumbre.
+
+Descripción técnica:
+prophet(apple_data) ajusta el modelo con base en los precios diarios de AAPL, detectando automáticamente cambios de tendencia, días con mayor varianza y estacionalidades relevantes.
+
+make_future_dataframe() genera un calendario extendido de 365 días futuros, lo que permite simular el comportamiento de los precios para todo el año siguiente.
+
+predict() aplica el modelo ajustado y genera predicciones para cada fecha del nuevo marco temporal, devolviendo un dataframe con:
+
+yhat: valor predicho
+
+yhat_lower y yhat_upper: bandas de confianza (80% por defecto)
+
+ **Análisis visual:**
+ 
++ El gráfico muestra
+
+**La línea azul principal:** valores predichos (yhat) de la acción AAPL.
+
+- Sombra gris claro: intervalos de confianza para cada fecha futura.
+
+En el rango histórico (2020–2025), se observa un ajuste suave sobre la tendencia subyacente.
+
+En el rango futuro (2025–2026), el modelo proyecta una continuación de la tendencia positiva, aunque con mayor incertidumbre (bandas más anchas).
+
+ **Interpretación:**
+Prophet estima que, de mantenerse las condiciones actuales, el precio ajustado de AAPL seguiría una trayectoria creciente moderada durante el año siguiente.
+
+El uso de bandas de confianza es clave para la toma de decisiones gerenciales, ya que permite planear bajo distintos escenarios (optimista, base, pesimista).
+
+## Componentes del modelo (tendencia, estacionalidad).
+
+Una vez entrenado el modelo y generadas las predicciones, es fundamental descomponer el comportamiento de la serie para entender los factores que influyen en las variaciones de la variable objetivo (precio ajustado de AAPL). Para esto, se emplea la función prophet_plot_components().
+
+```{r}
+prophet_plot_components(modelo_prophet, prediccion)
+```
+
+## Explicación:
+Esta visualización permite examinar la descomposición automática del modelo:
+
++ Tendencia estimada
+
++ Estacionalidad semanal
+
++ Estacionalidad anual (si aplica)
+Ideal para interpretar comportamientos estructurales de la serie.
+
+- ¿Qué muestra esta visualización?
+Esta función genera una serie de gráficos separados que ilustran:
+
+- Tendencia (Trend)
+
++ Muestra la evolución subyacente del precio de la acción a lo largo del tiempo.
+
++ En este caso, se observa una tendencia positiva con algunos tramos de aceleración y desaceleración, típicos de un activo con comportamiento de largo plazo al alza.
+
+- Estacionalidad anual (Yearly seasonality)
+
++ Identifica patrones que se repiten en el mismo mes del año.
+
++ Por ejemplo, si hay alzas sistemáticas en ciertos meses (e.g., octubre por eventos de tecnología o cierres fiscales), el modelo las representa suavemente.
+
+- Estacionalidad semanal (Weekly seasonality)
+
++ Refleja el comportamiento recurrente dentro de una semana. Aunque para activos bursátiles este patrón puede estar sesgado por la falta de datos los fines de semana, Prophet lo modela si encuentra suficiente evidencia.
+
+A menudo, los lunes o viernes pueden mostrar volatilidad distinta por decisiones de portafolio o eventos financieros.
+
+- Interpretación general:
+
++ El análisis de componentes es clave para validar si el modelo está capturando adecuadamente estructuras repetitivas en la serie.
+
++ Permite diagnosticar si existe estacionalidad fuerte o si el comportamiento depende principalmente de la tendencia (como parece ser el caso de AAPL).
+
++ También sirve para comunicar de manera transparente a los tomadores de decisión qué elementos están impulsando las predicciones del modelo.
+
+
+## Comparación con modelos anteriores (ARIMA vs Prophet).
+
+En unidades previas se aplicaron modelos ARIMA a la serie de precios de AAPL. Si bien estos modelos demostraron buena capacidad de ajuste, requieren supuestos fuertes como la estacionariedad y no siempre capturan fácilmente efectos de estacionalidad múltiple o rupturas de tendencia.
+
+- Prophet, en contraste:
+
++ No exige preprocesamiento complejo (como diferenciación manual).
+
++ Detecta automáticamente estacionalidad y tendencias no lineales.
+
++ Permite extender fácilmente horizontes de predicción.
+
+Por tanto, Prophet se presenta como una excelente alternativa en contextos donde se necesita agilidad, flexibilidad y robustez ante cambios estructurales.
+
+## Conclusiones.
+
++ El algoritmo Prophet se ajustó exitosamente a la serie de precios históricos de Apple Inc. desde 2020 hasta abril de 2025, entregando proyecciones con bandas de confianza para el año siguiente.
+
++ La descomposición automática del modelo facilitó el análisis de la tendencia subyacente y patrones de estacionalidad semanal, sin necesidad de diferenciación previa ni supuestos de estacionariedad.
+
++ Prophet demostró ser una alternativa más intuitiva y visual frente a modelos ARIMA, especialmente en contextos exploratorios o productivos.
+
++ La aplicación de Prophet permite abordar el problema como una regresión de series de tiempo, con control explícito sobre fechas, eventos y feriados futuros.
+
 ## Bibliografía.
 
 - **Yahoo Finance.** (2025). *Apple Inc. (AAPL) Stock Price & Historical Data*. Recuperado de [https://finance.yahoo.com/quote/AAPL](https://finance.yahoo.com/quote/AAPL)
@@ -636,3 +810,7 @@ El modelo ajustado ARIMA sobre la serie de precios ajustados de AAPL cumple los 
 - **R Documentation.** *HoltWinters() y forecast packages*. Recuperado de [https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters)
 
 - **Wickham, H., & Grolemund, G.** (2016). *R for Data Science*. O’Reilly Media.
+
+- aylor, S. J. & Letham, B. (2018). Forecasting at scale. The American Statistician, 72(1), 37–45. DOI: https://doi.org/10.1080/00031305.2017.1380080
+
+- Facebook Prophet Official Documentation: https://facebook.github.io/prophet/
