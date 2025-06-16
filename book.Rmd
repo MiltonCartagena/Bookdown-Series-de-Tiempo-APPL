@@ -992,3 +992,6 @@ Texto clásico sobre redes neuronales, con capítulos dedicados a RNN y una expl
 - **Schmidhuber, J**. (2015). Deep learning in neural networks: An overview. Neural Networks, 61, 85–117. https://doi.org/10.1016/j.neunet.2014.09.003
 
 Aunque enfocado en deep learning moderno, incluye una revisión de las redes recurrentes clásicas como Elman y Jordan en su evolución histórica.
+
+<!--chapter:end:index.Rmd-->
+

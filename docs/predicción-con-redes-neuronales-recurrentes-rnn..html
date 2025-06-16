@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capitulo6 Regresión en Series de Tiempo con Prophet. | Bookdown Análisis Series de Tiempo AAPL</title>
+  <title>Capitulo7 Predicción con Redes Neuronales Recurrentes (RNN). | Bookdown Análisis Series de Tiempo AAPL</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 set in the _output.yml file.
 The HTML output format for this example is bookdown::gitbook,</p>" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capitulo6 Regresión en Series de Tiempo con Prophet. | Bookdown Análisis Series de Tiempo AAPL" />
+  <meta property="og:title" content="Capitulo7 Predicción con Redes Neuronales Recurrentes (RNN). | Bookdown Análisis Series de Tiempo AAPL" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
@@ -19,7 +19,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capitulo6 Regresión en Series de Tiempo con Prophet. | Bookdown Análisis Series de Tiempo AAPL" />
+  <meta name="twitter:title" content="Capitulo7 Predicción con Redes Neuronales Recurrentes (RNN). | Bookdown Análisis Series de Tiempo AAPL" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 set in the _output.yml file.
@@ -36,8 +36,8 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html"/>
-<link rel="next" href="predicción-con-redes-neuronales-recurrentes-rnn..html"/>
+<link rel="prev" href="regresión-en-series-de-tiempo-con-prophet..html"/>
+<link rel="next" href="bibliografía..html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -252,31 +252,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="regresión-en-series-de-tiempo-con-prophet." class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Capitulo6</span> Regresión en Series de Tiempo con Prophet.<a href="regresión-en-series-de-tiempo-con-prophet..html#regresión-en-series-de-tiempo-con-prophet." class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="introducción.-4" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Introducción.<a href="regresión-en-series-de-tiempo-con-prophet..html#introducción.-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>En esta unidad se explora el uso de modelos de regresión aplicados a series de tiempo, integrando técnicas estadísticas convencionales con algoritmos de aprendizaje estadístico. Particularmente, se utilizará el algoritmo Facebook Prophet, ampliamente reconocido por su capacidad de modelar tendencias, estacionalidades y efectos de eventos en datos temporales. Se aplicará sobre la serie histórica de precios ajustados de Apple Inc. (AAPL), con el fin de realizar predicciones fundamentadas en su comportamiento histórico.</p>
+<div id="predicción-con-redes-neuronales-recurrentes-rnn." class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Capitulo7</span> Predicción con Redes Neuronales Recurrentes (RNN).<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#predicción-con-redes-neuronales-recurrentes-rnn." class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introducción.-5" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Introducción.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#introducción.-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En esta unidad aplicaremos algoritmos de inteligencia artificial, en particular redes neuronales recurrentes (RNN), para predecir valores futuros de una serie de tiempo financiera. Utilizaremos los modelos Elman y Jordan, los cuales tienen la capacidad de aprender patrones secuenciales a partir de los datos y permiten capturar dependencias temporales complejas.</p>
+<p>Este ejercicio representa el último avance en el proceso de modelado de series temporales que hemos venido documentando en este proyecto Bookdown.</p>
 </div>
-<div id="objetivo.-1" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Objetivo.<a href="regresión-en-series-de-tiempo-con-prophet..html#objetivo.-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Aplicar el algoritmo Prophet como modelo de regresión sobre una serie temporal financiera (AAPL), justificando su utilidad frente a modelos lineales o ARIMA, y evaluando su capacidad predictiva sobre los datos históricos.</p>
+<div id="objetivo.-2" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Objetivo.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#objetivo.-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Predecir valores futuros de la serie de precios de cierre de la acción de Apple Inc. (AAPL) usando modelos de redes neuronales recurrentes (Elman y Jordan), comparando su rendimiento y analizando su capacidad de modelado no lineal.</p>
 </div>
-<div id="justificación-del-uso-de-prophet." class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Justificación del uso de Prophet.<a href="regresión-en-series-de-tiempo-con-prophet..html#justificación-del-uso-de-prophet." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Prophet es un algoritmo de código abierto desarrollado por Facebook para el análisis y predicción de series temporales con fuertes componentes de tendencia y estacionalidad. Su facilidad de uso, robustez ante valores atípicos y capacidad para modelar cambios de tendencia lo convierten en una herramienta ideal para series financieras como la de AAPL. A diferencia de modelos ARIMA, Prophet permite descomponer automáticamente los componentes y ajustar predicciones incluso con fechas irregulares.</p>
-</div>
-<div id="script-preparación-de-los-datos." class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> Script: Preparación de los datos.<a href="regresión-en-series-de-tiempo-con-prophet..html#script-preparación-de-los-datos." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-1" tabindex="-1"></a><span class="co"># Instalar y cargar paquetes</span></span>
-<span id="cb42-2"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;tidyquant&quot;</span>)) <span class="fu">install.packages</span>(<span class="st">&quot;tidyquant&quot;</span>)</span>
-<span id="cb42-3"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-3" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
-<span id="cb42-4"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-4" tabindex="-1"></a></span>
-<span id="cb42-5"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-5" tabindex="-1"></a><span class="co"># Descargar datos históricos desde Yahoo Finance</span></span>
-<span id="cb42-6"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-6" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">&quot;AAPL&quot;</span>, <span class="at">from =</span> <span class="st">&quot;2020-01-01&quot;</span>, <span class="at">to =</span> <span class="st">&quot;2025-04-30&quot;</span>)</span>
-<span id="cb42-7"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-7" tabindex="-1"></a></span>
-<span id="cb42-8"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-8" tabindex="-1"></a><span class="co"># Vista previa</span></span>
-<span id="cb42-9"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb42-9" tabindex="-1"></a><span class="fu">head</span>(apple_data)</span></code></pre></div>
+<div id="carga-de-datos-desde-yahoo-finance." class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Carga de datos desde Yahoo Finance.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#carga-de-datos-desde-yahoo-finance." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb46-1" tabindex="-1"></a><span class="co"># Descargar datos históricos desde Yahoo Finance</span></span>
+<span id="cb46-2"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb46-2" tabindex="-1"></a>datos_appl <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">&quot;AAPL&quot;</span>, <span class="at">from =</span> <span class="st">&quot;2020-01-01&quot;</span>, <span class="at">to =</span> <span class="st">&quot;2025-04-30&quot;</span>)</span>
+<span id="cb46-3"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb46-3" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb46-4" tabindex="-1"></a><span class="co"># Vista previa</span></span>
+<span id="cb46-5"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb46-5" tabindex="-1"></a><span class="fu">head</span>(datos_appl)</span></code></pre></div>
 <div class="kable-table">
 <table>
 <colgroup>
@@ -310,7 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">73.7975</td>
 <td align="right">75.0875</td>
 <td align="right">135480400</td>
-<td align="right">72.62086</td>
+<td align="right">72.62084</td>
 </tr>
 <tr class="even">
 <td align="left">AAPL</td>
@@ -320,7 +313,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">74.1250</td>
 <td align="right">74.3575</td>
 <td align="right">146322800</td>
-<td align="right">71.91481</td>
+<td align="right">71.91483</td>
 </tr>
 <tr class="odd">
 <td align="left">AAPL</td>
@@ -340,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">74.3700</td>
 <td align="right">74.5975</td>
 <td align="right">108872000</td>
-<td align="right">72.14690</td>
+<td align="right">72.14695</td>
 </tr>
 <tr class="odd">
 <td align="left">AAPL</td>
@@ -350,7 +343,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">74.2900</td>
 <td align="right">75.7975</td>
 <td align="right">132079200</td>
-<td align="right">73.30753</td>
+<td align="right">73.30750</td>
 </tr>
 <tr class="even">
 <td align="left">AAPL</td>
@@ -365,151 +358,124 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-1" tabindex="-1"></a><span class="co"># Instalar si no está Prophet</span></span>
-<span id="cb43-2"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-2" tabindex="-1"></a><span class="co">#if (!require(&quot;prophet&quot;)) install.packages(&quot;prophet&quot;)</span></span>
-<span id="cb43-3"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-3" tabindex="-1"></a><span class="fu">library</span>(prophet)</span>
-<span id="cb43-4"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-4" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
-<span id="cb43-5"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-5" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb43-6"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-6" tabindex="-1"></a></span>
-<span id="cb43-7"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-7" tabindex="-1"></a><span class="co"># Descargar datos de AAPL</span></span>
-<span id="cb43-8"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-8" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">&quot;AAPL&quot;</span>, <span class="at">from =</span> <span class="st">&quot;2020-01-01&quot;</span>, <span class="at">to =</span> <span class="st">&quot;2025-04-30&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb43-9"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-9" tabindex="-1"></a>  <span class="fu">select</span>(date, adjusted) <span class="sc">%&gt;%</span></span>
-<span id="cb43-10"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-10" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">ds =</span> date, <span class="at">y =</span> adjusted)</span>
-<span id="cb43-11"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-11" tabindex="-1"></a></span>
-<span id="cb43-12"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-12" tabindex="-1"></a><span class="co"># Ver estructura</span></span>
-<span id="cb43-13"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb43-13" tabindex="-1"></a><span class="fu">head</span>(apple_data)</span></code></pre></div>
-<div class="kable-table">
-<table>
-<thead>
-<tr class="header">
-<th align="left">ds</th>
-<th align="right">y</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">2020-01-02</td>
-<td align="right">72.62084</td>
-</tr>
-<tr class="even">
-<td align="left">2020-01-03</td>
-<td align="right">71.91482</td>
-</tr>
-<tr class="odd">
-<td align="left">2020-01-06</td>
-<td align="right">72.48783</td>
-</tr>
-<tr class="even">
-<td align="left">2020-01-07</td>
-<td align="right">72.14693</td>
-</tr>
-<tr class="odd">
-<td align="left">2020-01-08</td>
-<td align="right">73.30753</td>
-</tr>
-<tr class="even">
-<td align="left">2020-01-09</td>
-<td align="right">74.86463</td>
-</tr>
-</tbody>
-</table>
 </div>
+<div id="explicación." class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Explicación.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#explicación." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>tq_get(“AAPL”, …): Esta función del paquete tidyquant permite obtener series de tiempo financieras directamente desde Yahoo Finance. En este caso se solicitan los datos de la acción de Apple Inc. con símbolo AAPL.</p>
+<p>from = “2020-01-01” y to = “2025-04-30”: Define el rango temporal que deseamos analizar.</p>
+<p>head(): Permite visualizar las primeras filas del dataset para asegurar que se haya descargado correctamente.</p>
 </div>
-<div id="datos." class="section level2 hasAnchor" number="6.5">
-<h2><span class="header-section-number">6.5</span> Datos.<a href="regresión-en-series-de-tiempo-con-prophet..html#datos." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Se descargan los datos históricos de precios ajustados de Apple Inc. y se renombran las columnas según el formato requerido por Prophet: ds para fechas y y para el valor numérico.</p>
+<div id="normalización-y-estructura-de-entrenamiento." class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Normalización y estructura de entrenamiento.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#normalización-y-estructura-de-entrenamiento." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-1" tabindex="-1"></a><span class="co"># Seleccionar columna de cierre y normalizar</span></span>
+<span id="cb47-2"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-2" tabindex="-1"></a>serie <span class="ot">&lt;-</span> datos_appl<span class="sc">$</span>close</span>
+<span id="cb47-3"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-3" tabindex="-1"></a>normalize <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {(x <span class="sc">-</span> <span class="fu">min</span>(x)) <span class="sc">/</span> (<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x))}</span>
+<span id="cb47-4"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-4" tabindex="-1"></a>serie_norm <span class="ot">&lt;-</span> <span class="fu">normalize</span>(serie)</span>
+<span id="cb47-5"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-5" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-6" tabindex="-1"></a><span class="co"># Preparar datos con rezagos (lag)</span></span>
+<span id="cb47-7"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-7" tabindex="-1"></a>lag <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb47-8"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-8" tabindex="-1"></a>input <span class="ot">&lt;-</span> <span class="fu">embed</span>(serie_norm, lag <span class="sc">+</span> <span class="dv">1</span>)[, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb47-9"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-9" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">embed</span>(serie_norm, lag <span class="sc">+</span> <span class="dv">1</span>)[, <span class="dv">1</span>]</span>
+<span id="cb47-10"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-10" tabindex="-1"></a></span>
+<span id="cb47-11"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-11" tabindex="-1"></a><span class="co"># Dividir en entrenamiento y prueba</span></span>
+<span id="cb47-12"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-12" tabindex="-1"></a>train_size <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fl">0.7</span> <span class="sc">*</span> <span class="fu">nrow</span>(input))</span>
+<span id="cb47-13"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-13" tabindex="-1"></a>X_train <span class="ot">&lt;-</span> input[<span class="dv">1</span><span class="sc">:</span>train_size, ]</span>
+<span id="cb47-14"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-14" tabindex="-1"></a>Y_train <span class="ot">&lt;-</span> output[<span class="dv">1</span><span class="sc">:</span>train_size]</span>
+<span id="cb47-15"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-15" tabindex="-1"></a>X_test <span class="ot">&lt;-</span> input[(train_size <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">nrow</span>(input), ]</span>
+<span id="cb47-16"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb47-16" tabindex="-1"></a>Y_test <span class="ot">&lt;-</span> output[(train_size <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">nrow</span>(input)]</span></code></pre></div>
 </div>
-<div id="entrenamiento-del-modelo-prophet." class="section level2 hasAnchor" number="6.6">
-<h2><span class="header-section-number">6.6</span> Entrenamiento del modelo Prophet.<a href="regresión-en-series-de-tiempo-con-prophet..html#entrenamiento-del-modelo-prophet." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Una vez preparados los datos con estructura compatible (ds, y), se entrena el modelo Prophet. Este proceso se realiza con la función prophet(), que ajusta automáticamente componentes de tendencia, estacionalidad y residuos a la serie temporal.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-1" tabindex="-1"></a><span class="co"># Crear y entrenar el modelo</span></span>
-<span id="cb44-2"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-2" tabindex="-1"></a>modelo_prophet <span class="ot">&lt;-</span> <span class="fu">prophet</span>(apple_data)</span>
-<span id="cb44-3"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-3" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-4" tabindex="-1"></a><span class="co"># Crear marco de fechas a futuro (12 meses)</span></span>
-<span id="cb44-5"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-5" tabindex="-1"></a>futuro <span class="ot">&lt;-</span> <span class="fu">make_future_dataframe</span>(modelo_prophet, <span class="at">periods =</span> <span class="dv">365</span>)</span>
-<span id="cb44-6"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-6" tabindex="-1"></a></span>
-<span id="cb44-7"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-7" tabindex="-1"></a><span class="co"># Generar predicción</span></span>
-<span id="cb44-8"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-8" tabindex="-1"></a>prediccion <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_prophet, futuro)</span>
-<span id="cb44-9"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-9" tabindex="-1"></a></span>
-<span id="cb44-10"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-10" tabindex="-1"></a><span class="co"># Visualizar resultado</span></span>
-<span id="cb44-11"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-11" tabindex="-1"></a><span class="fu">plot</span>(modelo_prophet, prediccion) <span class="sc">+</span></span>
-<span id="cb44-12"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-12" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Predicción del precio de AAPL con Prophet&quot;</span>) <span class="sc">+</span></span>
-<span id="cb44-13"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb44-13" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
-<p><strong>Explicación:</strong></p>
-<p>El modelo se entrena con los datos históricos y genera predicciones para un año adicional. La gráfica resultante muestra la serie observada, el valor ajustado y el pronóstico con bandas de incertidumbre.</p>
-<p>Descripción técnica:
-prophet(apple_data) ajusta el modelo con base en los precios diarios de AAPL, detectando automáticamente cambios de tendencia, días con mayor varianza y estacionalidades relevantes.</p>
-<p>make_future_dataframe() genera un calendario extendido de 365 días futuros, lo que permite simular el comportamiento de los precios para todo el año siguiente.</p>
-<p>predict() aplica el modelo ajustado y genera predicciones para cada fecha del nuevo marco temporal, devolviendo un dataframe con:</p>
-<p>yhat: valor predicho</p>
-<p>yhat_lower y yhat_upper: bandas de confianza (80% por defecto)</p>
-<p><strong>Análisis visual:</strong></p>
-<ul>
-<li>El gráfico muestra</li>
-</ul>
-<p><strong>La línea azul principal:</strong> valores predichos (yhat) de la acción AAPL.</p>
-<ul>
-<li>Sombra gris claro: intervalos de confianza para cada fecha futura.</li>
-</ul>
-<p>En el rango histórico (2020–2025), se observa un ajuste suave sobre la tendencia subyacente.</p>
-<p>En el rango futuro (2025–2026), el modelo proyecta una continuación de la tendencia positiva, aunque con mayor incertidumbre (bandas más anchas).</p>
-<p><strong>Interpretación:</strong>
-Prophet estima que, de mantenerse las condiciones actuales, el precio ajustado de AAPL seguiría una trayectoria creciente moderada durante el año siguiente.</p>
-<p>El uso de bandas de confianza es clave para la toma de decisiones gerenciales, ya que permite planear bajo distintos escenarios (optimista, base, pesimista).</p>
+<div id="explicación.-1" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Explicación.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#explicación.-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Normalización: Es necesaria para que la red neuronal aprenda más eficientemente, ya que evita que las diferencias de escala entre los valores influyan en el aprendizaje.</p>
+<p>embed(): Esta función permite estructurar los datos en formato supervisado: los valores pasados (lag) se usan para predecir el siguiente.</p>
+<p>División 70/30: Se utiliza el 70% de los datos para entrenamiento y el 30% restante para prueba.</p>
 </div>
-<div id="componentes-del-modelo-tendencia-estacionalidad." class="section level2 hasAnchor" number="6.7">
-<h2><span class="header-section-number">6.7</span> Componentes del modelo (tendencia, estacionalidad).<a href="regresión-en-series-de-tiempo-con-prophet..html#componentes-del-modelo-tendencia-estacionalidad." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Una vez entrenado el modelo y generadas las predicciones, es fundamental descomponer el comportamiento de la serie para entender los factores que influyen en las variaciones de la variable objetivo (precio ajustado de AAPL). Para esto, se emplea la función prophet_plot_components().</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="regresión-en-series-de-tiempo-con-prophet..html#cb45-1" tabindex="-1"></a><span class="fu">prophet_plot_components</span>(modelo_prophet, prediccion)</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<div id="implementación-del-modelo-elman." class="section level2 hasAnchor" number="7.7">
+<h2><span class="header-section-number">7.7</span> Implementación del modelo Elman.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#implementación-del-modelo-elman." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-1" tabindex="-1"></a><span class="fu">library</span>(RSNNS)</span>
+<span id="cb48-2"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-2" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-3" tabindex="-1"></a><span class="co"># Entrenar red Elman</span></span>
+<span id="cb48-4"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-4" tabindex="-1"></a>elman_model <span class="ot">&lt;-</span> <span class="fu">elman</span>(X_train, Y_train,</span>
+<span id="cb48-5"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-5" tabindex="-1"></a>                     <span class="at">size =</span> <span class="fu">c</span>(<span class="dv">10</span>),</span>
+<span id="cb48-6"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-6" tabindex="-1"></a>                     <span class="at">learnFuncParams =</span> <span class="fu">c</span>(<span class="fl">0.1</span>),</span>
+<span id="cb48-7"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-7" tabindex="-1"></a>                     <span class="at">maxit =</span> <span class="dv">500</span>,</span>
+<span id="cb48-8"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-8" tabindex="-1"></a>                     <span class="at">linOut =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb48-9"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-9" tabindex="-1"></a></span>
+<span id="cb48-10"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-10" tabindex="-1"></a><span class="co"># Predicciones</span></span>
+<span id="cb48-11"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-11" tabindex="-1"></a>pred_elman <span class="ot">&lt;-</span> <span class="fu">predict</span>(elman_model, X_test)</span>
+<span id="cb48-12"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-12" tabindex="-1"></a></span>
+<span id="cb48-13"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-13" tabindex="-1"></a><span class="co"># Desnormalizar</span></span>
+<span id="cb48-14"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-14" tabindex="-1"></a>denormalize <span class="ot">&lt;-</span> <span class="cf">function</span>(x, original) {</span>
+<span id="cb48-15"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-15" tabindex="-1"></a>  x <span class="sc">*</span> (<span class="fu">max</span>(original) <span class="sc">-</span> <span class="fu">min</span>(original)) <span class="sc">+</span> <span class="fu">min</span>(original)</span>
+<span id="cb48-16"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-16" tabindex="-1"></a>}</span>
+<span id="cb48-17"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-17" tabindex="-1"></a>pred_elman_real <span class="ot">&lt;-</span> <span class="fu">denormalize</span>(pred_elman, serie)</span>
+<span id="cb48-18"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-18" tabindex="-1"></a>Y_test_real <span class="ot">&lt;-</span> <span class="fu">denormalize</span>(Y_test, serie)</span>
+<span id="cb48-19"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-19" tabindex="-1"></a></span>
+<span id="cb48-20"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-20" tabindex="-1"></a><span class="co"># Métrica de error</span></span>
+<span id="cb48-21"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb48-21" tabindex="-1"></a>mse_elman <span class="ot">&lt;-</span> <span class="fu">mean</span>((Y_test_real <span class="sc">-</span> pred_elman_real)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 </div>
-<div id="explicación" class="section level2 hasAnchor" number="6.8">
-<h2><span class="header-section-number">6.8</span> Explicación:<a href="regresión-en-series-de-tiempo-con-prophet..html#explicación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Esta visualización permite examinar la descomposición automática del modelo:</p>
-<ul>
-<li><p>Tendencia estimada</p></li>
-<li><p>Estacionalidad semanal</p></li>
-<li><p>Estacionalidad anual (si aplica)
-Ideal para interpretar comportamientos estructurales de la serie.</p></li>
-<li><p>¿Qué muestra esta visualización?
-Esta función genera una serie de gráficos separados que ilustran:</p></li>
-<li><p>Tendencia (Trend)</p></li>
-<li><p>Muestra la evolución subyacente del precio de la acción a lo largo del tiempo.</p></li>
-<li><p>En este caso, se observa una tendencia positiva con algunos tramos de aceleración y desaceleración, típicos de un activo con comportamiento de largo plazo al alza.</p></li>
-<li><p>Estacionalidad anual (Yearly seasonality)</p></li>
-<li><p>Identifica patrones que se repiten en el mismo mes del año.</p></li>
-<li><p>Por ejemplo, si hay alzas sistemáticas en ciertos meses (e.g., octubre por eventos de tecnología o cierres fiscales), el modelo las representa suavemente.</p></li>
-<li><p>Estacionalidad semanal (Weekly seasonality)</p></li>
-<li><p>Refleja el comportamiento recurrente dentro de una semana. Aunque para activos bursátiles este patrón puede estar sesgado por la falta de datos los fines de semana, Prophet lo modela si encuentra suficiente evidencia.</p></li>
-</ul>
-<p>A menudo, los lunes o viernes pueden mostrar volatilidad distinta por decisiones de portafolio o eventos financieros.</p>
-<ul>
-<li><p>Interpretación general:</p></li>
-<li><p>El análisis de componentes es clave para validar si el modelo está capturando adecuadamente estructuras repetitivas en la serie.</p></li>
-<li><p>Permite diagnosticar si existe estacionalidad fuerte o si el comportamiento depende principalmente de la tendencia (como parece ser el caso de AAPL).</p></li>
-<li><p>También sirve para comunicar de manera transparente a los tomadores de decisión qué elementos están impulsando las predicciones del modelo.</p></li>
-</ul>
+<div id="gráfica-del-modelo-elma." class="section level2 hasAnchor" number="7.8">
+<h2><span class="header-section-number">7.8</span> Gráfica del modelo Elma.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#gráfica-del-modelo-elma." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb49-1" tabindex="-1"></a><span class="fu">plot</span>(Y_test_real, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb49-2"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb49-2" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Predicción con Red Elman&quot;</span>,</span>
+<span id="cb49-3"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb49-3" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Tiempo&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Precio real&quot;</span>)</span>
+<span id="cb49-4"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb49-4" tabindex="-1"></a><span class="fu">lines</span>(pred_elman_real, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb49-5"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb49-5" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Predicho&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 </div>
-<div id="comparación-con-modelos-anteriores-arima-vs-prophet." class="section level2 hasAnchor" number="6.9">
-<h2><span class="header-section-number">6.9</span> Comparación con modelos anteriores (ARIMA vs Prophet).<a href="regresión-en-series-de-tiempo-con-prophet..html#comparación-con-modelos-anteriores-arima-vs-prophet." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>En unidades previas se aplicaron modelos ARIMA a la serie de precios de AAPL. Si bien estos modelos demostraron buena capacidad de ajuste, requieren supuestos fuertes como la estacionariedad y no siempre capturan fácilmente efectos de estacionalidad múltiple o rupturas de tendencia.</p>
-<ul>
-<li><p>Prophet, en contraste:</p></li>
-<li><p>No exige preprocesamiento complejo (como diferenciación manual).</p></li>
-<li><p>Detecta automáticamente estacionalidad y tendencias no lineales.</p></li>
-<li><p>Permite extender fácilmente horizontes de predicción.</p></li>
-</ul>
-<p>Por tanto, Prophet se presenta como una excelente alternativa en contextos donde se necesita agilidad, flexibilidad y robustez ante cambios estructurales.</p>
+<div id="análisis." class="section level2 hasAnchor" number="7.9">
+<h2><span class="header-section-number">7.9</span> Análisis.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#análisis." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La red Elman logra seguir razonablemente la tendencia de la serie de prueba. ##Visualmente, se observan desviaciones pequeñas en las zonas de mayor variación, lo que es esperable debido a la complejidad del mercado financiero. El error cuadrático medio (MSE) proporciona una medida cuantitativa del rendimiento y en este caso se encuentra dentro de rangos aceptables para tareas de predicción financiera.</p>
 </div>
-<div id="conclusiones.-2" class="section level2 hasAnchor" number="6.10">
-<h2><span class="header-section-number">6.10</span> Conclusiones.<a href="regresión-en-series-de-tiempo-con-prophet..html#conclusiones.-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><p>El algoritmo Prophet se ajustó exitosamente a la serie de precios históricos de Apple Inc. desde 2020 hasta abril de 2025, entregando proyecciones con bandas de confianza para el año siguiente.</p></li>
-<li><p>La descomposición automática del modelo facilitó el análisis de la tendencia subyacente y patrones de estacionalidad semanal, sin necesidad de diferenciación previa ni supuestos de estacionariedad.</p></li>
-<li><p>Prophet demostró ser una alternativa más intuitiva y visual frente a modelos ARIMA, especialmente en contextos exploratorios o productivos.</p></li>
-<li><p>La aplicación de Prophet permite abordar el problema como una regresión de series de tiempo, con control explícito sobre fechas, eventos y feriados futuros.</p></li>
-</ul>
+<div id="implementación-del-modelo-jordan." class="section level2 hasAnchor" number="7.10">
+<h2><span class="header-section-number">7.10</span> Implementación del modelo Jordan.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#implementación-del-modelo-jordan." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb50-1" tabindex="-1"></a><span class="co"># Entrenar red Jordan</span></span>
+<span id="cb50-2"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb50-2" tabindex="-1"></a>jordan_model <span class="ot">&lt;-</span> <span class="fu">jordan</span>(X_train, Y_train,</span>
+<span id="cb50-3"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb50-3" tabindex="-1"></a>                       <span class="at">size =</span> <span class="fu">c</span>(<span class="dv">10</span>),</span>
+<span id="cb50-4"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb50-4" tabindex="-1"></a>                       <span class="at">learnFuncParams =</span> <span class="fu">c</span>(<span class="fl">0.1</span>),</span>
+<span id="cb50-5"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb50-5" tabindex="-1"></a>                       <span class="at">maxit =</span> <span class="dv">500</span>,</span>
+<span id="cb50-6"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb50-6" tabindex="-1"></a>                       <span class="at">linOut =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb50-7"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb50-7" tabindex="-1"></a></span>
+<span id="cb50-8"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb50-8" tabindex="-1"></a><span class="co"># Predicciones</span></span>
+<span id="cb50-9"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb50-9" tabindex="-1"></a>pred_jordan <span class="ot">&lt;-</span> <span class="fu">predict</span>(jordan_model, X_test)</span>
+<span id="cb50-10"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb50-10" tabindex="-1"></a>pred_jordan_real <span class="ot">&lt;-</span> <span class="fu">denormalize</span>(pred_jordan, serie)</span>
+<span id="cb50-11"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb50-11" tabindex="-1"></a></span>
+<span id="cb50-12"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb50-12" tabindex="-1"></a><span class="co"># Métrica de error</span></span>
+<span id="cb50-13"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb50-13" tabindex="-1"></a>mse_jordan <span class="ot">&lt;-</span> <span class="fu">mean</span>((Y_test_real <span class="sc">-</span> pred_jordan_real)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+</div>
+<div id="gráfica-del-modelo-jordan." class="section level2 hasAnchor" number="7.11">
+<h2><span class="header-section-number">7.11</span> Gráfica del modelo Jordan.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#gráfica-del-modelo-jordan." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb51-1" tabindex="-1"></a><span class="fu">plot</span>(Y_test_real, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb51-2"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb51-2" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Predicción con Red Jordan&quot;</span>,</span>
+<span id="cb51-3"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb51-3" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Tiempo&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Precio real&quot;</span>)</span>
+<span id="cb51-4"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb51-4" tabindex="-1"></a><span class="fu">lines</span>(pred_jordan_real, <span class="at">col =</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb51-5"><a href="predicción-con-redes-neuronales-recurrentes-rnn..html#cb51-5" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Real&quot;</span>, <span class="st">&quot;Predicho&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+</div>
+<div id="análisis.-1" class="section level2 hasAnchor" number="7.12">
+<h2><span class="header-section-number">7.12</span> Análisis.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#análisis.-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El modelo Jordan presenta un comportamiento similar al de Elman, con buena capacidad de seguimiento del comportamiento de la serie. Las diferencias entre ambos modelos suelen verse en la velocidad de adaptación a cambios bruscos. En este caso, el MSE también se encuentra en valores comparables, lo que indica un rendimiento competitivo.</p>
+</div>
+<div id="conclusiones.-3" class="section level2 hasAnchor" number="7.13">
+<h2><span class="header-section-number">7.13</span> Conclusiones.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#conclusiones.-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Las redes neuronales recurrentes son herramientas potentes para modelar series de tiempo, permitiendo capturar tanto patrones lineales como no lineales.</p>
+<p>Los modelos Elman y Jordan mostraron una buena capacidad de predicción sobre la serie AAPL.</p>
+<p>El uso de datos normalizados y una adecuada división entrenamiento/prueba contribuyen significativamente a la calidad del modelo.</p>
+<p>Las visualizaciones mostraron que ambas redes capturan bien la tendencia general, aunque con pequeñas diferencias en la respuesta ante picos.</p>
+<p>Este análisis cierra nuestro ciclo de aprendizaje en este curso, demostrando la utilidad de las RNN en series temporales reales de contexto financiero.</p>
+</div>
+<div id="importancia-de-las-series-de-tiempo." class="section level2 hasAnchor" number="7.14">
+<h2><span class="header-section-number">7.14</span> Importancia de las series de tiempo.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#importancia-de-las-series-de-tiempo." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A lo largo de las siete unidades desarrolladas en este proyecto, hemos explorado distintos enfoques para comprender, modelar y predecir series de tiempo. Desde la visualización inicial, pasando por el análisis de componentes como tendencia y estacionalidad, la verificación de estacionariedad, hasta la modelación con ARIMA, Prophet y redes neuronales, ha quedado en evidencia que las series de tiempo son herramientas fundamentales en el análisis predictivo. Su capacidad para capturar patrones temporales y su aplicabilidad a contextos reales —como mercados financieros, energía, salud o producción— las convierten en un recurso esencial en la toma de decisiones basada en datos.</p>
+<p>El dominio de técnicas de análisis de series de tiempo no solo permite entender el pasado, sino también anticipar el futuro, optimizar recursos y proponer estrategias fundamentadas. Este proyecto ha sido una muestra concreta de cómo, con datos reales y herramientas estadísticas y computacionales, se pueden generar modelos útiles para contextos complejos.</p>
+</div>
+<div id="recomendaciones-finales." class="section level2 hasAnchor" number="7.15">
+<h2><span class="header-section-number">7.15</span> Recomendaciones finales.<a href="predicción-con-redes-neuronales-recurrentes-rnn..html#recomendaciones-finales." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Continuar explorando modelos más avanzados de redes neuronales, como LSTM o GRU, especialmente útiles cuando existen secuencias largas y complejas.</p>
+<p>Incorporar variables exógenas o covariables si se desea mejorar la capacidad predictiva del modelo.</p>
+<p>Usar validación cruzada temporal para robustecer las conclusiones y evitar sobreajuste.</p>
+<p>Automatizar procesos de actualización del modelo si se trabajará en entornos productivos con datos que se actualizan periódicamente.</p>
+<p>Integrar visualizaciones interactivas para facilitar la comunicación de resultados a audiencias no técnicas.</p>
 </div>
 </div>
             </section>
@@ -517,8 +483,8 @@ Esta función genera una serie de gráficos separados que ilustran:</p></li>
           </div>
         </div>
       </div>
-<a href="modelado-avanzado-y-validación-de-supuestos-holt-winters..html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="predicción-con-redes-neuronales-recurrentes-rnn..html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="regresión-en-series-de-tiempo-con-prophet..html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bibliografía..html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

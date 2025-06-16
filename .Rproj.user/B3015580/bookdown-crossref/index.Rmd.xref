@@ -53,5 +53,21 @@ h2:componentes-del-modelo-tendencia-estacionalidad. Componentes del modelo (tend
 h2:explicación Explicación:
 h2:comparación-con-modelos-anteriores-arima-vs-prophet. Comparación con modelos anteriores (ARIMA vs Prophet).
 h2:conclusiones.-2 Conclusiones.
-h2:bibliografía. Bibliografía.
+h1:predicción-con-redes-neuronales-recurrentes-rnn. Predicción con Redes Neuronales Recurrentes (RNN).
+h2:introducción.-5 Introducción.
+h2:objetivo.-2 Objetivo.
+h2:carga-de-datos-desde-yahoo-finance. Carga de datos desde Yahoo Finance.
+h2:explicación. Explicación.
+h2:normalización-y-estructura-de-entrenamiento. Normalización y estructura de entrenamiento.
+h2:explicación.-1 Explicación.
+h2:implementación-del-modelo-elman. Implementación del modelo Elman.
+h2:gráfica-del-modelo-elma. Gráfica del modelo Elma.
+h2:análisis. Análisis.
+h2:implementación-del-modelo-jordan. Implementación del modelo Jordan.
+h2:gráfica-del-modelo-jordan. Gráfica del modelo Jordan.
+h2:análisis.-1 Análisis.
+h2:conclusiones.-3 Conclusiones.
+h2:importancia-de-las-series-de-tiempo. Importancia de las series de tiempo.
+h2:recomendaciones-finales. Recomendaciones finales.
+h1:bibliografía. Bibliografía.
 

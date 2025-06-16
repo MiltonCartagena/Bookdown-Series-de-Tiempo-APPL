@@ -1,7 +1,7 @@
 --- 
 title: "Bookdown Análisis Series de Tiempo AAPL"
 author: "Sofy Certuche, Milton Cartagena"
-date: "`r Sys.Date()`"
+date: "2025-06-15"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography:
@@ -16,12 +16,7 @@ github-repo: "rstudio/bookdown-demo"
 ---
 
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+
 
 # Introducción y Descripción de los Datos de AAPL.
 
@@ -60,16 +55,14 @@ Apple Inc. representa un caso de estudio ideal para la aplicación de técnicas 
 
 # Análisis Exploratorio y Comportamiento Temporal de AAPL.
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
-```
 
 ## Descarga y visualización inicial.
 
 Los datos se obtienen utilizando el paquete `tidyquant`, que permite extraer cotizaciones bursátiles directamente desde Yahoo Finance.
 
-```{r}
+
+``` r
 # Instalar y cargar paquetes
 if (!require("tidyquant")) install.packages("tidyquant")
 library(tidyquant)
@@ -81,12 +74,26 @@ apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30")
 head(apple_data)
 ```
 
+<div class="kable-table">
+
+|symbol |date       |    open|    high|     low|   close|    volume| adjusted|
+|:------|:----------|-------:|-------:|-------:|-------:|---------:|--------:|
+|AAPL   |2020-01-02 | 74.0600| 75.1500| 73.7975| 75.0875| 135480400| 72.62085|
+|AAPL   |2020-01-03 | 74.2875| 75.1450| 74.1250| 74.3575| 146322800| 71.91482|
+|AAPL   |2020-01-06 | 73.4475| 74.9900| 73.1875| 74.9500| 118387200| 72.48784|
+|AAPL   |2020-01-07 | 74.9600| 75.2250| 74.3700| 74.5975| 108872000| 72.14694|
+|AAPL   |2020-01-08 | 74.2900| 76.1100| 74.2900| 75.7975| 132079200| 73.30752|
+|AAPL   |2020-01-09 | 76.8100| 77.6075| 76.5500| 77.4075| 170108400| 74.86462|
+
+</div>
+
 ## Evolución del precio ajustado.
 
 A continuación, se muestra el comportamiento del precio de cierre ajustado de AAPL, incluyendo etiquetas para resaltar puntos de referencia en la serie.
 
 
-```{r}
+
+``` r
 # Librerias
 library(ggplot2)
 library(tidyquant)
@@ -112,15 +119,16 @@ ggplot(apple_data, aes(x = date, y = adjusted)) +
     y = "Precio (USD)"
   ) +
   theme_minimal(base_size = 12)
-
-
 ```
+
+<img src="book_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 ## Análisis con promedios móviles.
 
 Se calculan promedios móviles simples de 20 y 50 días para detectar tendencias a corto y mediano plazo.
 
-```{r}
+
+``` r
 # Librerias
 library(TTR)
 library(ggplot2)
@@ -160,15 +168,17 @@ ggplot(apple_data, aes(x = date)) +
     y = "Precio (USD)"
   ) +
   theme_minimal()
-
 ```
+
+<img src="book_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 ## Análisis de rezagos.
 
 Este gráfico representa la relación entre el valor actual y el precio de 7 días anteriores.
 
 
-```{r}
+
+``` r
 # Librerias
 library(dplyr)
 library(ggplot2)
@@ -207,14 +217,16 @@ ggplot(datos_lag7, aes(x = lag_7, y = adjusted)) +
     y = "Precio actual"
   ) +
   theme_minimal()
-
 ```
+
+<img src="book_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 ## Descomposición estacional.
 
 Se descompone la serie mensual para observar los componentes de tendencia, estacionalidad y ruido.
 
-```{r}
+
+``` r
 # Librerías
 
 library(tidyquant)
@@ -294,8 +306,9 @@ p4 <- ggplot(df, aes(x = Fecha, y = Residual)) +
 
 # Mostrar juntos
 gridExtra::grid.arrange(p1, p2, p3, p4, ncol = 1)
-
 ```
+
+<img src="book_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 # Preprocesamiento y Modelado Temporal de la Serie AAPL.
 
@@ -309,7 +322,8 @@ Analizar la estructura temporal del precio de las acciones de Apple Inc. mediant
 
 ## Preparación de los Datos
 
-```{r}
+
+``` r
 # Librerias
 
 library(tidyquant)
@@ -319,7 +333,8 @@ apple_data <- na.omit(apple_data)
 
 ## Gráfico inicial.
 
-```{r}
+
+``` r
 #Librerias
 
 library(ggplot2)
@@ -333,9 +348,12 @@ plot1 <- ggplot(apple_data, aes(x = date, y = adjusted)) +
 plot1
 ```
 
+<img src="book_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+
 ## Estacionariedad y diferenciación.
 
-```{r}
+
+``` r
 # Librerias
 
 library(tseries)
@@ -343,11 +361,30 @@ serie_ts <- ts(apple_data$adjusted, frequency = 365, start = c(2020, 1))
 adf.test(serie_ts)
 ```
 
+```
+## 
+## 	Augmented Dickey-Fuller Test
+## 
+## data:  serie_ts
+## Dickey-Fuller = -3.0277, Lag order = 11, p-value = 0.1433
+## alternative hypothesis: stationary
+```
+
 Interpretación Según el valor-p de la prueba ADF, si p > 0.05, la serie no es estacionaria. Por tanto, se requiere una diferenciación:
 
-```{r}
+
+``` r
 diff_serie <- diff(serie_ts)
 adf.test(diff_serie)
+```
+
+```
+## 
+## 	Augmented Dickey-Fuller Test
+## 
+## data:  diff_serie
+## Dickey-Fuller = -11.094, Lag order = 11, p-value = 0.01
+## alternative hypothesis: stationary
 ```
 
 Resultado esperado: p < 0.05, indicando que la serie diferenciada es estacionaria.
@@ -355,29 +392,82 @@ Resultado esperado: p < 0.05, indicando que la serie diferenciada es estacionari
 ## Descomposición de la serie
 
 
-```{r}
+
+``` r
 ts_monthly <- ts(tapply(apple_data$adjusted, format(apple_data$date, "%Y-%m"), mean), frequency = 12, start = c(2020,1))
 descomp <- decompose(ts_monthly)
 plot(descomp)
 ```
 
+<img src="book_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+
 Justificación: La descomposición permite observar la tendencia, estacionalidad y componente aleatorio, facilitando el entendimiento de la serie antes de modelar.
 
 ## Modelo ARIMA y validación.
 
-```{r}
+
+``` r
 library(forecast)
 modelo <- auto.arima(diff_serie)
 summary(modelo)
 ```
 
+```
+## Series: diff_serie 
+## ARIMA(0,0,0) with zero mean 
+## 
+## sigma^2 = 8.793:  log likelihood = -3350.42
+## AIC=6702.83   AICc=6702.83   BIC=6708.03
+## 
+## Training set error measures:
+##                     ME    RMSE     MAE MPE MAPE     MASE       ACF1
+## Training set 0.1034499 2.96531 2.10178 100  100 0.697125 -0.0100261
+```
+
 ## Validación de residuos.
 
-```{r}
+
+``` r
 residuos <- residuals(modelo)
 t.test(residuos)
+```
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  residuos
+## t = 1.2759, df = 1336, p-value = 0.2022
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -0.0556039  0.2625038
+## sample estimates:
+## mean of x 
+## 0.1034499
+```
+
+``` r
 Box.test(residuos, lag = 12, type = "Ljung-Box")
+```
+
+```
+## 
+## 	Box-Ljung test
+## 
+## data:  residuos
+## X-squared = 17.725, df = 12, p-value = 0.1243
+```
+
+``` r
 shapiro.test(residuos)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  residuos
+## W = 0.9394, p-value < 2.2e-16
 ```
 
 ## Conclusión.
@@ -390,18 +480,24 @@ shapiro.test(residuos)
 
 ## Predicción.
 
-```{r}
+
+``` r
 forecast_values <- forecast(modelo, h = 6)
 plot(forecast_values)
 ```
 
+<img src="book_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+
 ## Punto de cambio.
 
-```{r}
+
+``` r
 library(changepoint)
 cambio <- cpt.mean(diff_serie)
 plot(cambio)
 ```
+
+<img src="book_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 **Interpretación:** Se identifica visualmente un punto de quiebre estructural relevante.
 
@@ -429,69 +525,23 @@ El análisis de series temporales permite modelar fenómenos con componentes sis
 
 ## Preparación de la serie mensual.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyquant)
-library(dplyr)
-library(ggplot2)
-library(forecast)
-
-# Descargar y preparar datos mensuales
-apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30") %>%
-  na.omit() %>%
-  mutate(month = format(date, "%Y-%m")) %>%
-  group_by(month) %>%
-  summarise(adjusted_mean = mean(adjusted)) %>%
-  ungroup()
-
-# Crear objeto ts
-apple_ts <- ts(apple_data$adjusted_mean, start = c(2020, 1), frequency = 12)
-
-# Visualización
-autoplot(apple_ts) +
-  labs(title = "Serie mensual ajustada - AAPL", x = "Año", y = "Precio (USD)") +
-  theme_minimal()
-```
+<img src="book_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 ## Aplicación del modelo Holt-Winters.
 
-```{r, echo=FALSE}
-# Aplicar modelo Holt-Winters (suavizamiento exponencial triple aditivo)
-modelo_hw <- HoltWinters(apple_ts, seasonal = "additive")
-
-# Pronóstico a 6 meses
-forecast_hw <- forecast(modelo_hw, h = 6)
-
-# Graficar resultados con pronóstico
-autoplot(forecast_hw) +
-  labs(title = "Pronóstico con Holt-Winters (Aditivo)",
-       x = "Año", y = "Precio (USD)") +
-  theme_minimal()
-```
+<img src="book_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 ## Evaluación del modelo.
 
-```{r, echo=FALSE}
-# Métricas de precisión
-accuracy(forecast_hw)
+
+```
+##                     ME     RMSE      MAE        MPE     MAPE      MASE       ACF1
+## Training set -1.598109 11.96508 8.908272 -0.9404719 5.211654 0.2644498 0.03483045
 ```
 
 ## Comparación con promedio móvil y suavizado simple.
 
-```{r, echo=FALSE}
-# Promedio móvil
-ma_12 <- ma(apple_ts, order = 12)
-
-# Suavizado exponencial simple
-ses <- ses(apple_ts, h = 6)
-
-# Gráfica comparativa
-autoplot(apple_ts, series = "Observado") +
-  autolayer(ma_12, series = "Promedio móvil", color = "blue") +
-  autolayer(ses$mean, series = "SES", color = "green") +
-  autolayer(forecast_hw$mean, series = "Holt-Winters", color = "red") +
-  labs(title = "Comparación de métodos de suavizamiento", y = "Precio") +
-  theme_minimal()
-```
+<img src="book_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 ## Conclusiones.
 
@@ -512,7 +562,8 @@ Aplicaremos la metodología Box-Jenkins para identificar modelos autoregresivos 
 
 ## Cargar datos y preparar la serie.
 
-```{r, message=FALSE, warning=FALSE}
+
+``` r
 library(tidyquant)
 library(forecast)
 library(tseries)
@@ -535,64 +586,155 @@ autoplot(apple_ts, colour = "darkblue") +
   theme_minimal()
 ```
 
+<img src="book_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+
 **Análisis:** Se observa la evolución mensual de los precios ajustados de AAPL desde 2020. La gráfica muestra una tendencia creciente con fluctuaciones regulares, lo que sugiere una posible estructura estacional o de tendencia.
 
 ## Prueba de estacionariedad (ADF).
 
-```{r}
+
+``` r
 adf.test(apple_ts)
+```
+
+```
+## 
+## 	Augmented Dickey-Fuller Test
+## 
+## data:  apple_ts
+## Dickey-Fuller = -2.9868, Lag order = 3, p-value = 0.1751
+## alternative hypothesis: stationary
 ```
 
 **Resultado esperado:** Si el valor-p > 0.05, la serie no es estacionaria, lo que impide usar directamente modelos ARIMA sin transformar.
 
 ## Diferenciación si es necesario.
 
-```{r}
+
+``` r
 apple_ts_diff <- diff(apple_ts)
 autoplot(apple_ts_diff, colour = "tomato") +
   labs(title = "Serie diferenciada - AAPL", x = "Año", y = "Diferencia del precio") +
   theme_minimal()
+```
 
+<img src="book_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+
+``` r
 # Verificar estacionariedad de nuevo
 adf.test(apple_ts_diff)
+```
+
+```
+## 
+## 	Augmented Dickey-Fuller Test
+## 
+## data:  apple_ts_diff
+## Dickey-Fuller = -3.9959, Lag order = 3, p-value = 0.01563
+## alternative hypothesis: stationary
 ```
 
 **Análisis:** Al diferenciar la serie una vez, se estabiliza la media y se elimina la tendencia. El valor-p del ADF test posterior suele ser < 0.05, indicando estacionariedad.
 
 ## ACF y PACF.
 
-```{r}
+
+``` r
 acf(apple_ts_diff, main = "ACF - Serie Diferenciada", col = "darkred")
+```
+
+<img src="book_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+
+``` r
 pacf(apple_ts_diff, main = "PACF - Serie Diferenciada", col = "darkgreen")
 ```
+
+<img src="book_files/figure-html/unnamed-chunk-23-2.png" width="672" />
 
 **Interpretación:** La ACF muestra correlación en rezagos, útil para determinar el orden MA. La PACF ayuda a identificar la cantidad de componentes AR. Estas gráficas apoyan la configuración del modelo.
 
 ## Ajuste del modelo ARIMA.
 
-```{r}
+
+``` r
 modelo_arima <- auto.arima(apple_ts)
 summary(modelo_arima)
+```
+
+```
+## Series: apple_ts 
+## ARIMA(1,1,0)(0,0,1)[12] 
+## 
+## Coefficients:
+##          ar1    sma1
+##       0.1968  0.2845
+## s.e.  0.1272  0.1426
+## 
+## sigma^2 = 97.15:  log likelihood = -233.05
+## AIC=472.11   AICc=472.52   BIC=478.54
+## 
+## Training set error measures:
+##                    ME     RMSE      MAE       MPE     MAPE      MASE        ACF1
+## Training set 1.227539 9.622662 7.866658 0.8277076 5.209372 0.2335286 -0.01327609
 ```
 
 **Análisis:** auto.arima() selecciona automáticamente el modelo óptimo basado en AIC/BIC. Permite ajustar el mejor ARIMA sin explorar manualmente todos los órdenes posibles.
 
 ## Validación de supuestos.
 
-```{r}
+
+``` r
 residuos <- modelo_arima$residuals
 
 # 1. Media cero
 t.test(residuos)
+```
 
+```
+## 
+## 	One Sample t-test
+## 
+## data:  residuos
+## t = 1.0209, df = 63, p-value = 0.3112
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  -1.175338  3.630417
+## sample estimates:
+## mean of x 
+##  1.227539
+```
+
+``` r
 # 2. Independencia
 Box.test(residuos, lag = 12, type = "Ljung-Box")
+```
 
+```
+## 
+## 	Box-Ljung test
+## 
+## data:  residuos
+## X-squared = 12.162, df = 12, p-value = 0.4327
+```
+
+``` r
 # 3. Normalidad visual
 qqnorm(residuos, col = "blue"); qqline(residuos, col = "darkred")
+```
 
+<img src="book_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+
+``` r
 # 4. Normalidad estadística
 shapiro.test(residuos)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  residuos
+## W = 0.97643, p-value = 0.2584
 ```
 
 + T-test: Verifica si la media de los residuos es 0.
@@ -603,13 +745,16 @@ shapiro.test(residuos)
 
 ## Predicción.
 
-```{r}
+
+``` r
 forecast_arima <- forecast(modelo_arima, h = 12)
 
 autoplot(forecast_arima, colour = "forestgreen") +
   labs(title = "Predicción del precio ajustado de AAPL (12 meses)", x = "Año", y = "Precio estimado") +
   theme_minimal()
 ```
+
+<img src="book_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 **Análisis:** Se pronostican los próximos 12 meses. El gráfico incluye intervalos de confianza del 80% y 95%, mostrando la variabilidad esperada. Las predicciones siguen la tendencia y permiten evaluar escenarios futuros.
 
@@ -633,7 +778,8 @@ Prophet es un algoritmo de código abierto desarrollado por Facebook para el an�
 
 ## Script: Preparación de los datos.
 
-```{r}
+
+``` r
 # Instalar y cargar paquetes
 if (!require("tidyquant")) install.packages("tidyquant")
 library(tidyquant)
@@ -645,8 +791,22 @@ apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30")
 head(apple_data)
 ```
 
+<div class="kable-table">
 
-```{r}
+|symbol |date       |    open|    high|     low|   close|    volume| adjusted|
+|:------|:----------|-------:|-------:|-------:|-------:|---------:|--------:|
+|AAPL   |2020-01-02 | 74.0600| 75.1500| 73.7975| 75.0875| 135480400| 72.62082|
+|AAPL   |2020-01-03 | 74.2875| 75.1450| 74.1250| 74.3575| 146322800| 71.91483|
+|AAPL   |2020-01-06 | 73.4475| 74.9900| 73.1875| 74.9500| 118387200| 72.48785|
+|AAPL   |2020-01-07 | 74.9600| 75.2250| 74.3700| 74.5975| 108872000| 72.14695|
+|AAPL   |2020-01-08 | 74.2900| 76.1100| 74.2900| 75.7975| 132079200| 73.30752|
+|AAPL   |2020-01-09 | 76.8100| 77.6075| 76.5500| 77.4075| 170108400| 74.86463|
+
+</div>
+
+
+
+``` r
 # Instalar si no está Prophet
 #if (!require("prophet")) install.packages("prophet")
 library(prophet)
@@ -660,8 +820,20 @@ apple_data <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30") %>%
 
 # Ver estructura
 head(apple_data)
-
 ```
+
+<div class="kable-table">
+
+|ds         |        y|
+|:----------|--------:|
+|2020-01-02 | 72.62084|
+|2020-01-03 | 71.91483|
+|2020-01-06 | 72.48785|
+|2020-01-07 | 72.14693|
+|2020-01-08 | 73.30750|
+|2020-01-09 | 74.86462|
+
+</div>
 
 ## Datos.
 
@@ -671,7 +843,8 @@ Se descargan los datos históricos de precios ajustados de Apple Inc. y se renom
 
 Una vez preparados los datos con estructura compatible (ds, y), se entrena el modelo Prophet. Este proceso se realiza con la función prophet(), que ajusta automáticamente componentes de tendencia, estacionalidad y residuos a la serie temporal.
 
-```{r}
+
+``` r
 # Crear y entrenar el modelo
 modelo_prophet <- prophet(apple_data)
 
@@ -686,6 +859,8 @@ plot(modelo_prophet, prediccion) +
   ggtitle("Predicción del precio de AAPL con Prophet") +
   theme_minimal()
 ```
+
+<img src="book_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 **Explicación:**
 
@@ -723,9 +898,12 @@ El uso de bandas de confianza es clave para la toma de decisiones gerenciales, y
 
 Una vez entrenado el modelo y generadas las predicciones, es fundamental descomponer el comportamiento de la serie para entender los factores que influyen en las variaciones de la variable objetivo (precio ajustado de AAPL). Para esto, se emplea la función prophet_plot_components().
 
-```{r}
+
+``` r
 prophet_plot_components(modelo_prophet, prediccion)
 ```
+
+<img src="book_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
 ## Explicación:
 Esta visualización permite examinar la descomposición automática del modelo:
@@ -806,13 +984,27 @@ Este ejercicio representa el último avance en el proceso de modelado de series 
 Predecir valores futuros de la serie de precios de cierre de la acción de Apple Inc. (AAPL) usando modelos de redes neuronales recurrentes (Elman y Jordan), comparando su rendimiento y analizando su capacidad de modelado no lineal.
 
 ## Carga de datos desde Yahoo Finance.
-```{r}
+
+``` r
 # Descargar datos históricos desde Yahoo Finance
 datos_appl <- tq_get("AAPL", from = "2020-01-01", to = "2025-04-30")
 
 # Vista previa
 head(datos_appl)
 ```
+
+<div class="kable-table">
+
+|symbol |date       |    open|    high|     low|   close|    volume| adjusted|
+|:------|:----------|-------:|-------:|-------:|-------:|---------:|--------:|
+|AAPL   |2020-01-02 | 74.0600| 75.1500| 73.7975| 75.0875| 135480400| 72.62083|
+|AAPL   |2020-01-03 | 74.2875| 75.1450| 74.1250| 74.3575| 146322800| 71.91481|
+|AAPL   |2020-01-06 | 73.4475| 74.9900| 73.1875| 74.9500| 118387200| 72.48788|
+|AAPL   |2020-01-07 | 74.9600| 75.2250| 74.3700| 74.5975| 108872000| 72.14693|
+|AAPL   |2020-01-08 | 74.2900| 76.1100| 74.2900| 75.7975| 132079200| 73.30752|
+|AAPL   |2020-01-09 | 76.8100| 77.6075| 76.5500| 77.4075| 170108400| 74.86462|
+
+</div>
 
 ## Explicación.
 
@@ -824,7 +1016,8 @@ head(): Permite visualizar las primeras filas del dataset para asegurar que se h
 
 ## Normalización y estructura de entrenamiento.
 
-```{r}
+
+``` r
 # Seleccionar columna de cierre y normalizar
 serie <- datos_appl$close
 normalize <- function(x) {(x - min(x)) / (max(x) - min(x))}
@@ -853,7 +1046,8 @@ División 70/30: Se utiliza el 70% de los datos para entrenamiento y el 30% rest
 
 ## Implementación del modelo Elman.
 
-```{r}
+
+``` r
 library(RSNNS)
 
 # Entrenar red Elman
@@ -879,7 +1073,8 @@ mse_elman <- mean((Y_test_real - pred_elman_real)^2)
 
 ## Gráfica del modelo Elma.
 
-```{r}
+
+``` r
 plot(Y_test_real, type = "l", col = "blue", lwd = 2,
      main = "Predicción con Red Elman",
      xlab = "Tiempo", ylab = "Precio real")
@@ -887,13 +1082,16 @@ lines(pred_elman_real, col = "red", lwd = 2)
 legend("topleft", legend = c("Real", "Predicho"), col = c("blue", "red"), lty = 1)
 ```
 
+<img src="book_files/figure-html/unnamed-chunk-34-1.png" width="672" />
+
 ## Análisis.
 
 La red Elman logra seguir razonablemente la tendencia de la serie de prueba. ##Visualmente, se observan desviaciones pequeñas en las zonas de mayor variación, lo que es esperable debido a la complejidad del mercado financiero. El error cuadrático medio (MSE) proporciona una medida cuantitativa del rendimiento y en este caso se encuentra dentro de rangos aceptables para tareas de predicción financiera.
 
 ## Implementación del modelo Jordan.
 
-```{r}
+
+``` r
 # Entrenar red Jordan
 jordan_model <- jordan(X_train, Y_train,
                        size = c(10),
@@ -911,13 +1109,16 @@ mse_jordan <- mean((Y_test_real - pred_jordan_real)^2)
 
 ## Gráfica del modelo Jordan.
 
-```{r}
+
+``` r
 plot(Y_test_real, type = "l", col = "blue", lwd = 2,
      main = "Predicción con Red Jordan",
      xlab = "Tiempo", ylab = "Precio real")
 lines(pred_jordan_real, col = "darkgreen", lwd = 2)
 legend("topleft", legend = c("Real", "Predicho"), col = c("blue", "darkgreen"), lty = 1)
 ```
+
+<img src="book_files/figure-html/unnamed-chunk-36-1.png" width="672" />
 
 ## Análisis.
 
@@ -992,3 +1193,6 @@ Texto clásico sobre redes neuronales, con capítulos dedicados a RNN y una expl
 - **Schmidhuber, J**. (2015). Deep learning in neural networks: An overview. Neural Networks, 61, 85–117. https://doi.org/10.1016/j.neunet.2014.09.003
 
 Aunque enfocado en deep learning moderno, incluye una revisión de las redes recurrentes clásicas como Elman y Jordan en su evolución histórica.
+
+<!--chapter:end:index.Rmd-->
+

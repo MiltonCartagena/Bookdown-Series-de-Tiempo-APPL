@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capitulo3 Preprocesamiento y Modelado Temporal de la Serie AAPL. | Bookdown Análisis Series de Tiempo AAPL</title>
+  <title>Capitulo8 Bibliografía. | Bookdown Análisis Series de Tiempo AAPL</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 set in the _output.yml file.
 The HTML output format for this example is bookdown::gitbook,</p>" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capitulo3 Preprocesamiento y Modelado Temporal de la Serie AAPL. | Bookdown Análisis Series de Tiempo AAPL" />
+  <meta property="og:title" content="Capitulo8 Bibliografía. | Bookdown Análisis Series de Tiempo AAPL" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
@@ -19,7 +19,7 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capitulo3 Preprocesamiento y Modelado Temporal de la Serie AAPL. | Bookdown Análisis Series de Tiempo AAPL" />
+  <meta name="twitter:title" content="Capitulo8 Bibliografía. | Bookdown Análisis Series de Tiempo AAPL" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 set in the _output.yml file.
@@ -36,8 +36,8 @@ The HTML output format for this example is bookdown::gitbook,</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html"/>
-<link rel="next" href="suavizamiento-y-pronóstico-con-holt-winters..html"/>
+<link rel="prev" href="predicción-con-redes-neuronales-recurrentes-rnn..html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -252,148 +252,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="preprocesamiento-y-modelado-temporal-de-la-serie-aapl." class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Capitulo3</span> Preprocesamiento y Modelado Temporal de la Serie AAPL.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#preprocesamiento-y-modelado-temporal-de-la-serie-aapl." class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="introducción.-1" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Introducción.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#introducción.-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>El presente análisis explora la serie temporal del precio de cierre ajustado de las acciones de Apple Inc. (AAPL), obtenida de Yahoo Finance entre 2020 y abril de 2025. Se aplicarán técnicas de preprocesamiento, visualización, descomposición y modelado de series temporales con el fin de identificar patrones relevantes como tendencia, estacionalidad, rezagos y posibles puntos de cambio estructural.</p>
-</div>
-<div id="objetivo." class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Objetivo.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#objetivo." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Analizar la estructura temporal del precio de las acciones de Apple Inc. mediante técnicas de descomposición, prueba de estacionariedad, diferenciación e identificación de modelo ARIMA. El análisis incluirá visualizaciones con etiquetas para resaltar comportamientos clave.</p>
-</div>
-<div id="preparación-de-los-datos" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Preparación de los Datos<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#preparación-de-los-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb6-1" tabindex="-1"></a><span class="co"># Librerias</span></span>
-<span id="cb6-2"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb6-2" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb6-3" tabindex="-1"></a><span class="fu">library</span>(tidyquant)</span>
-<span id="cb6-4"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb6-4" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">tq_get</span>(<span class="st">&quot;AAPL&quot;</span>, <span class="at">from =</span> <span class="st">&quot;2020-01-01&quot;</span>, <span class="at">to =</span> <span class="st">&quot;2025-04-30&quot;</span>)</span>
-<span id="cb6-5"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb6-5" tabindex="-1"></a>apple_data <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(apple_data)</span></code></pre></div>
-</div>
-<div id="gráfico-inicial." class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> Gráfico inicial.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#gráfico-inicial." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb7-1" tabindex="-1"></a><span class="co">#Librerias</span></span>
-<span id="cb7-2"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb7-2" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb7-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb7-4"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb7-4" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(apple_data, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> adjusted)) <span class="sc">+</span></span>
-<span id="cb7-5"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb7-5" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;#2C3E50&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-6"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb7-6" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> apple_data[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(apple_data), <span class="at">by =</span> <span class="dv">250</span>), ],</span>
-<span id="cb7-7"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb7-7" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">&quot;$&quot;</span>, <span class="fu">round</span>(adjusted, <span class="dv">1</span>))),</span>
-<span id="cb7-8"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb7-8" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">&quot;gray30&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb7-9"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb7-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Precio de cierre ajustado - Apple Inc.&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Fecha&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio (USD)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-10"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb7-10" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb7-11"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb7-11" tabindex="-1"></a>plot1</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-</div>
-<div id="estacionariedad-y-diferenciación." class="section level2 hasAnchor" number="3.5">
-<h2><span class="header-section-number">3.5</span> Estacionariedad y diferenciación.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#estacionariedad-y-diferenciación." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb8-1" tabindex="-1"></a><span class="co"># Librerias</span></span>
-<span id="cb8-2"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb8-2" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb8-3" tabindex="-1"></a><span class="fu">library</span>(tseries)</span>
-<span id="cb8-4"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb8-4" tabindex="-1"></a>serie_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(apple_data<span class="sc">$</span>adjusted, <span class="at">frequency =</span> <span class="dv">365</span>, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2020</span>, <span class="dv">1</span>))</span>
-<span id="cb8-5"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb8-5" tabindex="-1"></a><span class="fu">adf.test</span>(serie_ts)</span></code></pre></div>
-<pre><code>## 
-##  Augmented Dickey-Fuller Test
-## 
-## data:  serie_ts
-## Dickey-Fuller = -3.0277, Lag order = 11, p-value = 0.1433
-## alternative hypothesis: stationary</code></pre>
-<p>Interpretación Según el valor-p de la prueba ADF, si p &gt; 0.05, la serie no es estacionaria. Por tanto, se requiere una diferenciación:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb10-1" tabindex="-1"></a>diff_serie <span class="ot">&lt;-</span> <span class="fu">diff</span>(serie_ts)</span>
-<span id="cb10-2"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb10-2" tabindex="-1"></a><span class="fu">adf.test</span>(diff_serie)</span></code></pre></div>
-<pre><code>## 
-##  Augmented Dickey-Fuller Test
-## 
-## data:  diff_serie
-## Dickey-Fuller = -11.094, Lag order = 11, p-value = 0.01
-## alternative hypothesis: stationary</code></pre>
-<p>Resultado esperado: p &lt; 0.05, indicando que la serie diferenciada es estacionaria.</p>
-</div>
-<div id="descomposición-de-la-serie" class="section level2 hasAnchor" number="3.6">
-<h2><span class="header-section-number">3.6</span> Descomposición de la serie<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#descomposición-de-la-serie" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb12-1" tabindex="-1"></a>ts_monthly <span class="ot">&lt;-</span> <span class="fu">ts</span>(<span class="fu">tapply</span>(apple_data<span class="sc">$</span>adjusted, <span class="fu">format</span>(apple_data<span class="sc">$</span>date, <span class="st">&quot;%Y-%m&quot;</span>), mean), <span class="at">frequency =</span> <span class="dv">12</span>, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2020</span>,<span class="dv">1</span>))</span>
-<span id="cb12-2"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb12-2" tabindex="-1"></a>descomp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(ts_monthly)</span>
-<span id="cb12-3"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb12-3" tabindex="-1"></a><span class="fu">plot</span>(descomp)</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<p>Justificación: La descomposición permite observar la tendencia, estacionalidad y componente aleatorio, facilitando el entendimiento de la serie antes de modelar.</p>
-</div>
-<div id="modelo-arima-y-validación." class="section level2 hasAnchor" number="3.7">
-<h2><span class="header-section-number">3.7</span> Modelo ARIMA y validación.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#modelo-arima-y-validación." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb13-1" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb13-2"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb13-2" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(diff_serie)</span>
-<span id="cb13-3"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb13-3" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
-<pre><code>## Series: diff_serie 
-## ARIMA(0,0,0) with zero mean 
-## 
-## sigma^2 = 8.793:  log likelihood = -3350.42
-## AIC=6702.83   AICc=6702.83   BIC=6708.03
-## 
-## Training set error measures:
-##                     ME    RMSE      MAE MPE MAPE      MASE        ACF1
-## Training set 0.1034499 2.96531 2.101781 100  100 0.6971252 -0.01002604</code></pre>
-</div>
-<div id="validación-de-residuos." class="section level2 hasAnchor" number="3.8">
-<h2><span class="header-section-number">3.8</span> Validación de residuos.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#validación-de-residuos." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb15-1" tabindex="-1"></a>residuos <span class="ot">&lt;-</span> <span class="fu">residuals</span>(modelo)</span>
-<span id="cb15-2"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb15-2" tabindex="-1"></a><span class="fu">t.test</span>(residuos)</span></code></pre></div>
-<pre><code>## 
-##  One Sample t-test
-## 
-## data:  residuos
-## t = 1.2759, df = 1336, p-value = 0.2022
-## alternative hypothesis: true mean is not equal to 0
-## 95 percent confidence interval:
-##  -0.05560388  0.26250375
-## sample estimates:
-## mean of x 
-## 0.1034499</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb17-1" tabindex="-1"></a><span class="fu">Box.test</span>(residuos, <span class="at">lag =</span> <span class="dv">12</span>, <span class="at">type =</span> <span class="st">&quot;Ljung-Box&quot;</span>)</span></code></pre></div>
-<pre><code>## 
-##  Box-Ljung test
-## 
-## data:  residuos
-## X-squared = 17.725, df = 12, p-value = 0.1243</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb19-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(residuos)</span></code></pre></div>
-<pre><code>## 
-##  Shapiro-Wilk normality test
-## 
-## data:  residuos
-## W = 0.9394, p-value &lt; 2.2e-16</code></pre>
-</div>
-<div id="conclusión." class="section level2 hasAnchor" number="3.9">
-<h2><span class="header-section-number">3.9</span> Conclusión.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#conclusión." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bibliografía." class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Capitulo8</span> Bibliografía.<a href="bibliografía..html#bibliografía." class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ul>
-<li><p>Si p &gt; 0.05 en t-test: la media de residuos es cero.</p></li>
-<li><p>Si p &gt; 0.05 en Box-test: residuos no están autocorrelacionados.</p></li>
-<li><p>Si p &gt; 0.05 en Shapiro-Wilk: residuos con distribución normal (deseable pero no obligatorio).</p></li>
+<li><p><strong>Yahoo Finance.</strong> (2025). <em>Apple Inc. (AAPL) Stock Price &amp; Historical Data</em>. Recuperado de <a href="https://finance.yahoo.com/quote/AAPL">https://finance.yahoo.com/quote/AAPL</a></p></li>
+<li><p><strong>Dancho, M. &amp; Vaughan, D.</strong> (2021). <em>tidyquant: Tidy Quantitative Financial Analysis</em>. R package version 1.0.4. Recuperado de <a href="https://business-science.github.io/tidyquant/">https://business-science.github.io/tidyquant/</a></p></li>
+<li><p><strong>Hyndman, R. J. &amp; Athanasopoulos, G.</strong> (2021). <em>Forecasting: Principles and Practice</em> (3ra ed.). OTexts. Disponible en <a href="https://otexts.com/fpp3/">https://otexts.com/fpp3/</a></p></li>
+<li><p><strong>Cowpertwait, P. &amp; Metcalfe, A.</strong> (2009). <em>Introductory Time Series with R</em>. Springer. DOI: <a href="https://doi.org/10.1007/978-0-387-88698-5">10.1007/978-0-387-88698-5</a></p></li>
+<li><p><strong>Shumway, R. H., &amp; Stoffer, D. S.</strong> (2017). <em>Time Series Analysis and Its Applications: With R Examples</em> (4ta ed.). Springer.</p></li>
+<li><p><strong>R Core Team.</strong> (2023). <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. Disponible en <a href="https://www.R-project.org/">https://www.R-project.org/</a></p></li>
+<li><p><strong>Analytics Vidhya.</strong> (2021). <em>Holt-Winters Method for Time Series Analysis</em>. Recuperado de: <a href="https://www.analyticsvidhya.com/blog/2021/08/holt-winters-method-for-time-series-analysis/">https://www.analyticsvidhya.com/blog/2021/08/holt-winters-method-for-time-series-analysis/</a></p></li>
+<li><p><strong>R Documentation.</strong> <em>HoltWinters() y forecast packages</em>. Recuperado de <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters">https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/HoltWinters</a></p></li>
+<li><p><strong>Wickham, H., &amp; Grolemund, G.</strong> (2016). <em>R for Data Science</em>. O’Reilly Media.</p></li>
+<li><p><strong>aylor, S. J. &amp; Letham, B.</strong> (2018). Forecasting at scale. The American Statistician, 72(1), 37–45. DOI: <a href="https://doi.org/10.1080/00031305.2017.1380080" class="uri">https://doi.org/10.1080/00031305.2017.1380080</a></p></li>
+<li><p>Facebook Prophet Official Documentation: <a href="https://facebook.github.io/prophet/" class="uri">https://facebook.github.io/prophet/</a></p></li>
+<li><p><strong>Elman, J. L</strong> (1990). Finding structure in time. Cognitive Science, 14(2), 179–211. <a href="https://doi.org/10.1207/s15516709cog1402_1" class="uri">https://doi.org/10.1207/s15516709cog1402_1</a></p></li>
 </ul>
-</div>
-<div id="predicción." class="section level2 hasAnchor" number="3.10">
-<h2><span class="header-section-number">3.10</span> Predicción.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#predicción." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb21-1" tabindex="-1"></a>forecast_values <span class="ot">&lt;-</span> <span class="fu">forecast</span>(modelo, <span class="at">h =</span> <span class="dv">6</span>)</span>
-<span id="cb21-2"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb21-2" tabindex="-1"></a><span class="fu">plot</span>(forecast_values)</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
-</div>
-<div id="punto-de-cambio." class="section level2 hasAnchor" number="3.11">
-<h2><span class="header-section-number">3.11</span> Punto de cambio.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#punto-de-cambio." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb22-1" tabindex="-1"></a><span class="fu">library</span>(changepoint)</span>
-<span id="cb22-2"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb22-2" tabindex="-1"></a>cambio <span class="ot">&lt;-</span> <span class="fu">cpt.mean</span>(diff_serie)</span>
-<span id="cb22-3"><a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#cb22-3" tabindex="-1"></a><span class="fu">plot</span>(cambio)</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<p><strong>Interpretación:</strong> Se identifica visualmente un punto de quiebre estructural relevante.</p>
-</div>
-<div id="conclusión.-1" class="section level2 hasAnchor" number="3.12">
-<h2><span class="header-section-number">3.12</span> Conclusión.<a href="preprocesamiento-y-modelado-temporal-de-la-serie-aapl..html#conclusión.-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Se realizó un análisis exhaustivo de la serie temporal del precio de las acciones de Apple Inc. Se identificó que la serie no es estacionaria en su forma original, por lo que se aplicó una diferenciación. Se llevó a cabo una descomposición para observar la estructura interna y un modelo ARIMA fue ajustado automáticamente. Se validaron los supuestos del modelo y se generó una predicción a corto plazo. Adicionalmente, se detectó un punto de cambio estructural en la serie diferenciada. Este ejercicio cumple con los criterios técnicos y comunicativos exigidos para la Unidad 3.</p>
-</div>
+<p>Artículo original donde se presenta la red neuronal de tipo Elman, mostrando su capacidad para capturar secuencias temporales y estructuras lingüísticas.</p>
+<ul>
+<li><strong>Jordan, M. I.</strong> (1986). Attractor dynamics and parallelism in a connectionist sequential machine. In Proceedings of the Eighth Annual Conference of the Cognitive Science Society (pp. 531–546).</li>
+</ul>
+<p>Trabajo fundacional que introduce las redes Jordan como una arquitectura para modelar secuencias de datos con retroalimentación desde la salida.</p>
+<ul>
+<li><strong>Haykin, S.</strong> (2009). Neural Networks and Learning Machines (3rd ed.). Pearson Education.</li>
+</ul>
+<p>Texto clásico sobre redes neuronales, con capítulos dedicados a RNN y una explicación detallada de las arquitecturas Elman y Jordan.</p>
+<ul>
+<li><strong>Schmidhuber, J</strong>. (2015). Deep learning in neural networks: An overview. Neural Networks, 61, 85–117. <a href="https://doi.org/10.1016/j.neunet.2014.09.003" class="uri">https://doi.org/10.1016/j.neunet.2014.09.003</a></li>
+</ul>
+<p>Aunque enfocado en deep learning moderno, incluye una revisión de las redes recurrentes clásicas como Elman y Jordan en su evolución histórica.</p>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="análisis-exploratorio-y-comportamiento-temporal-de-aapl..html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="suavizamiento-y-pronóstico-con-holt-winters..html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="predicción-con-redes-neuronales-recurrentes-rnn..html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
